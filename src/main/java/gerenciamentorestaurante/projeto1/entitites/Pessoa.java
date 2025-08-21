@@ -5,33 +5,33 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Entity
-@Table(name="usuario")
-public class Usuario {
+@Table(name="pessoa")
+public class Pessoa {
   @Id
-  @GeneratedValue
-  @Column(name="usuario_id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name="pessoa_id")
     private int id;
-  @Column(name="usuario_nome")
+  @Column(name="pessoa_nome")
     private String nome;
-  @Column(name="usuario_telefone")
+  @Column(name="pessoa_telefone")
     private String telefone;
-  @Column(name="usuario_email")
+  @Column(name="pessoa_email")
     private String email;
   /**
    * Entradas para o tipo de usuário
-   * usuario = 0 , cozinha = 1, admin = 2
+   * pessoa = 0 , cozinha = 1, admin = 2
    */
-  @Column(name="usuario_tipo")
+  @Column(name="pessoa_tipo")
     private int tipo;
-  @Column(name="usuario_senha_hash")
+  @Column(name="pessoa_senha_hash")
     private String senha;
   /**
    * Entradas para o status
    * removido: -1, inativo: 0, ativo: 1
    */
-  @Column(name="usuario_status")
+  @Column(name="pessoa_status")
     private int status;
-  @Column(name="usuario_criado_em")
+  @Column(name="pessoa_criado_em")
     private LocalDateTime data_criacao;
 
   public int getId() {
