@@ -19,8 +19,6 @@ public class Ingrediente {
     private String descricao;
     @Column(name="ingrediente_unidade_medida")
     private int unidade_medida;
-    @OneToOne(mappedBy = "ingrediente_alerta")
-    private int ingrediente;
 
     @OneToMany(mappedBy = "ingrediente")
     private Set<IngredienteReceita> receitaIngredientes;
@@ -59,15 +57,7 @@ public class Ingrediente {
         this.unidade_medida = unidade_medida;
     }
 
-    public int getIngrediente() {
-        return ingrediente;
-    }
-
-    public void setIngrediente(int ingrediente) {
-        this.ingrediente = ingrediente;
-    }
-
-    public Set<IngredienteReceita> getReceitaIngredientes() {
+     public Set<IngredienteReceita> getReceitaIngredientes() {
         return receitaIngredientes;
     }
 
