@@ -55,5 +55,9 @@ public class IngredienteService {
 
     }
 
+    public Ingrediente atualizarIngredientePorId(Integer ingredienteId){
+
+    }
+
 
 }
