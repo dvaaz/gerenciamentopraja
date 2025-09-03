@@ -27,7 +27,7 @@ public class IngredienteService {
      * @param ingredienteDTORequest
      * @return ingredienteDTOResponse
      */
-    public IngredienteDTOResponse criarIngrediente(IngredienteDTORequest ingredienteDTORequest) {
+    public IngredienteDTOResponse registrarIngrediente(IngredienteDTORequest ingredienteDTORequest) {
         Ingrediente ingrediente = modelMapper.map(ingredienteDTORequest, Ingrediente.class);
         Ingrediente ingredienteSave = this.ingredienteRepository.save(ingrediente);
         IngredienteDTOResponse ingredienteDTOResponse = modelMapper.map(ingredienteSave, IngredienteDTOResponse.class);
@@ -39,8 +39,21 @@ public class IngredienteService {
      * Listar a todos os ingredientes
      */
     public List<IngredienteDTOResponse> listarIngredientes(){
-        IngredienteDTOResponse ingredienteDTOResponse= modelMapper.map(this.ingredienteRepository.findAll(), IngredienteDTOResponse.class);
-        return (List<IngredienteDTOResponse>) ingredienteDTOResponse;
+      List<Ingrediente> ingredientes = this.ingredienteRepository.findAll();
+      List<IngredienteDTOResponse> listaDTO = ingredientes.stream()
+          .map(ingrediente -> modelMapper.map(ingrediente, IngredienteDTOResponse.class))
+          .toList();
+
+        return null;
     }
+
+    public IngredienteDTOResponse buscarIngredientePorId(Integer ingredienteId){
+      Ingrediente ingrediente = this.ingredienteRepository.findById(ingredienteId).orElse(null);
+      if  (ingrediente != null){
+        return modelMapper.map(ingrediente, IngredienteDTOResponse.class);
+      } else return null;
+
+    }
+
 
 }
