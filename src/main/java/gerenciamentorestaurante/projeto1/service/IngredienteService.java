@@ -5,6 +5,7 @@ import gerenciamentorestaurante.projeto1.dto.response.IngredienteDTOResponse;
 import gerenciamentorestaurante.projeto1.dto.response.IngredienteReceitaDTOResponse;
 import gerenciamentorestaurante.projeto1.repository.IngredienteRepository;
 import gerenciamentorestaurante.projeto1.entitites.Ingrediente;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,10 +35,8 @@ public class IngredienteService {
 
         return ingredienteDTOResponse;
     }
-
-    /**
-     * Listar a todos os ingredientes
-     */
+    //Listar a todos os ingredientes
+    @Transactional
     public List<IngredienteDTOResponse> listarIngredientes(){
       List<Ingrediente> ingredientes = this.ingredienteRepository.findAll();
       List<IngredienteDTOResponse> listaDTO = ingredientes.stream()
@@ -46,18 +45,21 @@ public class IngredienteService {
 
         return null;
     }
-
+    @Transactional
     public IngredienteDTOResponse buscarIngredientePorId(Integer ingredienteId){
-      Ingrediente ingrediente = this.ingredienteRepository.findById(ingredienteId).orElse(null);
+      Ingrediente ingrediente = this.ingredienteRepository.obterIngredientePorID(ingredienteId);
       if  (ingrediente != null){
-        return modelMapper.map(ingrediente, IngredienteDTOResponse.class);
+        return this.ingredienteRepository.obterIngredientePorID(ingredienteId)
       } else return null;
 
     }
 
-    public Ingrediente atualizarIngredientePorId(Integer ingredienteId){
-
+    @Transactional
+    public void apagarIngrediente(Integer ingredienteId){
+      this.ingredienteRepository.apagarLogicoIngrediente(ingredienteId);
     }
+
+
 
 
 }
