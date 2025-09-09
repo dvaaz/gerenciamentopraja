@@ -17,14 +17,13 @@ public class Ingrediente {
     private String nome;
     @Column(name ="ingrediente_descricao")
     private String descricao;
-    @Column(name="ingrediente_unidade_medida")
-    private int unidade_medida;
-
+    @Column(name="ingrediente_status")
+    private int status;
     @OneToMany(mappedBy = "ingrediente")
-    private Set<IngredienteReceita> receitaIngredientes;
-
+    private Set<IngredienteFichaTecnica> receitaIngredientes;
     @OneToMany(mappedBy = "ingrediente")
     private Set<Estoque> estoqueIngredientes;
+
     public int getId() {
         return id;
     }
@@ -49,19 +48,19 @@ public class Ingrediente {
         this.descricao = descricao;
     }
 
-    public int getUnidade_medida() {
-        return unidade_medida;
+    public int getStatus() {
+        return status;
     }
 
-    public void setUnidade_medida(int unidade_medida) {
-        this.unidade_medida = unidade_medida;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-     public Set<IngredienteReceita> getReceitaIngredientes() {
+    public Set<IngredienteFichaTecnica> getReceitaIngredientes() {
         return receitaIngredientes;
     }
 
-    public void setReceitaIngredientes(Set<IngredienteReceita> receitaIngredientes) {
+    public void setReceitaIngredientes(Set<IngredienteFichaTecnica> receitaIngredientes) {
         this.receitaIngredientes = receitaIngredientes;
     }
 

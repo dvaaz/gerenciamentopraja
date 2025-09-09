@@ -10,24 +10,24 @@ public class UtilizadoDia {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "utilizado_dia_id")
   private int id;
-
-  @Column(name = "utilizado_dia_quantidade")
-  private int quantidade;
-
+  @Column(name = "utilizado_dia_qtd")
+  private int qtd;
+  @Column(name="utilizado_dia_destino")
+  private int destino;
+  @Column(name="utilizado_dia_status")
+  private int status;
   @JsonIgnore
   @ManyToOne
-  @JoinColumn(name="ingrediente_receita", nullable = false)
-  private IngredienteReceita ingredienteReceita;
-
+  @JoinColumn(name="ingrediente", nullable = false)
+  private IngredienteFichaTecnica ingredienteFichaTecnica;
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name="producao_dia", nullable = false)
   private ProducaoDia producaoDia;
-
   @JsonIgnore
   @ManyToOne
-  @JoinColumn(name="disponivel_dia_detalhe", nullable = false)
-  private DisponivelDiaDetalhe disponivelDiaDetalhe;
+  @JoinColumn(name="producao", nullable = false)
+  private Producao producao;
 
   public int getId() {
     return id;
@@ -37,20 +37,36 @@ public class UtilizadoDia {
     this.id = id;
   }
 
-  public int getQuantidade() {
-    return quantidade;
+  public int getQtd() {
+    return qtd;
   }
 
-  public void setQuantidade(int quantidade) {
-    this.quantidade = quantidade;
+  public void setQtd(int qtd) {
+    this.qtd = qtd;
   }
 
-  public IngredienteReceita getIngredienteReceita() {
-    return ingredienteReceita;
+  public int getDestino() {
+    return destino;
   }
 
-  public void setIngredienteReceita(IngredienteReceita ingredienteReceita) {
-    this.ingredienteReceita = ingredienteReceita;
+  public void setDestino(int destino) {
+    this.destino = destino;
+  }
+
+  public int getStatus() {
+    return status;
+  }
+
+  public void setStatus(int status) {
+    this.status = status;
+  }
+
+  public IngredienteFichaTecnica getIngredienteFichaTecnica() {
+    return ingredienteFichaTecnica;
+  }
+
+  public void setIngredienteFichaTecnica(IngredienteFichaTecnica ingredienteFichaTecnica) {
+    this.ingredienteFichaTecnica = ingredienteFichaTecnica;
   }
 
   public ProducaoDia getProducaoDia() {
@@ -61,11 +77,11 @@ public class UtilizadoDia {
     this.producaoDia = producaoDia;
   }
 
-  public DisponivelDiaDetalhe getDisponivelDiaDetalhe() {
-    return disponivelDiaDetalhe;
+  public Producao getProducao() {
+    return producao;
   }
 
-  public void setDisponivelDiaDetalhe(DisponivelDiaDetalhe disponivelDiaDetalhe) {
-    this.disponivelDiaDetalhe = disponivelDiaDetalhe;
+  public void setProducao(Producao producao) {
+    this.producao = producao;
   }
 }

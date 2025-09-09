@@ -19,14 +19,15 @@ public class Estoque {
   private Date validade;
   @Column(name = "estoque_qtd")
   private int quantidade;
-
+  @Column(name="estoque_status")
+  private int status;
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "ingrediente_id", nullable = false)
   private Ingrediente ingrediente;
 
   @OneToMany(mappedBy = "estoque")
-  private Set<DisponivelDiaDetalhe> disponiveisDiaDetalheSet;
+  private Set<Producao> disponiveisDiaDetalheSet;
 
   public int getId() {
     return id;
@@ -60,6 +61,14 @@ public class Estoque {
     this.quantidade = quantidade;
   }
 
+  public int getStatus() {
+    return status;
+  }
+
+  public void setStatus(int status) {
+    this.status = status;
+  }
+
   public Ingrediente getIngrediente() {
     return ingrediente;
   }
@@ -68,11 +77,11 @@ public class Estoque {
     this.ingrediente = ingrediente;
   }
 
-  public Set<DisponivelDiaDetalhe> getDisponiveisDiaDetalheSet() {
+  public Set<Producao> getDisponiveisDiaDetalheSet() {
     return disponiveisDiaDetalheSet;
   }
 
-  public void setDisponiveisDiaDetalheSet(Set<DisponivelDiaDetalhe> disponiveisDiaDetalheSet) {
+  public void setDisponiveisDiaDetalheSet(Set<Producao> disponiveisDiaDetalheSet) {
     this.disponiveisDiaDetalheSet = disponiveisDiaDetalheSet;
   }
 }
