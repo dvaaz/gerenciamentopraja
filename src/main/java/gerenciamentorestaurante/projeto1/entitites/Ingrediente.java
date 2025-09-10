@@ -1,6 +1,7 @@
 package gerenciamentorestaurante.projeto1.entitites;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -17,14 +18,16 @@ public class Ingrediente {
     private String nome;
     @Column(name ="ingrediente_descricao")
     private String descricao;
-    @Column(name="ingrediente_grupo")
-    private int grupo;
     @Column(name="ingrediente_status")
     private int status;
     @OneToMany(mappedBy = "ingrediente")
     private Set<IngredienteFichaTecnica> receitaIngredientes;
     @OneToMany(mappedBy = "ingrediente")
     private Set<Estoque> estoqueIngredientes;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "grupo_id", nullable = false)
+    private Grupo grupo;
 
     public int getId() {
         return id;
@@ -50,14 +53,6 @@ public class Ingrediente {
         this.descricao = descricao;
     }
 
-    public int getGrupo() {
-        return grupo;
-    }
-
-    public void setGrupo(int grupo) {
-        this.grupo = grupo;
-    }
-
     public int getStatus() {
         return status;
     }
@@ -80,5 +75,13 @@ public class Ingrediente {
 
     public void setEstoqueIngredientes(Set<Estoque> estoqueIngredientes) {
         this.estoqueIngredientes = estoqueIngredientes;
+    }
+
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 }

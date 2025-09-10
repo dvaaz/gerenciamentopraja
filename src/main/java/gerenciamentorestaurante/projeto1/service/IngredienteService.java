@@ -34,15 +34,15 @@ public class IngredienteService {
 
     /**
      * Criar Ingredientes
-     * @param ingredienteDTORequest
      * @return ingredienteDTOResponse
      */
     public IngredienteDTOResponse criarIngrediente(IngredienteDTORequest ingredienteDTORequest) {
         Ingrediente ingrediente = modelMapper.map(ingredienteDTORequest, Ingrediente.class);
-        Grupo grupo = grupoRepository.buscarGrupoDeIngredientePorId(ingrediente.getGrupo());
+        Grupo grupo = grupoRepository.buscarGrupoDeIngredientePorId(ingrediente.getGrupo().getId());
         if (grupo == null) {
             // grupo default para todos ingredientes
-            ingrediente.setGrupo(1);
+            Grupo grupoDefault = this.grupoRepository.buscarGrupoPorID(1);
+            ingrediente.setGrupo(grupoDefault);
         }
         Ingrediente ingredienteSave = this.ingredienteRepository.save(ingrediente);
         IngredienteDTOResponse ingredienteDTOResponse = modelMapper.map(ingredienteSave, IngredienteDTOResponse.class);
@@ -87,7 +87,8 @@ public class IngredienteService {
         Ingrediente ingrediente = this.ingredienteRepository.buscarIngredientePorId(ingredienteId);
         Grupo grupo = this.grupoRepository.buscarGrupoDeIngredientePorId(updateGrupoRequest.getGrupo());
         if  (ingrediente != null &&  grupo != null){
-            ingrediente.setGrupo(updateGrupoRequest.getGrupo());
+            Grupo grupoDefault = grupoRepository.buscarGrupoPorID(1);
+            ingrediente.setGrupo(grupoDefault);
             Ingrediente tempResponse = ingredienteRepository.save(ingrediente);
             return modelMapper.map(tempResponse, UpdateGrupoResponse.class);
         } else return null;

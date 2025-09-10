@@ -22,8 +22,8 @@ public class IngredienteFichaTecnica {
   private Ingrediente ingrediente;
   @JsonIgnore
   @ManyToOne
-  @JoinColumn(name = "receita_id", nullable = false)
-  private FichaTecnica fichaTecnica;
+  @JoinColumn(name = "ficha_tecnica_id", nullable = false)
+  private FichaTecnica fichaTecnicas;
 
   public int getId() {
     return id;
@@ -65,11 +65,11 @@ public class IngredienteFichaTecnica {
     this.ingrediente = ingrediente;
   }
 
-  public FichaTecnica getFichaTecnica() {
-    return fichaTecnica;
+  public FichaTecnica getFichaTecnicas() {
+    return fichaTecnicas;
   }
 
-  public void setFichaTecnica(FichaTecnica fichaTecnica) {
-    this.fichaTecnica = fichaTecnica;
+  public void setFichaTecnicas(FichaTecnica fichaTecnicas) {
+    this.fichaTecnicas = fichaTecnicas;
   }
 }

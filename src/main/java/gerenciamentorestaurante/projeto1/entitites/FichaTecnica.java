@@ -1,11 +1,13 @@
 package gerenciamentorestaurante.projeto1.entitites;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
 
 @Entity
-@Table(name = "fichaTecnica")
+@Table(name = "ficha_tecnica")
 public class FichaTecnica {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,11 +17,13 @@ public class FichaTecnica {
   private String nome;
   @Column(name="ficha_tecnica_descricao")
   private String descricao;
-  @Column(name="ficha_tecnica_grupo")
-  private int grupo;
+  @JsonIgnore
+  @ManyToOne
+  @JoinColumn(name = "grupo_id", nullable = false)
+  private Grupo grupo;
   @Column(name="ficha_tecnica_status")
   private int status;
-  @OneToMany(mappedBy = "fichaTecnica")
+  @OneToMany(mappedBy = "ficha_tecnica")
   private Set<IngredienteFichaTecnica> ingredienteFichaTecnicas;
 
   public int getId() {
@@ -46,15 +50,15 @@ public class FichaTecnica {
     this.descricao = descricao;
   }
 
-    public int getGrupo() {
-        return grupo;
-    }
+  public Grupo getGrupo() {
+    return grupo;
+  }
 
-    public void setGrupo(int grupo) {
-        this.grupo = grupo;
-    }
+  public void setGrupo(Grupo grupo) {
+    this.grupo = grupo;
+  }
 
-    public int getStatus() {
+  public int getStatus() {
     return status;
   }
 
