@@ -18,7 +18,7 @@ public class Estoque {
   @Column(name = "estoque_validade")
   private Date validade;
   @Column(name = "estoque_qtd")
-  private int quantidade;
+  private int qtd;
   @Column(name="estoque_status")
   private int status;
   @JsonIgnore
@@ -53,12 +53,12 @@ public class Estoque {
     this.validade = validade;
   }
 
-  public int getQuantidade() {
-    return quantidade;
+  public int getQtd() {
+    return qtd;
   }
 
-  public void setQuantidade(int quantidade) {
-    this.quantidade = quantidade;
+  public void setQtd(int qtd) {
+    this.qtd = qtd;
   }
 
   public int getStatus() {

@@ -22,12 +22,12 @@ public interface GrupoRepository extends JpaRepository<Grupo, Integer> {
   List<Grupo> listarGrupos();
 
   @Query("SELECT g FROM Grupo g WHERE g.status = :id AND g.status>=0")
-  Grupo obterGrupoPorID(@Param("id") Integer grupoId);
+  Grupo buscarGrupoPorID(@Param("id") Integer grupoId);
 
-  @Query("SELECT g FROM Grupo g WHERE g.status = :id AND g.status>=0 AND g.tipo=0")
-  Grupo obterGrupoIngredientePorId(@Param("id") Integer grupoId);
+  @Query("SELECT g FROM Grupo g WHERE g.status = :id AND g.status>=0 AND g.tipo=1" )
+  Grupo buscarGrupoDeIngredientePorId(@Param("id") Integer grupoId);
 
-  @Query("SELECT g FROM Grupo g WHERE g.status = :id AND g.status>=0 AND g.tipo=1")
-  Grupo obterGrupoFichaTecnicaPorId(@Param("id") Integer grupoId);
+  @Query("SELECT g FROM Grupo g WHERE g.status = :id AND g.status>=0 AND g.tipo=2")
+  Grupo buscarGrupoDeFichaTecnicaPorId(@Param("id") Integer grupoId);
 
 }

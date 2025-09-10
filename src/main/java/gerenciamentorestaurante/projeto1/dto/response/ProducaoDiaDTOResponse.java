@@ -7,6 +7,7 @@ import java.util.Date;
 public class ProducaoDiaDTOResponse {
     private int id;
     private Date data;
+    private int status;
 
     public int getId() {
         return id;
@@ -22,5 +23,13 @@ public class ProducaoDiaDTOResponse {
 
     public void setData(Date data) {
         this.data = data;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

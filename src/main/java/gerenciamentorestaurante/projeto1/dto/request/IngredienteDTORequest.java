@@ -3,7 +3,8 @@ package gerenciamentorestaurante.projeto1.dto.request;
 public class IngredienteDTORequest {
     private String nome;
     private String descricao;
-    private int unidade_medida;
+    private int grupo;
+    private int status;
 
     public String getNome() {
         return nome;
@@ -21,11 +22,19 @@ public class IngredienteDTORequest {
         this.descricao = descricao;
     }
 
-    public int getUnidade_medida() {
-        return unidade_medida;
+    public int getGrupo() {
+        return grupo;
     }
 
-    public void setUnidade_medida(int unidade_medida) {
-        this.unidade_medida = unidade_medida;
+    public void setGrupo(int grupo) {
+        this.grupo = grupo;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

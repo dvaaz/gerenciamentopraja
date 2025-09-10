@@ -8,7 +8,16 @@ public class EstoqueDTOResponse {
     private int id;
     private Date dia;
     private Date validade;
-    private int quantidade;
+    private int qtd;
+    private int status;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public int getId() {
         return id;
@@ -34,11 +43,11 @@ public class EstoqueDTOResponse {
         this.validade = validade;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public int getQtd() {
+        return qtd;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setQtd(int qtd) {
+        this.qtd = qtd;
     }
 }

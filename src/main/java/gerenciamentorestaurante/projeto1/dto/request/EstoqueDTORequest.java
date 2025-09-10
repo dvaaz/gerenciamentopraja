@@ -5,7 +5,8 @@ import java.util.Date;
 public class EstoqueDTORequest {
     private Date dia;
     private Date validade;
-    private int quantidade;
+    private int qtd;
+    private int status;
 
     public Date getDia() {
         return dia;
@@ -23,11 +24,19 @@ public class EstoqueDTORequest {
         this.validade = validade;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public int getQtd() {
+        return qtd;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setQtd(int qtd) {
+        this.qtd = qtd;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

@@ -10,8 +10,8 @@ public class IngredienteFichaTecnica {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "ingrediente_ficha_tecnica_id")
   private int id;
-  @Column(name= "ingrediente_ficha_tecnica_quantidade")
-  private int quantidade;
+  @Column(name= "ingrediente_ficha_tecnica_qtd")
+  private int qtd;
   @Column(name="ingrediente_ficha_tecnica_unidade_medida")
   private int unidadeMedida;
   @Column(name="ingrediente_ficha_tecnica_status")
@@ -33,12 +33,12 @@ public class IngredienteFichaTecnica {
     this.id = id;
   }
 
-  public int getQuantidade() {
-    return quantidade;
+  public int getQtd() {
+    return qtd;
   }
 
-  public void setQuantidade(int quantidade) {
-    this.quantidade = quantidade;
+  public void setQtd(int qtd) {
+    this.qtd = qtd;
   }
 
   public int getUnidadeMedida() {

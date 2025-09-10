@@ -10,8 +10,8 @@ public class Producao {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "producao_id")
   private int id;
-  @Column(name = "producao_quantidade")
-  private int quantidade;
+  @Column(name = "producao_qtd")
+  private int qtd;
   @Column(name = "producao_status")
   private int status;
   @JsonIgnore

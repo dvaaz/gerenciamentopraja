@@ -17,6 +17,8 @@ public class Ingrediente {
     private String nome;
     @Column(name ="ingrediente_descricao")
     private String descricao;
+    @Column(name="ingrediente_grupo")
+    private int grupo;
     @Column(name="ingrediente_status")
     private int status;
     @OneToMany(mappedBy = "ingrediente")
@@ -46,6 +48,14 @@ public class Ingrediente {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public int getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(int grupo) {
+        this.grupo = grupo;
     }
 
     public int getStatus() {

@@ -22,5 +22,5 @@ public interface IngredienteRepository extends JpaRepository<Ingrediente, Intege
   List<Ingrediente> listarIngredientes();
 
   @Query("SELECT i FROM Ingrediente i WHERE i.status = :id AND i.status>=0")
-  Ingrediente obterIngredientePorID(@Param("id") Integer ingredienteId);
+  Ingrediente buscarIngredientePorId(@Param("id") Integer ingredienteId);
 }

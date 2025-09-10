@@ -20,5 +20,5 @@ public interface FichaTecnicaRepository extends JpaRepository<FichaTecnica, Inte
   List<FichaTecnica> listarCategorias();
 
   @Query("SELECT f FROM FichaTecnica f WHERE f.status = :id AND f.status>=0")
-  FichaTecnica obterCategoriaPorID(@Param("id") Integer categoriaId);
+  FichaTecnica buscarCategoriaPorID(@Param("id") Integer categoriaId);
 }

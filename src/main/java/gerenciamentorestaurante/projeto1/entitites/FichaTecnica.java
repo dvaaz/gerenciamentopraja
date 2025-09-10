@@ -15,6 +15,8 @@ public class FichaTecnica {
   private String nome;
   @Column(name="ficha_tecnica_descricao")
   private String descricao;
+  @Column(name="ficha_tecnica_grupo")
+  private int grupo;
   @Column(name="ficha_tecnica_status")
   private int status;
   @OneToMany(mappedBy = "fichaTecnica")
@@ -44,7 +46,15 @@ public class FichaTecnica {
     this.descricao = descricao;
   }
 
-  public int getStatus() {
+    public int getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(int grupo) {
+        this.grupo = grupo;
+    }
+
+    public int getStatus() {
     return status;
   }
 
