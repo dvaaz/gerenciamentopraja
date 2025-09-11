@@ -56,13 +56,8 @@ public class IngredienteService {
     }
 
 
-    public List<IngredienteDTOResponse> listarIngredientes(){
-      List<Ingrediente> ingredientes = this.ingredienteRepository.findAll();
-      List<IngredienteDTOResponse> listaDTO = ingredientes.stream()
-          .map(ingrediente -> modelMapper.map(ingrediente, IngredienteDTOResponse.class))
-          .toList();
-
-        return null;
+    public List<Ingrediente> listarIngredientes(){
+        return this.ingredienteRepository.findAll();
     }
 
     public Ingrediente buscarIngredientePorId(Integer ingredienteId){

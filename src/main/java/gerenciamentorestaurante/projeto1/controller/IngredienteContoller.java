@@ -37,7 +37,7 @@ public class IngredienteContoller {
 
     @GetMapping("/listar")
     @Operation(summary = "listar todos os ingredientes", description = "Endpoint para listar todos os ingredientes")
-    public ResponseEntity<List<IngredienteDTOResponse>> listarIngredientes() {
+    public ResponseEntity<List<Ingrediente>> listarIngredientes() {
         return ResponseEntity.ok(ingredienteService.listarIngredientes());
     }
 

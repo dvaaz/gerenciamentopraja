@@ -29,5 +29,12 @@ public class GrupoService {
     return modelMapper.map(grupoSave, GrupoDTOResponse.class);
   }
 
+  public List<Grupo> listarGrupos() {
+    List<Grupo> listaGrupo = this.grupoRepository.findAll();
+
+    if (!listaGrupo.isEmpty()){
+      return listaGrupo;
+    } return null;
+  }
 
 }
