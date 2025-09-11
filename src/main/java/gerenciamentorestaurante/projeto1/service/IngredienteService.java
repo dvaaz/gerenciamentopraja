@@ -57,7 +57,7 @@ public class IngredienteService {
 
 
     public List<Ingrediente> listarIngredientes(){
-        return this.ingredienteRepository.findAll();
+        return this.ingredienteRepository.listarIngredientes();
     }
 
     public Ingrediente buscarIngredientePorId(Integer ingredienteId){

@@ -30,7 +30,7 @@ public class GrupoService {
   }
 
   public List<Grupo> listarGrupos() {
-    List<Grupo> listaGrupo = this.grupoRepository.findAll();
+    List<Grupo> listaGrupo = this.grupoRepository.listarGrupos();
 
     if (!listaGrupo.isEmpty()){
       return listaGrupo;
