@@ -23,7 +23,7 @@ public class FichaTecnica {
   private Grupo grupo;
   @Column(name="ficha_tecnica_status")
   private int status;
-  @OneToMany(mappedBy = "ficha_tecnica")
+  @OneToMany(mappedBy = "fichaTecnicas")
   private Set<IngredienteFichaTecnica> ingredienteFichaTecnicas;
 
   public int getId() {

@@ -4,9 +4,12 @@ import gerenciamentorestaurante.projeto1.dto.request.GrupoDTORequest;
 import gerenciamentorestaurante.projeto1.dto.response.GrupoDTOResponse;
 import gerenciamentorestaurante.projeto1.entitites.Grupo;
 import gerenciamentorestaurante.projeto1.repository.GrupoRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GrupoService {
@@ -19,10 +22,12 @@ public class GrupoService {
     this.grupoRepository = grupoRepository;
   }
 
+  @Transactional
   public GrupoDTOResponse criarGrupo(GrupoDTORequest grupoDTORequest) {
     Grupo grupo = modelMapper.map(grupoDTORequest, Grupo.class);
     Grupo grupoSave = this.grupoRepository.save(grupo);
-    GrupoDTOResponse grupoDTOResponse = modelMapper.map(grupoSave, GrupoDTOResponse.class);
-    return grupoDTOResponse;
+    return modelMapper.map(grupoSave, GrupoDTOResponse.class);
   }
+
+
 }
