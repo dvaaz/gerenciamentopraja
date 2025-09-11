@@ -17,7 +17,7 @@ public class Producao {
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "producao_dia_id", nullable = false)
-  private ProducaoDia producaoDia;
+  private ProducaoDia producoes;
 
   @JsonIgnore
   @ManyToOne

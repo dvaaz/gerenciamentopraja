@@ -17,10 +17,10 @@ public class Grupo {
   @Column(name = "grupo_status")
   private int status;
 
-  @OneToMany(mappedBy = "ingrediente")
+  @OneToMany(mappedBy = "grupo")
   private Set<Ingrediente> ingredienteSet;
 
-  @OneToMany(mappedBy = "ficha_tecnica")
+  @OneToMany(mappedBy = "grupo")
   private Set<FichaTecnica> fichaTecnicaSet;
   public int getId() {
     return id;

@@ -36,6 +36,7 @@ public class IngredienteService {
      * Criar Ingredientes
      * @return ingredienteDTOResponse
      */
+    @Transactional
     public IngredienteDTOResponse criarIngrediente(IngredienteDTORequest ingredienteDTORequest) {
         Ingrediente ingrediente = modelMapper.map(ingredienteDTORequest, Ingrediente.class);
         Grupo grupo = grupoRepository.buscarGrupoDeIngredientePorId(ingrediente.getGrupo().getId());
@@ -45,9 +46,8 @@ public class IngredienteService {
             ingrediente.setGrupo(grupoDefault);
         }
         Ingrediente ingredienteSave = this.ingredienteRepository.save(ingrediente);
-        IngredienteDTOResponse ingredienteDTOResponse = modelMapper.map(ingredienteSave, IngredienteDTOResponse.class);
 
-        return ingredienteDTOResponse;
+      return modelMapper.map(ingredienteSave, IngredienteDTOResponse.class);
     }
 
     @Transactional

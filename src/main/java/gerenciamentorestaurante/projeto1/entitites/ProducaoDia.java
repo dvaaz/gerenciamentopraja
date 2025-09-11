@@ -16,8 +16,8 @@ public class ProducaoDia {
   private Date data;
   @Column(name="producao_dia_status")
   private int status;
-  @OneToMany(mappedBy = "producao_dia")
-  private Set<Producao> disponiveisDiaDetalheSet;
+  @OneToMany(mappedBy = "producoes")
+  private Set<Producao> producaoDias;
 
   public int getId() {
     return id;
@@ -43,11 +43,11 @@ public class ProducaoDia {
     this.status = status;
   }
 
-  public Set<Producao> getDisponiveisDiaDetalheSet() {
-    return disponiveisDiaDetalheSet;
+  public Set<Producao> getProducaoDias() {
+    return producaoDias;
   }
 
-  public void setDisponiveisDiaDetalheSet(Set<Producao> disponiveisDiaDetalheSet) {
-    this.disponiveisDiaDetalheSet = disponiveisDiaDetalheSet;
+  public void setProducaoDias(Set<Producao> producaoDias) {
+    this.producaoDias = producaoDias;
   }
 }
