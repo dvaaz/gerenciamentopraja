@@ -1,6 +1,6 @@
 package gerenciamentorestaurante.projeto1.repository;
 
-import gerenciamentorestaurante.projeto1.entitites.Ingrediente;
+import gerenciamentorestaurante.projeto1.entities.Ingrediente;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

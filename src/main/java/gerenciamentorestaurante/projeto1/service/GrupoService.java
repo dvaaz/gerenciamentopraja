@@ -1,10 +1,10 @@
 package gerenciamentorestaurante.projeto1.service;
 
-import gerenciamentorestaurante.projeto1.dto.request.GrupoDTORequest;
-import gerenciamentorestaurante.projeto1.dto.response.GrupoDTOResponse;
-import gerenciamentorestaurante.projeto1.entitites.Grupo;
+import gerenciamentorestaurante.projeto1.entities.dto.request.GrupoDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.response.GrupoDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.Grupo;
 import gerenciamentorestaurante.projeto1.repository.GrupoRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,11 +30,7 @@ public class GrupoService {
   }
 
   public List<Grupo> listarGrupos() {
-    List<Grupo> listaGrupo = this.grupoRepository.listarGrupos();
-
-    if (!listaGrupo.isEmpty()){
-      return listaGrupo;
-    } return null;
+    return this.grupoRepository.listarGrupos();
   }
 
 }

@@ -1,15 +1,14 @@
 package gerenciamentorestaurante.projeto1.controller;
 
-import gerenciamentorestaurante.projeto1.dto.request.IngredienteDTORequest;
-import gerenciamentorestaurante.projeto1.dto.request.UpdateDescricaoRequest;
-import gerenciamentorestaurante.projeto1.dto.request.UpdateGrupoRequest;
-import gerenciamentorestaurante.projeto1.dto.request.UpdateStatusRequest;
-import gerenciamentorestaurante.projeto1.dto.response.IngredienteDTOResponse;
-import gerenciamentorestaurante.projeto1.dto.response.UpdateDescricaoResponse;
-import gerenciamentorestaurante.projeto1.dto.response.UpdateGrupoResponse;
-import gerenciamentorestaurante.projeto1.dto.response.UpdateStatusResponse;
-import gerenciamentorestaurante.projeto1.entitites.Grupo;
-import gerenciamentorestaurante.projeto1.entitites.Ingrediente;
+import gerenciamentorestaurante.projeto1.entities.dto.request.IngredienteDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateDescricaoRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateGrupoRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateDescricaoResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateGrupoResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
+import gerenciamentorestaurante.projeto1.entities.Ingrediente;
 import gerenciamentorestaurante.projeto1.service.IngredienteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

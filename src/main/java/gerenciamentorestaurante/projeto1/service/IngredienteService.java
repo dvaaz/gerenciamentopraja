@@ -1,17 +1,17 @@
 package gerenciamentorestaurante.projeto1.service;
 
-import gerenciamentorestaurante.projeto1.dto.request.IngredienteDTORequest;
-import gerenciamentorestaurante.projeto1.dto.request.UpdateDescricaoRequest;
-import gerenciamentorestaurante.projeto1.dto.request.UpdateGrupoRequest;
-import gerenciamentorestaurante.projeto1.dto.request.UpdateStatusRequest;
-import gerenciamentorestaurante.projeto1.dto.response.IngredienteDTOResponse;
-import gerenciamentorestaurante.projeto1.dto.response.UpdateDescricaoResponse;
-import gerenciamentorestaurante.projeto1.dto.response.UpdateGrupoResponse;
-import gerenciamentorestaurante.projeto1.dto.response.UpdateStatusResponse;
-import gerenciamentorestaurante.projeto1.entitites.Grupo;
+import gerenciamentorestaurante.projeto1.entities.dto.request.IngredienteDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateDescricaoRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateGrupoRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateDescricaoResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateGrupoResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
+import gerenciamentorestaurante.projeto1.entities.Grupo;
 import gerenciamentorestaurante.projeto1.repository.GrupoRepository;
 import gerenciamentorestaurante.projeto1.repository.IngredienteRepository;
-import gerenciamentorestaurante.projeto1.entitites.Ingrediente;
+import gerenciamentorestaurante.projeto1.entities.Ingrediente;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

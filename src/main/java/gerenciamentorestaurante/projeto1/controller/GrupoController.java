@@ -1,8 +1,8 @@
 package gerenciamentorestaurante.projeto1.controller;
 
-import gerenciamentorestaurante.projeto1.dto.request.GrupoDTORequest;
-import gerenciamentorestaurante.projeto1.dto.response.GrupoDTOResponse;
-import gerenciamentorestaurante.projeto1.entitites.Grupo;
+import gerenciamentorestaurante.projeto1.entities.dto.request.GrupoDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.response.GrupoDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.Grupo;
 import gerenciamentorestaurante.projeto1.service.GrupoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,6 +33,6 @@ public class GrupoController {
   @GetMapping("/listar")
   @Operation(summary ="Listar todos os grupos", description = "Endpoint para listar todos os grupos")
   public ResponseEntity<List<Grupo>> listarGrupos() {
-    return ResponseEntity.ok(GrupoService.listarGrupos());
+    return ResponseEntity.ok(grupoService.listarGrupos());
   }
 }
