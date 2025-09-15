@@ -1,8 +1,12 @@
 package gerenciamentorestaurante.projeto1.controller;
 
+import gerenciamentorestaurante.projeto1.entities.dto.request.GrupoAtualizarDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.GrupoDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.response.GrupoAtualizarDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.GrupoDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.Grupo;
+import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.service.GrupoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,4 +39,49 @@ public class GrupoController {
   public ResponseEntity<List<Grupo>> listarGrupos() {
     return ResponseEntity.ok(grupoService.listarGrupos());
   }
+
+    @GetMapping("listar/ingrediente")
+    @Operation(summary = "Listar grupos de ingredientes", description="Endpoint para obter apenas grupos de ingredientes")
+    public ResponseEntity<List<Grupo>> listarGruposDeIngredientes() {
+        return ResponseEntity.ok(grupoService.listarGruposDeIngredientes());
+    }
+
+    @GetMapping("listar/fichatecnica")
+    @Operation(summary = "Listar grupos de fichatecnicas", description="Endpoint para obter apenas grupos de fichatecnicas")
+    public ResponseEntity<List<Grupo>> listarGruposDeFichaTecnicas() {
+        return ResponseEntity.ok(grupoService.listarGruposDeFichaTecnicas());
+    }
+
+  @GetMapping("/listar/{grupoId}")
+    @Operation(summary = "Buscar um grupo", description ="Endpoint para obter um grupo por id")
+    public ResponseEntity<Grupo> buscarGrupoPorId(@Valid @PathVariable Integer grupoId) {
+      Grupo grupo = this.grupoService.listarGrupoPorID(grupoId);
+      if(grupo != null){
+          return ResponseEntity.ok(grupo);
+      } else return ResponseEntity.notFound().build();
+  }
+
+    @PatchMapping("/alterar/{grupoId}")
+    @Operation(summary = "Alterações em um grupo", description="Endpoint para alterar nome e cor de um grupo")
+    public ResponseEntity<GrupoAtualizarDTOResponse> atualizarGrupo(
+            @Valid @PathVariable Integer grupoId,
+            @RequestBody GrupoAtualizarDTORequest atualizarDTORequest) {
+      GrupoAtualizarDTOResponse atualizado = grupoService.atualizarGrupo(grupoId, atualizarDTORequest);
+      if (atualizado != null){
+          return ResponseEntity.ok(atualizado);
+      } else return ResponseEntity.notFound().build();
+    }
+
+    @PatchMapping("/alterarstatus/{grupoId}")
+    @Operation(summary = "Deleção lógica", description = "Endpoint para delação lógica de um grupo")
+    public ResponseEntity<UpdateStatusResponse> atualizarStatus(
+            @Valid @PathVariable Integer grupoId,
+            @RequestBody UpdateStatusRequest updateStatusRequest
+    ) {
+      Grupo grupo = this.grupoService.listarGrupoPorID(grupoId);
+      if (grupo != null){
+          return ResponseEntity.ok(grupoService.atualizarStatusGrupo(grupoId, updateStatusRequest));
+      } else return ResponseEntity.notFound().build();
+    }
+
 }

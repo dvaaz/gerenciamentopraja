@@ -1,8 +1,13 @@
 package gerenciamentorestaurante.projeto1.service;
 
+
+import gerenciamentorestaurante.projeto1.entities.dto.request.GrupoAtualizarDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.GrupoDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.response.GrupoAtualizarDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.GrupoDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.Grupo;
+import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.repository.GrupoRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.modelmapper.ModelMapper;
@@ -33,4 +38,46 @@ public class GrupoService {
     return this.grupoRepository.listarGrupos();
   }
 
+  public Grupo listarGrupoPorID(Integer id) { return this.grupoRepository.listarGrupoPorID(id); }
+
+  public List<Grupo> listarGruposDeIngredientes() {return this.grupoRepository.buscarGrupoDeIngredientes();}
+
+  public List<Grupo> listarGruposDeFichaTecnicas() {return this.grupoRepository.buscarGrupoDeFichaTecnicas();}
+
+    @Transactional
+    public UpdateStatusResponse atualizarStatusGrupo(Integer grupoId, UpdateStatusRequest updateStatusRequest) {
+      Grupo  grupo = this.grupoRepository.listarGrupoPorID(grupoId);
+      if (grupo != null) {
+          grupo.setStatus(updateStatusRequest.getStatus());
+          Grupo tempResponse = grupoRepository.save(grupo);
+          return modelMapper.map(tempResponse, UpdateStatusResponse.class);
+      } else return null;
+    }
+
+    @Transactional
+    public GrupoAtualizarDTOResponse atualizarGrupo(Integer grupoId, GrupoAtualizarDTORequest grupoDTORequest) {
+      Grupo grupo = grupoRepository.listarGrupoPorID(grupoId);
+      if (grupo != null) {
+          if (grupoDTORequest.getCor() != null) {
+            grupo.setCor(grupoDTORequest.getCor());
+          }
+          if (grupoDTORequest.getNome()!= null) {
+            grupo.setNome(grupoDTORequest.getNome());
+          }
+          Grupo tempResponse = grupoRepository.save(grupo);
+          return modelMapper.map(tempResponse, GrupoAtualizarDTOResponse.class);
+      } else return null;
+    }
+
+    @Transactional
+    public void apagarGrupo(Integer grupoId) {
+      this.grupoRepository.apagarLogicoGrupo(grupoId);
+    }
+
+    public void destruiGrupo(Integer grupoId) {
+      Grupo grupo = this.grupoRepository.listarGrupoPorID(grupoId);
+      if (grupo != null && grupo.getStatus() == -1) {
+          this.grupoRepository.delete(grupo);
+      }
+    }
 }

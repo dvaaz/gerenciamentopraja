@@ -73,7 +73,10 @@ public class Grupo {
     }
 
     public Set<FichaTecnica> getFichaTecnicaSet() {
-        return fichaTecnicaSet;
+      if (this.getTipo() == 2 || this.getTipo() == 0){
+            return fichaTecnicaSet;
+        }  else return null;
+
     }
 
     public void setFichaTecnicaSet(Set<FichaTecnica> fichaTecnicaSet) {

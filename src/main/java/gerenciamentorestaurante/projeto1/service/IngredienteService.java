@@ -12,7 +12,7 @@ import gerenciamentorestaurante.projeto1.entities.Grupo;
 import gerenciamentorestaurante.projeto1.repository.GrupoRepository;
 import gerenciamentorestaurante.projeto1.repository.IngredienteRepository;
 import gerenciamentorestaurante.projeto1.entities.Ingrediente;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +42,7 @@ public class IngredienteService {
         Grupo grupo = grupoRepository.buscarGrupoDeIngredientePorId(ingrediente.getGrupo().getId());
         if (grupo == null) {
             // grupo default para todos ingredientes
-            Grupo grupoDefault = this.grupoRepository.buscarGrupoPorID(1);
+            Grupo grupoDefault = this.grupoRepository.listarGrupoPorID(1);
             ingrediente.setGrupo(grupoDefault);
         }
         Ingrediente ingredienteSave = this.ingredienteRepository.save(ingrediente);
@@ -82,7 +82,7 @@ public class IngredienteService {
         Ingrediente ingrediente = this.ingredienteRepository.buscarIngredientePorId(ingredienteId);
         Grupo grupo = this.grupoRepository.buscarGrupoDeIngredientePorId(updateGrupoRequest.getGrupo());
         if  (ingrediente != null &&  grupo != null){
-            Grupo grupoDefault = grupoRepository.buscarGrupoPorID(1);
+            Grupo grupoDefault = grupoRepository.listarGrupoPorID(1);
             ingrediente.setGrupo(grupoDefault);
             Ingrediente tempResponse = ingredienteRepository.save(ingrediente);
             return modelMapper.map(tempResponse, UpdateGrupoResponse.class);
