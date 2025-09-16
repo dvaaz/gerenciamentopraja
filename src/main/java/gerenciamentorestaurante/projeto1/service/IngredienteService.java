@@ -38,15 +38,29 @@ public class IngredienteService {
     @Transactional
     public IngredienteDTOResponse criarIngrediente(IngredienteDTORequest ingredienteDTORequest) {
         Ingrediente ingrediente = modelMapper.map(ingredienteDTORequest, Ingrediente.class);
-        Grupo grupo = grupoRepository.buscarGrupoDeIngredientePorId(ingrediente.getGrupo().getId());
-        if (grupo == null) {
-            // grupo default para todos ingredientes
-            Grupo grupoDefault = this.grupoRepository.listarGrupoPorID(1);
-            ingrediente.setGrupo(grupoDefault);
-        }
-        Ingrediente ingredienteSave = this.ingredienteRepository.save(ingrediente);
+        Grupo grupo = grupoRepository.buscarGrupoDeIngredientePorId(ingredienteDTORequest.getGrupo());
+        if (grupo != null) {
+          Ingrediente ingredienteSave = this.ingredienteRepository.save(ingrediente);
 
-      return modelMapper.map(ingredienteSave, IngredienteDTOResponse.class);
+          return modelMapper.map(ingredienteSave, IngredienteDTOResponse.class);
+        }
+        // Buscar o grupo default para todos ingredientes
+        Grupo grupoDefault = this.grupoRepository.buscarGrupoPadrao();
+        if (grupoDefault == null) {
+          // se nao esta criado um grupo default
+          GrupoService grupoService = new GrupoService(this.grupoRepository);
+          grupoService.criarGrupoDefault();
+          ingrediente.setGrupo(grupoRepository.buscarGrupoPadrao());
+          Ingrediente ingredienteSave = this.ingredienteRepository.save(ingrediente);
+          return modelMapper.map(ingredienteSave, IngredienteDTOResponse.class);
+
+        }
+        // se há um grupo default
+        ingrediente.setGrupo(grupoDefault);
+        Ingrediente ingredienteSave = this.ingredienteRepository.save(ingrediente);
+        return modelMapper.map(ingredienteSave, IngredienteDTOResponse.class);
+
+
     }
 
     @Transactional

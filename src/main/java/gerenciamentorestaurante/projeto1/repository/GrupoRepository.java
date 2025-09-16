@@ -25,6 +25,9 @@ public interface GrupoRepository extends JpaRepository<Grupo, Integer> {
   @Query("SELECT g FROM Grupo g WHERE g.status>=0")
   List<Grupo> listarGrupos();
 
+  @Query("SELECT g FROM Grupo g WHERE g.status>=0 AND g.tipo=0")
+  Grupo buscarGrupoPadrao();
+
   @Query("SELECT g FROM Grupo g WHERE g.id = :id AND g.status>=0")
   Grupo listarGrupoPorID(@Param("id") Integer grupoId);
 

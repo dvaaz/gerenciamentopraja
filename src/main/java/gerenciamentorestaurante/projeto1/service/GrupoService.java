@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.View;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class GrupoService {
   @Autowired
   private ModelMapper modelMapper;
 
+
   public GrupoService (GrupoRepository grupoRepository) {
     this.grupoRepository = grupoRepository;
   }
@@ -30,8 +32,14 @@ public class GrupoService {
   @Transactional
   public GrupoDTOResponse criarGrupo(GrupoDTORequest grupoDTORequest) {
     Grupo grupo = modelMapper.map(grupoDTORequest, Grupo.class);
-    Grupo grupoSave = this.grupoRepository.save(grupo);
-    return modelMapper.map(grupoSave, GrupoDTOResponse.class);
+    if (grupo.getTipo() != 1 || grupo.getTipo() != 2) {
+      throw new IllegalArgumentException("Tipo de grupo inválido: " + grupo.getTipo() + "deve ser 1 (ingredientes) ou 2 (Fichas tecnicas)");
+
+    } else{
+      Grupo grupoSave = this.grupoRepository.save(grupo);
+      return modelMapper.map(grupoSave, GrupoDTOResponse.class);
+    }
+
   }
 
   public List<Grupo> listarGrupos() {
@@ -47,7 +55,8 @@ public class GrupoService {
     @Transactional
     public UpdateStatusResponse atualizarStatusGrupo(Integer grupoId, UpdateStatusRequest updateStatusRequest) {
       Grupo  grupo = this.grupoRepository.listarGrupoPorID(grupoId);
-      if (grupo != null) {
+      if (grupo != null
+          && (updateStatusRequest.getStatus() == 1 || updateStatusRequest.getStatus() == 2)) {
           grupo.setStatus(updateStatusRequest.getStatus());
           Grupo tempResponse = grupoRepository.save(grupo);
           return modelMapper.map(tempResponse, UpdateStatusResponse.class);
@@ -78,6 +87,16 @@ public class GrupoService {
       Grupo grupo = this.grupoRepository.listarGrupoPorID(grupoId);
       if (grupo != null && grupo.getStatus() == -1) {
           this.grupoRepository.delete(grupo);
-      }
+      } else
+        throw new IllegalArgumentException("Gupo não encontrado ou ativo");
+    }
+    @Transactional
+  public void criarGrupoDefault() {
+    Grupo grupoDefault = new  Grupo();
+    grupoDefault.setNome("Padrão");
+    grupoDefault.setStatus(1);
+    grupoDefault.setCor("D3D3D3");
+    grupoDefault.setTipo(0);
+    grupoRepository.save(grupoDefault);
     }
 }

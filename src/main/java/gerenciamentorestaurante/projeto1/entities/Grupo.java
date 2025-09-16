@@ -8,7 +8,7 @@ import java.util.Set;
 public class Grupo {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name ="grupo_id")
+  @Column(name ="grup_id")
   private Integer id;
   @Column (name="grupo_nome")
   private String nome;

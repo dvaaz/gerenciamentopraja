@@ -73,7 +73,7 @@ public class GrupoController {
     }
 
     @PatchMapping("/alterarstatus/{grupoId}")
-    @Operation(summary = "Deleção lógica", description = "Endpoint para delação lógica de um grupo")
+    @Operation(summary = "Atualizaçao de grupo", description = "Endpoint para atualização lógica de um grupo")
     public ResponseEntity<UpdateStatusResponse> atualizarStatus(
             @Valid @PathVariable Integer grupoId,
             @RequestBody UpdateStatusRequest updateStatusRequest
@@ -84,4 +84,20 @@ public class GrupoController {
       } else return ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/deletar/{grupoId}")
+    @Operation(summary = "Deletar o grupo", description ="Endpoint para  a deleção lógica")
+  public ResponseEntity deletarGrupoPorID(
+      @Valid @PathVariable Integer grupoId) {
+    this.grupoService.apagarGrupo(grupoId);
+    return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{grupoId}/destroy")
+  @Operation(summary = "Remover grupo", description = "Endpoint para destruir grupo")
+  public ResponseEntity removerGrupoPorID(
+      @Valid @PathVariable Integer grupoId
+    ) {
+    this.grupoService.destruiGrupo(grupoId);
+    return ResponseEntity.noContent().build();
+    }
 }
