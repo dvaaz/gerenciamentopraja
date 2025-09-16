@@ -25,7 +25,6 @@ public class IngredienteDTORequest {
         this.descricao = descricao;
     }
 
-
     public Integer getGrupoId() {
         return grupoId;
     }

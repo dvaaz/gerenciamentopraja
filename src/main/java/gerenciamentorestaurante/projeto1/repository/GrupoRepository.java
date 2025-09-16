@@ -31,10 +31,10 @@ public interface GrupoRepository extends JpaRepository<Grupo, Integer> {
   @Query("SELECT g FROM Grupo g WHERE g.id = :id AND g.status>=0")
   Grupo listarGrupoPorID(@Param("id") Integer grupoId);
 
-  @Query("SELECT g FROM Grupo g WHERE (g.tipo = 0 OR g.tipo=1)  AND g.status>=0" )
+  @Query("SELECT g FROM Grupo g WHERE g.tipo=1  AND g.status>=0" )
   List<Grupo> buscarGrupoDeIngredientes();
 
-  @Query("SELECT g FROM Grupo g WHERE g.id =:id AND g.status>=0 AND (g.tipo = 0 OR g.tipo=1)")
+  @Query("SELECT g FROM Grupo g WHERE g.id =:id AND g.status>=0 AND g.tipo=1")
   Grupo  buscarGrupoDeIngredientePorId(@Param("id") Integer grupoId);
 
   @Query("SELECT g FROM Grupo g WHERE g.tipo=2 AND g.status>=0 ")

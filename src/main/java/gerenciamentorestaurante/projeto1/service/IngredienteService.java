@@ -52,7 +52,7 @@ public class IngredienteService {
         }
         // Mapeia os dados obtidos para  acriação de ingrediente
         Ingrediente ingrediente = modelMapper.map(dtoRequest, Ingrediente.class);
-        ingrediente.setGrupoId(grupo);
+        ingrediente.setGrupo(grupo);
         // Salva no banco de dados (persistence)
         Ingrediente ingredienteSave = ingredienteRepository.save(ingrediente);
 
@@ -63,7 +63,6 @@ public class IngredienteService {
     public Ingrediente buscaFindById(Integer ingredienteID) {
         return ingredienteRepository.findById(ingredienteID).orElse(null);
     }
-
 
     public List<Ingrediente> listarIngredientes(){
         return this.ingredienteRepository.listarIngredientes();
@@ -91,7 +90,7 @@ public class IngredienteService {
         Ingrediente ingrediente = this.ingredienteRepository.buscarIngredientePorId(ingredienteId);
         Grupo alteraGrupo = this.grupoRepository.buscarGrupoDeIngredientePorId(novoGrupo);
         if  (ingrediente != null &&  alteraGrupo != null){
-            ingrediente.setGrupoId(alteraGrupo);
+            ingrediente.setGrupo(alteraGrupo);
             Ingrediente tempResponse = ingredienteRepository.save(ingrediente);
             return modelMapper.map(tempResponse, ChangeGrupoDTOResponse.class);
         } else return null;

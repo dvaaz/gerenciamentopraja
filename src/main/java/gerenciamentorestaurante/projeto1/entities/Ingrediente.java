@@ -25,7 +25,7 @@ public class Ingrediente {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "grupo_id", nullable = false)
-    private Grupo grupoId;
+    private Grupo grupo;
     @OneToMany(mappedBy = "ingredienteId")
     private Set<IngredienteFichaTecnica> ingredienteNaFichaTecnica;
     @OneToMany(mappedBy = "ingredienteId")
@@ -71,12 +71,12 @@ public class Ingrediente {
         this.ingredientesNoEstoque = ingredientesNoEstoque;
     }
 
-    public Grupo getGrupoId() {
-        return grupoId;
+    public Grupo getGrupo() {
+        return grupo;
     }
 
-    public void setGrupoId(Grupo grupoId) {
-        this.grupoId = grupoId;
+    public void setGrupo(Grupo grupoId) {
+        this.grupo = grupoId;
     }
 
     public Set<IngredienteFichaTecnica> getIngredienteNaFichaTecnica() {

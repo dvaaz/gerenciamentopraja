@@ -41,7 +41,7 @@ public class IngredienteContoller {
 
     @GetMapping("/listar/{ingredienteId}")
     @Operation(summary = "listar ingrediente por id", description = "Endpoint para listar um ingrediente")
-    public ResponseEntity<Ingrediente> listarIngredientePorId(@PathVariable("ingredienteId") Integer ingredienteId) {
+    public ResponseEntity<Ingrediente> listarIngredientePorId(@Valid @PathVariable("ingredienteId") Integer ingredienteId) {
         Ingrediente ingrediente = ingredienteService.buscarIngredientePorId(ingredienteId);
         if  (ingrediente != null) {
             return ResponseEntity.ok(ingredienteService.buscarIngredientePorId(ingredienteId));
