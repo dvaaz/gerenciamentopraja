@@ -18,18 +18,18 @@ public class UtilizadoDia {
   private int status;
   @JsonIgnore
   @ManyToOne
-  @JoinColumn(name="ingrediente", nullable = false)
-  private IngredienteFichaTecnica ingredienteFichaTecnica;
+  @JoinColumn(name="ingrediente_id", nullable = false)
+  private Ingrediente ingredienteId;
   @JsonIgnore
   @ManyToOne
-  @JoinColumn(name="producao_dia", nullable = false)
-  private ProducaoDia producaoDia;
+  @JoinColumn(name="producao_dia_id", nullable = false)
+  private ProducaoDia producaoDiaId;
   @JsonIgnore
   @ManyToOne
-  @JoinColumn(name="producao", nullable = false)
-  private Producao producao;
+  @JoinColumn(name="producao_id", nullable = false)
+  private Producao producaoId;
 
-  public int getId() {
+  public Integer getId() {
     return id;
   }
 
@@ -61,27 +61,27 @@ public class UtilizadoDia {
     this.status = status;
   }
 
-  public IngredienteFichaTecnica getIngredienteFichaTecnica() {
-    return ingredienteFichaTecnica;
+  public Ingrediente getIngredienteId() {
+    return ingredienteId;
   }
 
-  public void setIngredienteFichaTecnica(IngredienteFichaTecnica ingredienteFichaTecnica) {
-    this.ingredienteFichaTecnica = ingredienteFichaTecnica;
+  public void setIngredienteId(Ingrediente ingredienteId) {
+    this.ingredienteId = ingredienteId;
   }
 
-  public ProducaoDia getProducaoDia() {
-    return producaoDia;
+  public ProducaoDia getProducaoDiaId() {
+    return producaoDiaId;
   }
 
-  public void setProducaoDia(ProducaoDia producaoDia) {
-    this.producaoDia = producaoDia;
+  public void setProducaoDiaId(ProducaoDia producaoDiaId) {
+    this.producaoDiaId = producaoDiaId;
   }
 
-  public Producao getProducao() {
-    return producao;
+  public Producao getProducaoId() {
+    return producaoId;
   }
 
-  public void setProducao(Producao producao) {
-    this.producao = producao;
+  public void setProducaoId(Producao producaoId) {
+    this.producaoId = producaoId;
   }
 }

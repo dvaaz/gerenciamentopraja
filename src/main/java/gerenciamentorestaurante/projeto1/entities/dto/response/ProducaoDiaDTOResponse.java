@@ -7,7 +7,7 @@ public class ProducaoDiaDTOResponse {
     private Date data;
     private int status;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

@@ -5,7 +5,7 @@ public class ProducaoDTOResponse {
     private int qtd;
     private int status;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

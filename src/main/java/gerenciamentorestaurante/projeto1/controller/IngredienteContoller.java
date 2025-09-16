@@ -2,11 +2,10 @@ package gerenciamentorestaurante.projeto1.controller;
 
 import gerenciamentorestaurante.projeto1.entities.dto.request.IngredienteDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateDescricaoRequest;
-import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateGrupoDeIngredienteDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateDescricaoResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateGrupoDeIngredienteDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.ChangeGrupoDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.entities.Ingrediente;
 import gerenciamentorestaurante.projeto1.service.IngredienteService;
@@ -40,7 +39,7 @@ public class IngredienteContoller {
         return ResponseEntity.ok(ingredienteService.listarIngredientes());
     }
 
-    @GetMapping("/listar/{id}")
+    @GetMapping("/listar/{ingredienteId}")
     @Operation(summary = "listar ingrediente por id", description = "Endpoint para listar um ingrediente")
     public ResponseEntity<Ingrediente> listarIngredientePorId(@PathVariable("ingredienteId") Integer ingredienteId) {
         Ingrediente ingrediente = ingredienteService.buscarIngredientePorId(ingredienteId);
@@ -64,7 +63,7 @@ public class IngredienteContoller {
 
     }
 
-    @PatchMapping("{id}/status")
+    @PatchMapping("{ingredienteId}/status")
     @Operation(summary = "altera status de um ingrediente", description = "Endpoint para alterar o status de um ingrediente")
     public ResponseEntity<UpdateStatusResponse> alterarStatusIngrediente(
             @Valid
@@ -76,9 +75,9 @@ public class IngredienteContoller {
         } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
-    @PatchMapping("{id}/grupo")
+    @PatchMapping("{ingredienteId}/grupo")
     @Operation(summary = "alterar o grupo de um ingrediente", description = "Endpoint para alterar o grupo ao qual um ingrediente pertence")
-    public ResponseEntity<UpdateGrupoDeIngredienteDTOResponse> alterarGrupoIngrediente(
+    public ResponseEntity<ChangeGrupoDTOResponse> alterarGrupoIngrediente(
             @Valid
             @PathVariable("ingredienteID") Integer ingredienteId,
             @RequestBody Integer novoGrupo) {
@@ -89,7 +88,7 @@ public class IngredienteContoller {
 
     }
 
-    @DeleteMapping("/deletar/{id}")
+    @DeleteMapping("/deletar/{ingredienteId}")
     @Operation(summary = "remove o ingrediente", description = "Endpoint para remoção lógica")
     public ResponseEntity removerGrupoIngrediente(
             @Valid
@@ -101,7 +100,7 @@ public class IngredienteContoller {
         } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
-    @DeleteMapping("/destroy/{id}")
+    @DeleteMapping("/destroy/{ingredienteId}")
     @Operation(summary = "destroi o ingrediente", description = "Endpoint para destruir o ingrediente")
     public ResponseEntity removerIngrediente(
             @Valid

@@ -1,6 +1,6 @@
 package gerenciamentorestaurante.projeto1.entities.dto.request;
 
-public class GrupoAtualizarDTORequest {
+public class UpdateGrupoDTORequest {
     private String nome;
     private String cor;
 

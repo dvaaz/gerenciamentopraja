@@ -1,6 +1,6 @@
 package gerenciamentorestaurante.projeto1.entities.dto.request;
 
-public class UpdateGrupoDeIngredienteDTORequest {
+public class ChangeToAnotherGrupoDTORequest {
     private int grupo;
 
     public int getGrupo() {

@@ -5,7 +5,7 @@ import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateDescricaoReq
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateDescricaoResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateGrupoDeIngredienteDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.ChangeGrupoDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.entities.Grupo;
 import gerenciamentorestaurante.projeto1.repository.GrupoRepository;
@@ -25,6 +25,8 @@ public class IngredienteService {
 
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private GrupoService grupoService;
 
     public IngredienteService(IngredienteRepository ingredienteRepository, GrupoRepository grupoRepository) {
         this.ingredienteRepository = ingredienteRepository;
@@ -36,34 +38,28 @@ public class IngredienteService {
      * @return ingredienteDTOResponse
      */
     @Transactional
-    public IngredienteDTOResponse criarIngrediente(IngredienteDTORequest ingredienteDTORequest) {
-        Ingrediente ingrediente = modelMapper.map(ingredienteDTORequest, Ingrediente.class);
-        Grupo grupo = grupoRepository.buscarGrupoDeIngredientePorId(ingredienteDTORequest.getGrupo());
-        if (grupo != null) {
-          Ingrediente ingredienteSave = this.ingredienteRepository.save(ingrediente);
-
-          return modelMapper.map(ingredienteSave, IngredienteDTOResponse.class);
+    public IngredienteDTOResponse criarIngrediente(IngredienteDTORequest dtoRequest) {
+        // Verifica a existencia do um grupo
+        Grupo grupo = grupoRepository.buscarGrupoDeIngredientePorId(dtoRequest.getGrupoId());
+        // Se não encontrar um grupo
+        if (grupo == null) {
+            grupo = grupoRepository.buscarGrupoPadrao();
+            // se não houver um grupo do tipo padrão criado, nós criaremos um
+            if (grupo == null) {
+                grupoService.criarGrupoDefault();
+                grupo = grupoRepository.buscarGrupoPadrao();
+            }
         }
-        // Buscar o grupo default para todos ingredientes
-        Grupo grupoDefault = this.grupoRepository.buscarGrupoPadrao();
-        if (grupoDefault == null) {
-          // se nao esta criado um grupo default
-          GrupoService grupoService = new GrupoService(this.grupoRepository);
-          grupoService.criarGrupoDefault();
-          ingrediente.setGrupo(grupoRepository.buscarGrupoPadrao());
-          Ingrediente ingredienteSave = this.ingredienteRepository.save(ingrediente);
-          return modelMapper.map(ingredienteSave, IngredienteDTOResponse.class);
+        // Mapeia os dados obtidos para  acriação de ingrediente
+        Ingrediente ingrediente = modelMapper.map(dtoRequest, Ingrediente.class);
+        ingrediente.setGrupoId(grupo);
+        // Salva no banco de dados (persistence)
+        Ingrediente ingredienteSave = ingredienteRepository.save(ingrediente);
 
-        }
-        // se há um grupo default
-        ingrediente.setGrupo(grupoDefault);
-        Ingrediente ingredienteSave = this.ingredienteRepository.save(ingrediente);
         return modelMapper.map(ingredienteSave, IngredienteDTOResponse.class);
-
 
     }
 
-    @Transactional
     public Ingrediente buscaFindById(Integer ingredienteID) {
         return ingredienteRepository.findById(ingredienteID).orElse(null);
     }
@@ -91,13 +87,13 @@ public class IngredienteService {
     }
 
     @Transactional
-    public UpdateGrupoDeIngredienteDTOResponse alterarGrupoIngrediente(Integer ingredienteId, Integer novoGrupo) {
+    public ChangeGrupoDTOResponse alterarGrupoIngrediente(Integer ingredienteId, Integer novoGrupo) {
         Ingrediente ingrediente = this.ingredienteRepository.buscarIngredientePorId(ingredienteId);
         Grupo alteraGrupo = this.grupoRepository.buscarGrupoDeIngredientePorId(novoGrupo);
         if  (ingrediente != null &&  alteraGrupo != null){
-            ingrediente.setGrupo(alteraGrupo);
+            ingrediente.setGrupoId(alteraGrupo);
             Ingrediente tempResponse = ingredienteRepository.save(ingrediente);
-            return modelMapper.map(tempResponse, UpdateGrupoDeIngredienteDTOResponse.class);
+            return modelMapper.map(tempResponse, ChangeGrupoDTOResponse.class);
         } else return null;
     }
 

@@ -4,10 +4,10 @@ public class IngredienteDTOResponse {
     private Integer id;
     private String nome;
     private String descricao;
-    private int grupo;
+    private Integer grupoId;
     private int status;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -31,12 +31,12 @@ public class IngredienteDTOResponse {
         this.descricao = descricao;
     }
 
-    public int getGrupo() {
-        return grupo;
+    public Integer getGrupoId() {
+        return grupoId;
     }
 
-    public void setGrupo(int grupo) {
-        this.grupo = grupo;
+    public void setGrupoId(Integer grupoId) {
+        this.grupoId = grupoId;
     }
 
     public int getStatus() {

@@ -7,7 +7,7 @@ public class GrupoDTOResponse {
   private int tipo;
   private int status;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

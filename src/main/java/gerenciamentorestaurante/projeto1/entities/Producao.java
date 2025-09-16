@@ -17,12 +17,50 @@ public class Producao {
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "producao_dia_id", nullable = false)
-  private ProducaoDia producoes;
+  private ProducaoDia producaoDiaId;
 
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "estoque_id", nullable = false)
-  private Estoque estoque;
+  private Estoque estoqueId;
 
+  public Integer getId() {
+    return id;
+  }
 
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public int getQtd() {
+    return qtd;
+  }
+
+  public void setQtd(int qtd) {
+    this.qtd = qtd;
+  }
+
+  public int getStatus() {
+    return status;
+  }
+
+  public void setStatus(int status) {
+    this.status = status;
+  }
+
+  public ProducaoDia getProducaoDiaId() {
+    return producaoDiaId;
+  }
+
+  public void setProducaoDiaId(ProducaoDia producaoDiaId) {
+    this.producaoDiaId = producaoDiaId;
+  }
+
+  public Estoque getEstoqueId() {
+    return estoqueId;
+  }
+
+  public void setEstoqueId(Estoque estoqueId) {
+    this.estoqueId = estoqueId;
+  }
 }

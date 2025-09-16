@@ -1,9 +1,12 @@
 package gerenciamentorestaurante.projeto1.entities.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class IngredienteDTORequest {
     private String nome;
     private String descricao;
-    private int grupo;
+    @JsonProperty("grupoId")
+    private Integer grupoId;
     private int status;
 
     public String getNome() {
@@ -22,12 +25,13 @@ public class IngredienteDTORequest {
         this.descricao = descricao;
     }
 
-    public int getGrupo() {
-        return grupo;
+
+    public Integer getGrupoId() {
+        return grupoId;
     }
 
-    public void setGrupo(int grupo) {
-        this.grupo = grupo;
+    public void setGrupoId(Integer grupoId) {
+        this.grupoId = grupoId;
     }
 
     public int getStatus() {

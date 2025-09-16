@@ -19,10 +19,10 @@ public class Grupo {
   @Column(name = "grupo_status")
   private int status;
 
-  @OneToMany(mappedBy = "grupo")
+  @OneToMany(mappedBy = "grupoId")
   private Set<Ingrediente> ingredienteSet;
 
-  @OneToMany(mappedBy = "grupo")
+  @OneToMany(mappedBy = "grupoId")
   private Set<FichaTecnica> fichaTecnicaSet;
 
     public Integer getId() {

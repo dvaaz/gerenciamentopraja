@@ -1,6 +1,6 @@
 package gerenciamentorestaurante.projeto1.controller;
 
-import gerenciamentorestaurante.projeto1.entities.dto.request.GrupoAtualizarDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateGrupoDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.GrupoDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.GrupoAtualizarDTOResponse;
@@ -65,7 +65,7 @@ public class GrupoController {
     @Operation(summary = "Alterações em um grupo", description="Endpoint para alterar nome e cor de um grupo")
     public ResponseEntity<GrupoAtualizarDTOResponse> atualizarGrupo(
             @Valid @PathVariable Integer grupoId,
-            @RequestBody GrupoAtualizarDTORequest atualizarDTORequest) {
+            @RequestBody UpdateGrupoDTORequest atualizarDTORequest) {
       GrupoAtualizarDTOResponse atualizado = grupoService.atualizarGrupo(grupoId, atualizarDTORequest);
       if (atualizado != null){
           return ResponseEntity.ok(atualizado);
@@ -76,11 +76,11 @@ public class GrupoController {
     @Operation(summary = "Atualizaçao de grupo", description = "Endpoint para atualização lógica de um grupo")
     public ResponseEntity<UpdateStatusResponse> atualizarStatus(
             @Valid @PathVariable Integer grupoId,
-            @RequestBody UpdateStatusRequest updateStatusRequest
+            @RequestBody UpdateStatusRequest novoStatus
     ) {
-      Grupo grupo = this.grupoService.listarGrupoPorID(grupoId);
-      if (grupo != null){
-          return ResponseEntity.ok(grupoService.atualizarStatusGrupo(grupoId, updateStatusRequest));
+      UpdateStatusResponse  statusResponse = grupoService.atualizarStatusGrupo(grupoId, novoStatus);
+      if (statusResponse != null){
+          return ResponseEntity.ok(statusResponse);
       } else return ResponseEntity.notFound().build();
     }
 

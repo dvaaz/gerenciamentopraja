@@ -4,7 +4,7 @@ public class UpdateStatusResponse {
     private Integer id;
     private int status;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

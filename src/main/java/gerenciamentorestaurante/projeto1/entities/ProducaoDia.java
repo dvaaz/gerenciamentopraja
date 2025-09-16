@@ -16,10 +16,10 @@ public class ProducaoDia {
   private Date data;
   @Column(name="producao_dia_status")
   private int status;
-  @OneToMany(mappedBy = "producoes")
+  @OneToMany(mappedBy = "producaoDiaId")
   private Set<Producao> producaoDias;
 
-  public int getId() {
+  public Integer getId() {
     return id;
   }
 

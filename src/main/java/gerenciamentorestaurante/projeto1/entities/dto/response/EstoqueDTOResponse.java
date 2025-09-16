@@ -17,7 +17,7 @@ public class EstoqueDTOResponse {
         this.status = status;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

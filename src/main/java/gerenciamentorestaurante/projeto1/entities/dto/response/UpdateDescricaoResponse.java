@@ -4,7 +4,7 @@ public class UpdateDescricaoResponse {
     private Integer id;
     private String descricao;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

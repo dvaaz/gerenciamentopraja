@@ -6,7 +6,7 @@ public class UtilizadoDiaDTOResponse {
     private int destino;
     private int status;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

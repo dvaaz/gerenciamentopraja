@@ -1,7 +1,7 @@
 package gerenciamentorestaurante.projeto1.service;
 
 
-import gerenciamentorestaurante.projeto1.entities.dto.request.GrupoAtualizarDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateGrupoDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.GrupoDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.GrupoAtualizarDTOResponse;
@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.View;
 
 import java.util.List;
 
@@ -32,12 +31,12 @@ public class GrupoService {
   @Transactional
   public GrupoDTOResponse criarGrupo(GrupoDTORequest grupoDTORequest) {
     Grupo grupo = modelMapper.map(grupoDTORequest, Grupo.class);
-    if (grupo.getTipo() != 1 || grupo.getTipo() != 2) {
-      throw new IllegalArgumentException("Tipo de grupo inválido: " + grupo.getTipo() + "deve ser 1 (ingredientes) ou 2 (Fichas tecnicas)");
-
-    } else{
+    if (grupo.getTipo() == 1 || grupo.getTipo() == 2) {
       Grupo grupoSave = this.grupoRepository.save(grupo);
       return modelMapper.map(grupoSave, GrupoDTOResponse.class);
+    } else{
+      return null;
+//      throw new IllegalArgumentException("Tipo de grupo inválido: " + grupo.getTipo() + "deve ser 1 (ingredientes) ou 2 (Fichas tecnicas)");
     }
 
   }
@@ -64,7 +63,7 @@ public class GrupoService {
     }
 
     @Transactional
-    public GrupoAtualizarDTOResponse atualizarGrupo(Integer grupoId, GrupoAtualizarDTORequest grupoDTORequest) {
+    public GrupoAtualizarDTOResponse atualizarGrupo(Integer grupoId, UpdateGrupoDTORequest grupoDTORequest) {
       Grupo grupo = grupoRepository.listarGrupoPorID(grupoId);
       if (grupo != null) {
           if (grupoDTORequest.getCor() != null) {
@@ -78,17 +77,21 @@ public class GrupoService {
       } else return null;
     }
 
+    public Grupo buscaFindById(Integer grupoID) {
+      return this.grupoRepository.findById(grupoID).orElse(null);
+    }
+
     @Transactional
     public void apagarGrupo(Integer grupoId) {
       this.grupoRepository.apagarLogicoGrupo(grupoId);
     }
 
     public void destruiGrupo(Integer grupoId) {
-      Grupo grupo = this.grupoRepository.listarGrupoPorID(grupoId);
-      if (grupo != null && grupo.getStatus() == -1) {
+      Grupo grupo = this.buscaFindById(grupoId);
+      if (grupo == null && grupo.getStatus() == -1) {
           this.grupoRepository.delete(grupo);
-      } else
-        throw new IllegalArgumentException("Gupo não encontrado ou ativo");
+      }
+//        throw new IllegalArgumentException("Gupo não encontrado ou ativo");
     }
     @Transactional
   public void criarGrupoDefault() {
