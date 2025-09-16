@@ -12,7 +12,7 @@ public class Estoque {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "estoque_id")
-  private int id;
+  private Integer id;
   @Column(name = "estoque_dia")
   private Date dia;
   @Column(name = "estoque_validade")
@@ -33,7 +33,7 @@ public class Estoque {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

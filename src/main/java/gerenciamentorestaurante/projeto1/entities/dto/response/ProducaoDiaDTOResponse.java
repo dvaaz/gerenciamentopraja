@@ -3,7 +3,7 @@ package gerenciamentorestaurante.projeto1.entities.dto.response;
 import java.util.Date;
 
 public class ProducaoDiaDTOResponse {
-    private int id;
+    private Integer id;
     private Date data;
     private int status;
 
@@ -11,7 +11,7 @@ public class ProducaoDiaDTOResponse {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

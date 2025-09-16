@@ -12,7 +12,7 @@ public class FichaTecnica {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name="ficha_tecnica_id")
-  private int id;
+  private Integer id;
   @Column(name="ficha_tecnica_nome")
   private String nome;
   @Column(name="ficha_tecnica_descricao")
@@ -30,7 +30,7 @@ public class FichaTecnica {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

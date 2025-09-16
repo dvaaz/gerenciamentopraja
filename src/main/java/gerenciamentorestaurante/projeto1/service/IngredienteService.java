@@ -2,11 +2,10 @@ package gerenciamentorestaurante.projeto1.service;
 
 import gerenciamentorestaurante.projeto1.entities.dto.request.IngredienteDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateDescricaoRequest;
-import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateGrupoRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateDescricaoResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateGrupoResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateGrupoDeIngredienteDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.entities.Grupo;
 import gerenciamentorestaurante.projeto1.repository.GrupoRepository;
@@ -78,14 +77,13 @@ public class IngredienteService {
     }
 
     @Transactional
-    public UpdateGrupoResponse alterarGrupoIngrediente(Integer ingredienteId, UpdateGrupoRequest updateGrupoRequest) {
+    public UpdateGrupoDeIngredienteDTOResponse alterarGrupoIngrediente(Integer ingredienteId, Integer novoGrupo) {
         Ingrediente ingrediente = this.ingredienteRepository.buscarIngredientePorId(ingredienteId);
-        Grupo grupo = this.grupoRepository.buscarGrupoDeIngredientePorId(updateGrupoRequest.getGrupo());
-        if  (ingrediente != null &&  grupo != null){
-            Grupo grupoDefault = grupoRepository.listarGrupoPorID(1);
-            ingrediente.setGrupo(grupoDefault);
+        Grupo alteraGrupo = this.grupoRepository.buscarGrupoDeIngredientePorId(novoGrupo);
+        if  (ingrediente != null &&  alteraGrupo != null){
+            ingrediente.setGrupo(alteraGrupo);
             Ingrediente tempResponse = ingredienteRepository.save(ingrediente);
-            return modelMapper.map(tempResponse, UpdateGrupoResponse.class);
+            return modelMapper.map(tempResponse, UpdateGrupoDeIngredienteDTOResponse.class);
         } else return null;
     }
 

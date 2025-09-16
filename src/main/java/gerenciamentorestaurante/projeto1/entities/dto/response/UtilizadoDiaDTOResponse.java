@@ -1,7 +1,7 @@
 package gerenciamentorestaurante.projeto1.entities.dto.response;
 
 public class UtilizadoDiaDTOResponse {
-    private int id;
+    private Integer id;
     private int qtd;
     private int destino;
     private int status;
@@ -10,7 +10,7 @@ public class UtilizadoDiaDTOResponse {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

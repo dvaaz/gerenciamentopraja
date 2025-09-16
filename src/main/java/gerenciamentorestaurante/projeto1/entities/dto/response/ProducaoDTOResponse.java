@@ -1,7 +1,7 @@
 package gerenciamentorestaurante.projeto1.entities.dto.response;
 
 public class ProducaoDTOResponse {
-    private int id;
+    private Integer id;
     private int qtd;
     private int status;
 
@@ -9,7 +9,7 @@ public class ProducaoDTOResponse {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

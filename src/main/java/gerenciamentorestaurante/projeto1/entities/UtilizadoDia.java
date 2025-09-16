@@ -9,7 +9,7 @@ public class UtilizadoDia {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "utilizado_dia_id")
-  private int id;
+  private Integer id;
   @Column(name = "utilizado_dia_qtd")
   private int qtd;
   @Column(name="utilizado_dia_destino")
@@ -33,7 +33,7 @@ public class UtilizadoDia {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

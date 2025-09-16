@@ -1,7 +1,7 @@
 package gerenciamentorestaurante.projeto1.entities.dto.response;
 
 public class GrupoDTOResponse {
-  private int id;
+  private Integer id;
   private String nome;
   private String cor;
   private int tipo;
@@ -11,7 +11,7 @@ public class GrupoDTOResponse {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

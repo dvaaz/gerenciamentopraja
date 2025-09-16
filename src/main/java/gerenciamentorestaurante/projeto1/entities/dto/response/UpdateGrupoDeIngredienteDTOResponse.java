@@ -1,14 +1,14 @@
 package gerenciamentorestaurante.projeto1.entities.dto.response;
 
-public class UpdateGrupoResponse {
-    private int id;
+public class UpdateGrupoDeIngredienteDTOResponse {
+    private Integer id;
     private int grupo;
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

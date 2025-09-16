@@ -13,7 +13,7 @@ public class Ingrediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ingrediente_id")
-    private int id;
+    private Integer id;
     @Column(name="ingrediente_nome")
     private String nome;
     @Column(name ="ingrediente_descricao")
@@ -33,7 +33,7 @@ public class Ingrediente {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,14 +1,14 @@
 package gerenciamentorestaurante.projeto1.entities.dto.response;
 
 public class UpdateDescricaoResponse {
-    private int id;
+    private Integer id;
     private String descricao;
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

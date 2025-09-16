@@ -9,7 +9,7 @@ public class IngredienteFichaTecnica {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "ingrediente_ficha_tecnica_id")
-  private int id;
+  private Integer id;
   @Column(name= "ingrediente_ficha_tecnica_qtd")
   private int qtd;
   @Column(name="ingrediente_ficha_tecnica_unidade_medida")
@@ -29,7 +29,7 @@ public class IngredienteFichaTecnica {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

@@ -2,11 +2,11 @@ package gerenciamentorestaurante.projeto1.controller;
 
 import gerenciamentorestaurante.projeto1.entities.dto.request.IngredienteDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateDescricaoRequest;
-import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateGrupoRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateGrupoDeIngredienteDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateDescricaoResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateGrupoResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateGrupoDeIngredienteDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.entities.Ingrediente;
 import gerenciamentorestaurante.projeto1.service.IngredienteService;
@@ -78,13 +78,13 @@ public class IngredienteContoller {
 
     @PatchMapping("{id}/grupo")
     @Operation(summary = "alterar o grupo de um ingrediente", description = "Endpoint para alterar o grupo ao qual um ingrediente pertence")
-    public ResponseEntity<UpdateGrupoResponse> alterarGrupoIngrediente(
+    public ResponseEntity<UpdateGrupoDeIngredienteDTOResponse> alterarGrupoIngrediente(
             @Valid
             @PathVariable("ingredienteID") Integer ingredienteId,
-            @RequestBody UpdateGrupoRequest updateGrupoRequest) {
+            @RequestBody Integer novoGrupo) {
         Ingrediente ingrediente = ingredienteService.buscarIngredientePorId(ingredienteId);
         if (ingrediente != null) {
-            return ResponseEntity.ok(ingredienteService.alterarGrupoIngrediente(ingredienteId, updateGrupoRequest));
+            return ResponseEntity.ok(ingredienteService.alterarGrupoIngrediente(ingredienteId, novoGrupo));
         } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 
     }

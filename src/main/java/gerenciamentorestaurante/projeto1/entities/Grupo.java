@@ -8,8 +8,8 @@ import java.util.Set;
 public class Grupo {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name ="gupo_id")
-  private int id;
+  @Column(name ="grupo_id")
+  private Integer id;
   @Column (name="grupo_nome")
   private String nome;
   @Column(name = "grupo_cor")
@@ -24,11 +24,12 @@ public class Grupo {
 
   @OneToMany(mappedBy = "grupo")
   private Set<FichaTecnica> fichaTecnicaSet;
-  public int getId() {
-    return id;
-  }
 
-    public void setId(int id) {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -73,10 +74,7 @@ public class Grupo {
     }
 
     public Set<FichaTecnica> getFichaTecnicaSet() {
-      if (this.getTipo() == 2 || this.getTipo() == 0){
-            return fichaTecnicaSet;
-        }  else return null;
-
+        return fichaTecnicaSet;
     }
 
     public void setFichaTecnicaSet(Set<FichaTecnica> fichaTecnicaSet) {

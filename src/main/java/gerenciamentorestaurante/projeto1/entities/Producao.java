@@ -9,7 +9,7 @@ public class Producao {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "producao_id")
-  private int id;
+  private Integer id;
   @Column(name = "producao_qtd")
   private int qtd;
   @Column(name = "producao_status")

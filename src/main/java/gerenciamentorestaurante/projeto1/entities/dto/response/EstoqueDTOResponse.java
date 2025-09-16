@@ -3,7 +3,7 @@ package gerenciamentorestaurante.projeto1.entities.dto.response;
 import java.util.Date;
 
 public class EstoqueDTOResponse {
-    private int id;
+    private Integer id;
     private Date dia;
     private Date validade;
     private int qtd;
@@ -21,7 +21,7 @@ public class EstoqueDTOResponse {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -11,7 +11,7 @@ public class ProducaoDia {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "producao_dia_id")
-  private int id;
+  private Integer id;
   @Column(name = "producao_dia_data")
   private Date data;
   @Column(name="producao_dia_status")
@@ -23,7 +23,7 @@ public class ProducaoDia {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
