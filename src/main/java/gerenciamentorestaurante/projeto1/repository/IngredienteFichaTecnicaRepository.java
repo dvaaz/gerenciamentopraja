@@ -12,14 +12,14 @@ import java.util.List;
 public interface IngredienteFichaTecnicaRepository extends JpaRepository<FichaTecnica, Integer> {
   @Modifying
   @Transactional
-  @Query("UPDATE FichaTecnica f SET f.status = -1 " +
+  @Query("UPDATE IngredienteFichaTecnica f SET f.status = -1 " +
       "WHERE f.id = :id")
-  void apagarLogicoFichaTecnica(@Param("id") Integer fichaTecnicaId) ;
+  void apagarLogicoIngredienteFichaTecnica(@Param("id") Integer ingredienteFichaTecnicaId) ;
 
-  @Query("SELECT f FROM FichaTecnica f WHERE f.status>=0")
-  List<FichaTecnica> listarFichaTecnicas();
+  @Query("SELECT f FROM IngredienteFichaTecnica f WHERE f.status>=0")
+  List<FichaTecnica> listarIngredienteFichaTecnicas();
 
-  @Query("SELECT f FROM FichaTecnica f WHERE f.status = :id AND f.status>=0")
-  FichaTecnica buscarFichaTecnicaPorID(@Param("id") Integer fichaTecnicaId);
+  @Query("SELECT f FROM IngredienteFichaTecnica f WHERE f.id = :id AND f.status>=0")
+  FichaTecnica buscarIngredienteFichaTecnicaPorID(@Param("id") Integer ingredienteFichaTecnicaId);
 
 }

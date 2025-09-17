@@ -17,9 +17,9 @@ public interface ProducaoRepository extends JpaRepository<Producao, Integer> {
   void apagarLogicoProducao(@Param("id") Integer producaoId) ;
 
   @Query("SELECT p FROM Producao p WHERE p.status>=0")
-  List<Producao> listarProducaos();
+  List<Producao> listarProducoes();
 
-  @Query("SELECT p FROM Producao p WHERE p.status = :id AND p.status>=0")
+  @Query("SELECT p FROM Producao p WHERE p.id = :id AND p.status>=0")
   Producao buscarProducaoPorID(@Param("id") Integer producaoId);
 
 }

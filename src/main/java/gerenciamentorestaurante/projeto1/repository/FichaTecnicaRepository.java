@@ -14,11 +14,11 @@ public interface FichaTecnicaRepository extends JpaRepository<FichaTecnica, Inte
   @Transactional
   @Query("UPDATE FichaTecnica f SET f.status = -1 " +
       "WHERE f.id = :id")
-  void apagarLogicoCategoria(@Param("id") Integer categoriaId) ;
+  void apagarLogicoFichaTecnica(@Param("id") Integer fichaTecnicaId) ;
 
   @Query("SELECT f FROM FichaTecnica f WHERE f.status>=0")
-  List<FichaTecnica> listarCategorias();
+  List<FichaTecnica> listarFichaTecnicas();
 
-  @Query("SELECT f FROM FichaTecnica f WHERE f.status = :id AND f.status>=0")
-  FichaTecnica buscarCategoriaPorID(@Param("id") Integer categoriaId);
+  @Query("SELECT f FROM FichaTecnica f WHERE f.id = :id AND f.status>=0")
+  FichaTecnica buscarFichaTecnicaPorID(@Param("id") Integer fichaTecnicaId);
 }

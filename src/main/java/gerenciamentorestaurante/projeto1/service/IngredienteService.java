@@ -5,7 +5,7 @@ import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateDescricaoReq
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateDescricaoResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.ChangeGrupoDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.ChangeToAnotherGrupoDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.entities.Grupo;
 import gerenciamentorestaurante.projeto1.repository.GrupoRepository;
@@ -51,13 +51,22 @@ public class IngredienteService {
             }
         }
         // Mapeia os dados obtidos para  acriação de ingrediente
-        Ingrediente ingrediente = modelMapper.map(dtoRequest, Ingrediente.class);
+        Ingrediente ingrediente = new Ingrediente();
+        ingrediente.setNome(dtoRequest.getNome());
+        ingrediente.setDescricao(dtoRequest.getDescricao());
         ingrediente.setGrupo(grupo);
+        ingrediente.setStatus(dtoRequest.getStatus());
         // Salva no banco de dados (persistence)
         Ingrediente ingredienteSave = ingredienteRepository.save(ingrediente);
 
-        return modelMapper.map(ingredienteSave, IngredienteDTOResponse.class);
+        IngredienteDTOResponse dtoResponse= new IngredienteDTOResponse();
+        dtoResponse.setId(ingredienteSave.getId());
+        dtoResponse.setNome(ingredienteSave.getNome());
+        dtoResponse.setDescricao(ingredienteSave.getDescricao());
+        dtoResponse.setGrupoId(ingredienteSave.getGrupo().getId());
+        dtoResponse.setStatus(ingredienteSave.getStatus());
 
+        return dtoResponse;
     }
 
     public Ingrediente buscaFindById(Integer ingredienteID) {
@@ -81,18 +90,28 @@ public class IngredienteService {
         if  (ingrediente != null){
             ingrediente.setDescricao(updateDescricaoRequest.getDescricao());
             Ingrediente tempResponse = ingredienteRepository.save(ingrediente);
-            return modelMapper.map(tempResponse, UpdateDescricaoResponse.class);
+
+            UpdateDescricaoResponse updated = new UpdateDescricaoResponse();
+            updated.setId(tempResponse.getId());
+            updated.setDescricao(tempResponse.getDescricao());
+
+            return updated;
         } else return null;
     }
 
     @Transactional
-    public ChangeGrupoDTOResponse alterarGrupoIngrediente(Integer ingredienteId, Integer novoGrupo) {
+    public ChangeToAnotherGrupoDTOResponse alterarGrupoIngrediente(Integer ingredienteId, Integer novoGrupo) {
         Ingrediente ingrediente = this.ingredienteRepository.buscarIngredientePorId(ingredienteId);
         Grupo alteraGrupo = this.grupoRepository.buscarGrupoDeIngredientePorId(novoGrupo);
         if  (ingrediente != null &&  alteraGrupo != null){
             ingrediente.setGrupo(alteraGrupo);
             Ingrediente tempResponse = ingredienteRepository.save(ingrediente);
-            return modelMapper.map(tempResponse, ChangeGrupoDTOResponse.class);
+
+            ChangeToAnotherGrupoDTOResponse updated = new ChangeToAnotherGrupoDTOResponse();
+            updated.setId(tempResponse.getId());
+            updated.setGrupo(tempResponse.getGrupo().getId());
+
+            return updated;
         } else return null;
     }
 
@@ -102,7 +121,12 @@ public class IngredienteService {
         if (ingrediente != null){
             ingrediente.setStatus(updateStatusRequest.getStatus());
             Ingrediente tempResponse = ingredienteRepository.save(ingrediente);
-            return modelMapper.map(tempResponse, UpdateStatusResponse.class);
+
+            UpdateStatusResponse updated = new UpdateStatusResponse();
+            updated.setId(tempResponse.getId());
+            updated.setStatus(tempResponse.getStatus());
+
+            return updated;
         } else return null;
     }
 

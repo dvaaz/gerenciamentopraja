@@ -41,11 +41,14 @@ public class GrupoService {
 
   }
 
-  public List<Grupo> listarGrupos() {
+  public List<Grupo> listarTodosGrupos() {
     return this.grupoRepository.listarGrupos();
   }
 
+
   public Grupo listarGrupoPorID(Integer id) { return this.grupoRepository.listarGrupoPorID(id); }
+
+  public Grupo obterGrupoPadrao() { return this.grupoRepository.buscarGrupoPadrao(); }
 
   public List<Grupo> listarGruposDeIngredientes() {return this.grupoRepository.buscarGrupoDeIngredientes();}
 
@@ -102,4 +105,6 @@ public class GrupoService {
     grupoDefault.setTipo(0);
     grupoRepository.save(grupoDefault);
     }
+
+
 }

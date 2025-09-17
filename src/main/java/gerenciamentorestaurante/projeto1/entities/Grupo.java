@@ -1,6 +1,9 @@
 package gerenciamentorestaurante.projeto1.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+
 import java.util.Set;
 
 @Entity
@@ -15,6 +18,8 @@ public class Grupo {
   @Column(name = "grupo_cor")
   private String cor;
   @Column(name = "grupo_tipo")
+  @Min(0)
+  @Max(2)
   private int tipo;
   @Column(name = "grupo_status")
   private int status;

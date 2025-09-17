@@ -1,6 +1,6 @@
 package gerenciamentorestaurante.projeto1.entities.dto.response;
 
-public class ChangeGrupoDTOResponse {
+public class ChangeToAnotherGrupoDTOResponse {
     private Integer id;
     private int grupo;
 

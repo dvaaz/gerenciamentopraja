@@ -19,7 +19,7 @@ public interface UtilizadoDiaRepository extends JpaRepository<UtilizadoDia, Inte
   @Query("SELECT p FROM UtilizadoDia p WHERE p.status>=0")
   List<UtilizadoDia> listarUtilizadoDias();
 
-  @Query("SELECT p FROM UtilizadoDia p WHERE p.status = :id AND p.status>=0")
+  @Query("SELECT p FROM UtilizadoDia p WHERE p.id = :id AND p.status>=0")
   UtilizadoDia buscarUtilizadoDiaPorID(@Param("id") Integer utilizadoDiaId);
 
 }

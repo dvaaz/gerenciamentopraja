@@ -5,7 +5,7 @@ import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateDescricaoReq
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateDescricaoResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.ChangeGrupoDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.ChangeToAnotherGrupoDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.entities.Ingrediente;
 import gerenciamentorestaurante.projeto1.service.IngredienteService;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/ingredientes")
+@RequestMapping("api/ingrediente")
 @Tag(name ="Ingrediente", description="Api para  gerenciamento de ingredientes")
 public class IngredienteContoller {
     private final IngredienteService ingredienteService;
@@ -50,7 +50,7 @@ public class IngredienteContoller {
 
     }
 
-    @PatchMapping("{id}/descricao")
+    @PatchMapping("{ingredienteId}/descricao")
     @Operation(summary = "altera a descricao de um ingrediente", description = "Endpoint para alterar a descricao de um ingrediente")
     public ResponseEntity<UpdateDescricaoResponse> alterarDescricaoIngrediente(
             @Valid
@@ -75,24 +75,23 @@ public class IngredienteContoller {
         } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
-    @PatchMapping("{ingredienteId}/grupo")
+    @PatchMapping("/grupo/{ingredienteId}")
     @Operation(summary = "alterar o grupo de um ingrediente", description = "Endpoint para alterar o grupo ao qual um ingrediente pertence")
-    public ResponseEntity<ChangeGrupoDTOResponse> alterarGrupoIngrediente(
+    public ResponseEntity<ChangeToAnotherGrupoDTOResponse> alterarGrupoIngrediente(
             @Valid
-            @PathVariable("ingredienteID") Integer ingredienteId,
+            @PathVariable("ingredienteId") Integer ingredienteId,
             @RequestBody Integer novoGrupo) {
         Ingrediente ingrediente = ingredienteService.buscarIngredientePorId(ingredienteId);
         if (ingrediente != null) {
             return ResponseEntity.ok(ingredienteService.alterarGrupoIngrediente(ingredienteId, novoGrupo));
         } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-
     }
 
     @DeleteMapping("/deletar/{ingredienteId}")
     @Operation(summary = "remove o ingrediente", description = "Endpoint para remoção lógica")
     public ResponseEntity removerGrupoIngrediente(
             @Valid
-            @PathVariable("ingredienteID") Integer ingredienteId) {
+            @PathVariable("ingredienteId") Integer ingredienteId) {
         Ingrediente ingrediente = ingredienteService.buscarIngredientePorId(ingredienteId);
         if (ingrediente != null) {
             this.ingredienteService.apagarLogicoIngrediente(ingredienteId);
@@ -104,12 +103,11 @@ public class IngredienteContoller {
     @Operation(summary = "destroi o ingrediente", description = "Endpoint para destruir o ingrediente")
     public ResponseEntity removerIngrediente(
             @Valid
-            @PathVariable("ingredienteID") Integer ingredienteId) {
+            @PathVariable("ingredienteId") Integer ingredienteId) {
         Ingrediente ingrediente = ingredienteService.buscarIngredientePorId(ingredienteId);
         if (ingrediente != null) {
             this.ingredienteService.deletarDefinitivoIngrediente(ingredienteId);
             return ResponseEntity.noContent().build();
         } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
-
 }
