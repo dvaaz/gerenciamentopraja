@@ -7,6 +7,9 @@ public class IngredienteFichaTecnicaDTOResponse {
     private int qtd;
     private int status;
 
+    private Integer ingrediente;
+    private Integer fichatecnica;
+
     public Integer getId() {
         return id;
     }
@@ -45,5 +48,21 @@ public class IngredienteFichaTecnicaDTOResponse {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public Integer getIngrediente() {
+        return ingrediente;
+    }
+
+    public void setIngrediente(Integer ingrediente) {
+        this.ingrediente = ingrediente;
+    }
+
+    public Integer getFichatecnica() {
+        return fichatecnica;
+    }
+
+    public void setFichatecnica(Integer fichatecnica) {
+        this.fichatecnica = fichatecnica;
     }
 }

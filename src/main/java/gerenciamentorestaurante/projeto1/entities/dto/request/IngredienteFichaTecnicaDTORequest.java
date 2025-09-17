@@ -1,10 +1,16 @@
 package gerenciamentorestaurante.projeto1.entities.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class IngredienteFichaTecnicaDTORequest {
     private String nome;
     private String unidadeMedida;
     private int qtd;
     private int status;
+    @JsonProperty("ingredienteId")
+    private Integer ingrediente;
+    @JsonProperty("fichaTecnicaId")
+    private Integer fichaTecnica;
 
     public String getNome() {
         return nome;
@@ -36,5 +42,21 @@ public class IngredienteFichaTecnicaDTORequest {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public Integer getIngrediente() {
+        return ingrediente;
+    }
+
+    public void setIngrediente(Integer ingrediente) {
+        this.ingrediente = ingrediente;
+    }
+
+    public Integer getFichaTecnica() {
+        return fichaTecnica;
+    }
+
+    public void setFichaTecnica(Integer fichaTecnica) {
+        this.fichaTecnica = fichaTecnica;
     }
 }

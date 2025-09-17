@@ -4,10 +4,7 @@ import gerenciamentorestaurante.projeto1.entities.FichaTecnica;
 import gerenciamentorestaurante.projeto1.entities.dto.request.FichaTecnicaDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateDescricaoRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
-import gerenciamentorestaurante.projeto1.entities.dto.response.ChangeToAnotherGrupoDTOResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.FichaTecnicaDTOResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateDescricaoResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.*;
 import gerenciamentorestaurante.projeto1.service.FichaTecnicaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,6 +23,7 @@ public class FichaTecnicaController {
   public FichaTecnicaController (FichaTecnicaService fichaTecnicaService){
     this.fichaTecnicaService = fichaTecnicaService;
   }
+
 
   @PostMapping("/criar")
   @Operation(summary = "Registro de novo fichaTecnica", description = "Endpoint para a criacao de novo objeto fichaTecnica")
@@ -75,24 +73,23 @@ public class FichaTecnicaController {
     } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
   }
 
-  @PatchMapping("{fichaTecnicaId}/grupo")
+  @PatchMapping("/grupo/{fichaTecnicaId}")
   @Operation(summary = "alterar o grupo de um fichaTecnica", description = "Endpoint para alterar o grupo ao qual um fichaTecnica pertence")
   public ResponseEntity<ChangeToAnotherGrupoDTOResponse> alterarGrupoFichaTecnica(
       @Valid
-      @PathVariable("fichaTecnicaID") Integer fichaTecnicaId,
+      @PathVariable("fichaTecnicaId") Integer fichaTecnicaId,
       @RequestBody Integer novoGrupo) {
     FichaTecnica fichaTecnica = fichaTecnicaService.buscarFichaTecnicaPorId(fichaTecnicaId);
     if (fichaTecnica != null) {
       return ResponseEntity.ok(fichaTecnicaService.alterarGrupoFichaTecnica(fichaTecnicaId, novoGrupo));
     } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-
   }
 
   @DeleteMapping("/deletar/{fichaTecnicaId}")
   @Operation(summary = "remove o fichaTecnica", description = "Endpoint para remoção lógica")
   public ResponseEntity removerGrupoFichaTecnica(
       @Valid
-      @PathVariable("fichaTecnicaID") Integer fichaTecnicaId) {
+      @PathVariable("fichaTecnicaId") Integer fichaTecnicaId) {
     FichaTecnica fichaTecnica = fichaTecnicaService.buscarFichaTecnicaPorId(fichaTecnicaId);
     if (fichaTecnica != null) {
       this.fichaTecnicaService.apagarLogicoFichaTecnica(fichaTecnicaId);
@@ -104,7 +101,7 @@ public class FichaTecnicaController {
   @Operation(summary = "destroi o fichaTecnica", description = "Endpoint para destruir o fichaTecnica")
   public ResponseEntity removerFichaTecnica(
       @Valid
-      @PathVariable("fichaTecnicaID") Integer fichaTecnicaId) {
+      @PathVariable("fichaTecnicaId") Integer fichaTecnicaId) {
     FichaTecnica fichaTecnica = fichaTecnicaService.buscarFichaTecnicaPorId(fichaTecnicaId);
     if (fichaTecnica != null) {
       this.fichaTecnicaService.deletarDefinitivoFichaTecnica(fichaTecnicaId);
