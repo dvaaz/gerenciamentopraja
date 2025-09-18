@@ -20,5 +20,5 @@ public interface EstoqueRepository extends JpaRepository<Estoque, Integer> {
   List<Estoque> listarEstoques();
 
   @Query("SELECT e FROM Estoque e WHERE e.id = :id AND e.status>=0")
-  Estoque buscarEstoquePorID(@Param("id") Integer estoqueId);
+  Estoque listarEstoquePorID(@Param("id") Integer estoqueId);
 }

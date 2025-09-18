@@ -7,9 +7,7 @@ public class IngredienteFichaTecnicaDTORequest {
     private int unidadeMedida;
     private int qtd;
     private int status;
-    @JsonProperty("ingredienteId")
     private Integer ingrediente;
-    @JsonProperty("fichaTecnicaId")
     private Integer fichaTecnica;
 
 

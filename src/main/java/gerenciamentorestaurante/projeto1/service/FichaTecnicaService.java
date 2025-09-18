@@ -40,14 +40,14 @@ public class FichaTecnicaService {
   @Transactional
   public FichaTecnicaDTOResponse criarFichaTecnica(FichaTecnicaDTORequest dtoRequest) {
     // Verifica a existencia do um grupo
-    Grupo grupo = grupoRepository.buscarGrupoDeFichaTecnicaPorId(dtoRequest.getGrupoId());
+    Grupo grupo = grupoRepository.listarGrupoDeFichaTecnicaPorId(dtoRequest.getGrupoId());
     // Se não encontrar um grupo
     if (grupo == null) {
-      grupo = grupoRepository.buscarGrupoPadrao();
+      grupo = grupoRepository.listarGrupoPadrao();
       // se não houver um grupo do tipo padrão criado, nós criaremos um
       if (grupo == null) {
         grupoService.criarGrupoDefault();
-        grupo = grupoRepository.buscarGrupoPadrao();
+        grupo = grupoRepository.listarGrupoPadrao();
       }
     }
     // Mapeia os dados obtidos para  acriação de fichaTecnica
@@ -77,16 +77,16 @@ public class FichaTecnicaService {
     return this.fichaTecnicaRepository.listarFichaTecnicas();
   }
 
-  public FichaTecnica buscarFichaTecnicaPorId(Integer fichaTecnicaId){
-    FichaTecnica fichaTecnica = this.fichaTecnicaRepository.buscarFichaTecnicaPorID(fichaTecnicaId);
+  public FichaTecnica listarFichaTecnicaPorId(Integer fichaTecnicaId){
+    FichaTecnica fichaTecnica = this.fichaTecnicaRepository.listarFichaTecnicaPorID(fichaTecnicaId);
     if  (fichaTecnica != null){
-      return this.fichaTecnicaRepository.buscarFichaTecnicaPorID(fichaTecnicaId);
+      return this.fichaTecnicaRepository.listarFichaTecnicaPorID(fichaTecnicaId);
     } else return null;
   }
 
   @Transactional
   public UpdateDescricaoResponse atualizarDescricaoFichaTecnica(Integer fichaTecnicaId, UpdateDescricaoRequest updateDescricaoRequest) {
-    FichaTecnica fichaTecnica = this.fichaTecnicaRepository.buscarFichaTecnicaPorID(fichaTecnicaId);
+    FichaTecnica fichaTecnica = this.fichaTecnicaRepository.listarFichaTecnicaPorID(fichaTecnicaId);
     if  (fichaTecnica != null){
       fichaTecnica.setDescricao(updateDescricaoRequest.getDescricao());
       FichaTecnica tempResponse = fichaTecnicaRepository.save(fichaTecnica);
@@ -101,8 +101,8 @@ public class FichaTecnicaService {
 
   @Transactional
   public ChangeToAnotherGrupoDTOResponse alterarGrupoFichaTecnica(Integer fichaTecnicaId, Integer novoGrupo) {
-    FichaTecnica fichaTecnica = this.fichaTecnicaRepository.buscarFichaTecnicaPorID(fichaTecnicaId);
-    Grupo alteraGrupo = this.grupoRepository.buscarGrupoDeFichaTecnicaPorId(novoGrupo);
+    FichaTecnica fichaTecnica = this.fichaTecnicaRepository.listarFichaTecnicaPorID(fichaTecnicaId);
+    Grupo alteraGrupo = this.grupoRepository.listarGrupoDeFichaTecnicaPorId(novoGrupo);
     if  (fichaTecnica != null &&  alteraGrupo != null){
       fichaTecnica.setGrupo(alteraGrupo);
       FichaTecnica tempResponse = fichaTecnicaRepository.save(fichaTecnica);
@@ -117,7 +117,7 @@ public class FichaTecnicaService {
 
   @Transactional
   public UpdateStatusResponse atualizarStatusFichaTecnica(Integer fichaTecnicaId, UpdateStatusRequest updateStatusRequest){
-    FichaTecnica fichaTecnica = this.fichaTecnicaRepository.buscarFichaTecnicaPorID(fichaTecnicaId);
+    FichaTecnica fichaTecnica = this.fichaTecnicaRepository.listarFichaTecnicaPorID(fichaTecnicaId);
     if (fichaTecnica != null){
       fichaTecnica.setStatus(updateStatusRequest.getStatus());
       FichaTecnica tempResponse = fichaTecnicaRepository.save(fichaTecnica);

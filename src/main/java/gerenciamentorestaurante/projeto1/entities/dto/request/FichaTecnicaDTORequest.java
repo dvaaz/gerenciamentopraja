@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class FichaTecnicaDTORequest {
     private String nome;
     private String descricao;
-    @JsonProperty("grupoId")
     private Integer grupoId;
     private int status;
 
@@ -25,7 +24,6 @@ public class FichaTecnicaDTORequest {
         this.descricao = descricao;
     }
 
-    @JsonProperty("grupoId")
     public Integer getGrupoId() {
         return grupoId;
     }

@@ -4,7 +4,9 @@ package gerenciamentorestaurante.projeto1.service;
 import gerenciamentorestaurante.projeto1.entities.FichaTecnica;
 import gerenciamentorestaurante.projeto1.entities.Ingrediente;
 import gerenciamentorestaurante.projeto1.entities.IngredienteFichaTecnica;
+import gerenciamentorestaurante.projeto1.entities.dto.request.AlterarMedidasIngredienteFichaDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.IngredienteFichaTecnicaDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.response.AlterarMedidasIngredienteFichaDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteFichaTecnicaDTOResponse;
 import gerenciamentorestaurante.projeto1.repository.FichaTecnicaRepository;
@@ -13,6 +15,8 @@ import gerenciamentorestaurante.projeto1.repository.IngredienteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class IngredienteFichaTecnicaService {
@@ -37,13 +41,13 @@ public class IngredienteFichaTecnicaService {
   }
 
   @Transactional
-  public IngredienteFichaTecnicaDTOResponse adicionarIngrediente(IngredienteFichaTecnicaDTORequest dtoRequestRequest){
-    Ingrediente ingrediente = this.ingredienteRepository.buscarIngredientePorId(dtoRequestRequest.getIngrediente());
+  public IngredienteFichaTecnicaDTOResponse adicionarIngredienteAFichaTecnica (IngredienteFichaTecnicaDTORequest dtoRequestRequest){
+    Ingrediente ingrediente = this.ingredienteRepository.listarIngredientePorId(dtoRequestRequest.getIngrediente());
     if(ingrediente == null){ return null; } // personalizar returns com throw
-    FichaTecnica fichaTecnica = this.fichaTecnicaRepository.buscarFichaTecnicaPorID(dtoRequestRequest.getFichaTecnica());
+    FichaTecnica fichaTecnica = this.fichaTecnicaRepository.listarFichaTecnicaPorID(dtoRequestRequest.getFichaTecnica());
     if(fichaTecnica == null){return null; }
-    IngredienteFichaTecnica buscarDuplicata = this.ingredienteFichaTecRepository.buscarIngredienteExisteEmFichaTecnica(ingrediente.getId(), fichaTecnica.getId());
-    if(buscarDuplicata != null){ return null; }
+    IngredienteFichaTecnica listarDuplicata = this.ingredienteFichaTecRepository.listarIngredienteExisteEmFichaTecnica(ingrediente.getId(), fichaTecnica.getId());
+    if(listarDuplicata != null){ return null; }
     IngredienteFichaTecnica ingredienteFicha =  new IngredienteFichaTecnica();
     ingredienteFicha.setQtd(dtoRequestRequest.getQtd());
     ingredienteFicha.setUnidadeMedida(dtoRequestRequest.getUnidadeMedida());
@@ -62,6 +66,16 @@ public class IngredienteFichaTecnicaService {
     dtoResponse.setStatus(ingredienteFichaSave.getStatus());
     return dtoResponse;
 
+  }
+
+  public void apagapagarLogicoIngredienteFichaTecnica(Integer ingredienteFichaId){
+    this.ingredienteFichaTecRepository.apagarLogicoIngredienteFichaTecnica(ingredienteFichaId);
+  }
+
+
+
+  public AlterarMedidasIngredienteFichaDTOResponse(Integer ingredienteFichaId, AlterarMedidasIngredienteFichaDTORequest) {
+    IngredienteFichaTecnica ingredienteFichaTecnica =
   }
   
 }

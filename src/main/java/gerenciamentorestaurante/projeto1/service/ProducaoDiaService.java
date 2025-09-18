@@ -39,13 +39,13 @@ public class ProducaoDiaService {
 
 
     public List<ProducaoDia> listarProducaoDias(){
-        return this.producaoDiaRepository.buscarProducoesDia();
+        return this.producaoDiaRepository.listarProducoesDia();
     }
 
-    public ProducaoDia buscarProducaoDiaPorId(Integer producaoDiaId){
-        ProducaoDia producaoDia = this.producaoDiaRepository.buscarProducaoDiaPorID(producaoDiaId);
+    public ProducaoDia listarProducaoDiaPorId(Integer producaoDiaId){
+        ProducaoDia producaoDia = this.producaoDiaRepository.listarProducaoDiaPorID(producaoDiaId);
         if  (producaoDia != null){
-            return this.producaoDiaRepository.buscarProducaoDiaPorID(producaoDiaId);
+            return this.producaoDiaRepository.listarProducaoDiaPorID(producaoDiaId);
         } else return null;
     }
 
@@ -53,7 +53,7 @@ public class ProducaoDiaService {
 
     @Transactional
     public UpdateStatusResponse atualizarStatusProducaoDia(Integer producaoDiaId, UpdateStatusRequest updateStatusRequest){
-        ProducaoDia producaoDia = this.producaoDiaRepository.buscarProducaoDiaPorID(producaoDiaId);
+        ProducaoDia producaoDia = this.producaoDiaRepository.listarProducaoDiaPorID(producaoDiaId);
         if (producaoDia != null){
             producaoDia.setStatus(updateStatusRequest.getStatus());
             ProducaoDia tempResponse = producaoDiaRepository.save(producaoDia);

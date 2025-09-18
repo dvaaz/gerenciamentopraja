@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class IngredienteDTORequest {
     private String nome;
     private String descricao;
-    @JsonProperty("grupoId")
-
     private Integer grupoId;
     private int status;
 

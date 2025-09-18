@@ -48,11 +48,11 @@ public class GrupoService {
 
   public Grupo listarGrupoPorID(Integer id) { return this.grupoRepository.listarGrupoPorID(id); }
 
-  public Grupo obterGrupoPadrao() { return this.grupoRepository.buscarGrupoPadrao(); }
+  public Grupo obterGrupoPadrao() { return this.grupoRepository.listarGrupoPadrao(); }
 
-  public List<Grupo> listarGruposDeIngredientes() {return this.grupoRepository.buscarGrupoDeIngredientes();}
+  public List<Grupo> listarGruposDeIngredientes() {return this.grupoRepository.listarGrupoDeIngredientes();}
 
-  public List<Grupo> listarGruposDeFichaTecnicas() {return this.grupoRepository.buscarGrupoDeFichaTecnicas();}
+  public List<Grupo> listarGruposDeFichaTecnicas() {return this.grupoRepository.listarGrupoDeFichaTecnicas();}
 
     @Transactional
     public UpdateStatusResponse atualizarStatusGrupo(Integer grupoId, UpdateStatusRequest updateStatusRequest) {

@@ -35,9 +35,9 @@ public class ProducaoDiaController  {
     public ResponseEntity<List<ProducaoDia>> listarProducoesDia() {return ResponseEntity.ok(producaoDiaService.listarProducaoDias());}
 
     @GetMapping("/listar/{proDiaId}")
-    @Operation(summary = "Buscar producao diária por ID", description = "Endpoint para obter UMA producao dia buscando por ID")
-    public ResponseEntity<ProducaoDia> buscarProducaoDiaPorId(@Valid @PathVariable Integer proDiaId){
-        ProducaoDia proDia = this.producaoDiaService.buscarProducaoDiaPorId(proDiaId);
+    @Operation(summary = "listar producao diária por ID", description = "Endpoint para obter UMA producao dia buscando por ID")
+    public ResponseEntity<ProducaoDia> listarProducaoDiaPorId(@Valid @PathVariable Integer proDiaId){
+        ProducaoDia proDia = this.producaoDiaService.listarProducaoDiaPorId(proDiaId);
         if(proDia != null){
             return ResponseEntity.ok(proDia);
         } else return  ResponseEntity.notFound().build();

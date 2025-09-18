@@ -40,9 +40,9 @@ public class FichaTecnicaController {
   @GetMapping("/listar/{fichaTecnicaId}")
   @Operation(summary = "listar fichaTecnica por id", description = "Endpoint para listar um fichaTecnica")
   public ResponseEntity<FichaTecnica> listarFichaTecnicaPorId(@Valid @PathVariable("fichaTecnicaId") Integer fichaTecnicaId) {
-    FichaTecnica fichaTecnica = fichaTecnicaService.buscarFichaTecnicaPorId(fichaTecnicaId);
+    FichaTecnica fichaTecnica = fichaTecnicaService.listarFichaTecnicaPorId(fichaTecnicaId);
     if  (fichaTecnica != null) {
-      return ResponseEntity.ok(fichaTecnicaService.buscarFichaTecnicaPorId(fichaTecnicaId));
+      return ResponseEntity.ok(fichaTecnicaService.listarFichaTecnicaPorId(fichaTecnicaId));
     }
     else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 
@@ -54,7 +54,7 @@ public class FichaTecnicaController {
       @Valid
       @PathVariable("fichaTecnicaId") Integer fichaTecnicaId,
       @RequestBody UpdateDescricaoRequest updateDescricaoRequest) {
-    FichaTecnica fichaTecnica = fichaTecnicaService.buscarFichaTecnicaPorId(fichaTecnicaId);
+    FichaTecnica fichaTecnica = fichaTecnicaService.listarFichaTecnicaPorId(fichaTecnicaId);
     if (fichaTecnica != null) {
       return ResponseEntity.ok(fichaTecnicaService.atualizarDescricaoFichaTecnica(fichaTecnicaId, updateDescricaoRequest));
     } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -67,7 +67,7 @@ public class FichaTecnicaController {
       @Valid
       @PathVariable("fichaTecnicaId") Integer fichaTecnicaId,
       @RequestBody UpdateStatusRequest updateStatusRequest) {
-    FichaTecnica fichaTecnica =fichaTecnicaService.buscarFichaTecnicaPorId(fichaTecnicaId);
+    FichaTecnica fichaTecnica =fichaTecnicaService.listarFichaTecnicaPorId(fichaTecnicaId);
     if (fichaTecnica != null) {
       return ResponseEntity.ok(fichaTecnicaService.atualizarStatusFichaTecnica(fichaTecnicaId, updateStatusRequest));
     } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -79,7 +79,7 @@ public class FichaTecnicaController {
       @Valid
       @PathVariable("fichaTecnicaId") Integer fichaTecnicaId,
       @RequestBody Integer novoGrupo) {
-    FichaTecnica fichaTecnica = fichaTecnicaService.buscarFichaTecnicaPorId(fichaTecnicaId);
+    FichaTecnica fichaTecnica = fichaTecnicaService.listarFichaTecnicaPorId(fichaTecnicaId);
     if (fichaTecnica != null) {
       return ResponseEntity.ok(fichaTecnicaService.alterarGrupoFichaTecnica(fichaTecnicaId, novoGrupo));
     } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -90,7 +90,7 @@ public class FichaTecnicaController {
   public ResponseEntity removerGrupoFichaTecnica(
       @Valid
       @PathVariable("fichaTecnicaId") Integer fichaTecnicaId) {
-    FichaTecnica fichaTecnica = fichaTecnicaService.buscarFichaTecnicaPorId(fichaTecnicaId);
+    FichaTecnica fichaTecnica = fichaTecnicaService.listarFichaTecnicaPorId(fichaTecnicaId);
     if (fichaTecnica != null) {
       this.fichaTecnicaService.apagarLogicoFichaTecnica(fichaTecnicaId);
       return ResponseEntity.noContent().build();
@@ -102,7 +102,7 @@ public class FichaTecnicaController {
   public ResponseEntity removerFichaTecnica(
       @Valid
       @PathVariable("fichaTecnicaId") Integer fichaTecnicaId) {
-    FichaTecnica fichaTecnica = fichaTecnicaService.buscarFichaTecnicaPorId(fichaTecnicaId);
+    FichaTecnica fichaTecnica = fichaTecnicaService.listarFichaTecnicaPorId(fichaTecnicaId);
     if (fichaTecnica != null) {
       this.fichaTecnicaService.deletarDefinitivoFichaTecnica(fichaTecnicaId);
       return ResponseEntity.noContent().build();
