@@ -1,6 +1,7 @@
 package gerenciamentorestaurante.projeto1.repository;
 
 import gerenciamentorestaurante.projeto1.entities.FichaTecnica;
+import gerenciamentorestaurante.projeto1.entities.IngredienteFichaTecnica;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -17,9 +18,13 @@ public interface IngredienteFichaTecnicaRepository extends JpaRepository<FichaTe
   void apagarLogicoIngredienteFichaTecnica(@Param("id") Integer ingredienteFichaTecnicaId) ;
 
   @Query("SELECT f FROM IngredienteFichaTecnica f WHERE f.status>=0")
-  List<FichaTecnica> listarIngredienteFichaTecnicas();
+  List<IngredienteFichaTecnica> listarIngredienteFichaTecnicas();
 
   @Query("SELECT f FROM IngredienteFichaTecnica f WHERE f.id = :id AND f.status>=0")
-  FichaTecnica buscarIngredienteFichaTecnicaPorID(@Param("id") Integer ingredienteFichaTecnicaId);
+  IngredienteFichaTecnica buscarIngredienteFichaTecnicaPorID(@Param("id") Integer ingredienteFichaTecnicaId);
+
+  @Query("SELECT x FROM IngredienteFichaTecnica x WHERE x.ingredienteId = :ingredienteId AND x.fichaTecnicaId = :fichaTecnicaId AND x.status>=0")
+  IngredienteFichaTecnica buscarIngredienteExisteEmFichaTecnica(
+      @Param("ingredienteId") Integer ingredienteId, @Param("fichaTecnicaId") Integer fichaTecnicaId);
 
 }

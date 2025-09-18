@@ -1,68 +1,63 @@
 package gerenciamentorestaurante.projeto1.entities.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class IngredienteFichaTecnicaDTOResponse {
     private Integer id;
-    private String nome;
-    private String unidadeMedida;
-    private int qtd;
-    private int status;
+  private int unidadeMedida;
+  private int qtd;
+  private int status;
+  @JsonProperty("ingredienteId")
+  private Integer ingrediente;
+  @JsonProperty("fichaTecnicaId")
+  private Integer fichaTecnica;
 
-    private Integer ingrediente;
-    private Integer fichatecnica;
+  public Integer getId() {
+    return id;
+  }
 
-    public Integer getId() {
-        return id;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
-    public String getNome() {
-        return nome;
-    }
+  public int getUnidadeMedida() {
+    return unidadeMedida;
+  }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+  public void setUnidadeMedida(int unidadeMedida) {
+    this.unidadeMedida = unidadeMedida;
+  }
 
-    public String getUnidadeMedida() {
-        return unidadeMedida;
-    }
+  public int getQtd() {
+    return qtd;
+  }
 
-    public void setUnidadeMedida(String unidadeMedida) {
-        this.unidadeMedida = unidadeMedida;
-    }
+  public void setQtd(int qtd) {
+    this.qtd = qtd;
+  }
 
-    public int getQtd() {
-        return qtd;
-    }
+  public int getStatus() {
+    return status;
+  }
 
-    public void setQtd(int qtd) {
-        this.qtd = qtd;
-    }
+  public void setStatus(int status) {
+    this.status = status;
+  }
 
-    public int getStatus() {
-        return status;
-    }
+  public Integer getIngrediente() {
+    return ingrediente;
+  }
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
+  public void setIngrediente(Integer ingrediente) {
+    this.ingrediente = ingrediente;
+  }
 
-    public Integer getIngrediente() {
-        return ingrediente;
-    }
+  public Integer getFichaTecnica() {
+    return fichaTecnica;
+  }
 
-    public void setIngrediente(Integer ingrediente) {
-        this.ingrediente = ingrediente;
-    }
-
-    public Integer getFichatecnica() {
-        return fichatecnica;
-    }
-
-    public void setFichatecnica(Integer fichatecnica) {
-        this.fichatecnica = fichatecnica;
-    }
+  public void setFichaTecnica(Integer fichaTecnica) {
+    this.fichaTecnica = fichaTecnica;
+  }
 }
