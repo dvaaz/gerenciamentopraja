@@ -42,7 +42,7 @@ public class FichaTecnicaController {
   public ResponseEntity<FichaTecnica> listarFichaTecnicaPorId(@Valid @PathVariable("fichaTecnicaId") Integer fichaTecnicaId) {
     FichaTecnica fichaTecnica = fichaTecnicaService.listarFichaTecnicaPorId(fichaTecnicaId);
     if  (fichaTecnica != null) {
-      return ResponseEntity.ok(fichaTecnicaService.listarFichaTecnicaPorId(fichaTecnicaId));
+      return  ResponseEntity.ok(fichaTecnica);
     }
     else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 

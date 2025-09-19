@@ -1,6 +1,4 @@
-package gerenciamentorestaurante.projeto1.entities.dto.request;
-
-import jakarta.persistence.Column;
+package gerenciamentorestaurante.projeto1.entities.dto.request.ingredienteFichaTecnica;
 
 public class AlterarMedidasIngredienteFichaDTORequest {
   private int qtd;

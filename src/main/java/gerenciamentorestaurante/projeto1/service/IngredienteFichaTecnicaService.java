@@ -4,10 +4,9 @@ package gerenciamentorestaurante.projeto1.service;
 import gerenciamentorestaurante.projeto1.entities.FichaTecnica;
 import gerenciamentorestaurante.projeto1.entities.Ingrediente;
 import gerenciamentorestaurante.projeto1.entities.IngredienteFichaTecnica;
-import gerenciamentorestaurante.projeto1.entities.dto.request.AlterarMedidasIngredienteFichaDTORequest;
-import gerenciamentorestaurante.projeto1.entities.dto.request.IngredienteFichaTecnicaDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.ingredienteFichaTecnica.AlterarMedidasIngredienteFichaDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.ingredienteFichaTecnica.IngredienteFichaTecnicaDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.AlterarMedidasIngredienteFichaDTOResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteFichaTecnicaDTOResponse;
 import gerenciamentorestaurante.projeto1.repository.FichaTecnicaRepository;
 import gerenciamentorestaurante.projeto1.repository.IngredienteFichaTecnicaRepository;
@@ -15,8 +14,6 @@ import gerenciamentorestaurante.projeto1.repository.IngredienteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class IngredienteFichaTecnicaService {
@@ -33,7 +30,7 @@ public class IngredienteFichaTecnicaService {
   public IngredienteFichaTecnicaService(
       IngredienteFichaTecnicaRepository ingredienteFichaTecRepository,
       IngredienteRepository ingredienteRepository,
-      private final FichaTecnicaRepository fichaTecnicaRepository
+      FichaTecnicaRepository fichaTecnicaRepository
   ) {
     this.ingredienteFichaTecRepository = ingredienteFichaTecRepository;
     this.ingredienteRepository = ingredienteRepository;
@@ -41,11 +38,11 @@ public class IngredienteFichaTecnicaService {
   }
 
   @Transactional
-  public IngredienteFichaTecnicaDTOResponse adicionarIngredienteAFichaTecnica (IngredienteFichaTecnicaDTORequest dtoRequestRequest){
+  public IngredienteFichaTecnicaDTOResponse criarRelacaoIngredienteFichaTecnica (IngredienteFichaTecnicaDTORequest dtoRequestRequest){
     Ingrediente ingrediente = this.ingredienteRepository.listarIngredientePorId(dtoRequestRequest.getIngrediente());
-    if(ingrediente == null){ return null; } // personalizar returns com throw
+    if(ingrediente == null){ throw new RuntimeException("Nenhum ingrediente foi encontrado"); } // personalizar returns com throw
     FichaTecnica fichaTecnica = this.fichaTecnicaRepository.listarFichaTecnicaPorID(dtoRequestRequest.getFichaTecnica());
-    if(fichaTecnica == null){return null; }
+    if(fichaTecnica == null){ throw new RuntimeException("Nenhuma ficha tecnica foi encontrada"); }
     IngredienteFichaTecnica listarDuplicata = this.ingredienteFichaTecRepository.listarIngredienteExisteEmFichaTecnica(ingrediente.getId(), fichaTecnica.getId());
     if(listarDuplicata != null){ return null; }
     IngredienteFichaTecnica ingredienteFicha =  new IngredienteFichaTecnica();
@@ -68,15 +65,26 @@ public class IngredienteFichaTecnicaService {
 
   }
 
-  public void apagapagarLogicoIngredienteFichaTecnica(Integer ingredienteFichaId){
+  public AlterarMedidasIngredienteFichaDTOResponse alterarMedidasIngredienteFicha(Integer ingredienteFichaId, AlterarMedidasIngredienteFichaDTORequest dtoRequest) {
+    IngredienteFichaTecnica ingredienteFichaTecnica = this.ingredienteFichaTecRepository.listarIngredienteFichaTecnicaPorID(ingredienteFichaId);
+    if (ingredienteFichaTecnica != null) {
+      ingredienteFichaTecnica.setUnidadeMedida(dtoRequest.getUnidadeMedida());
+      ingredienteFichaTecnica.setQtd(dtoRequest.getQtd());
+
+      IngredienteFichaTecnica save = ingredienteFichaTecRepository.save(ingredienteFichaTecnica);
+
+      AlterarMedidasIngredienteFichaDTOResponse dtoResponse= new AlterarMedidasIngredienteFichaDTOResponse();
+      dtoResponse.setId(save.getId());
+      dtoResponse.setQtd(save.getQtd());
+      dtoResponse.setUnidadeMedida(save.getUnidadeMedida());
+
+      return dtoResponse;
+
+    } throw new RuntimeException("Nenhuma ficha tecnica com esse ID foi encontrada");
+  }
+
+  public void pagarLogicoIngredienteFichaTecnica(Integer ingredienteFichaId){
     this.ingredienteFichaTecRepository.apagarLogicoIngredienteFichaTecnica(ingredienteFichaId);
   }
-
-
-
-  public AlterarMedidasIngredienteFichaDTOResponse(Integer ingredienteFichaId, AlterarMedidasIngredienteFichaDTORequest) {
-    IngredienteFichaTecnica ingredienteFichaTecnica =
-  }
-  
 }
 
