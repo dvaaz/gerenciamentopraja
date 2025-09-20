@@ -1,9 +1,10 @@
 package gerenciamentorestaurante.projeto1.controller;
 
+import gerenciamentorestaurante.projeto1.entities.IngredienteFichaTecnica;
 import gerenciamentorestaurante.projeto1.entities.dto.request.ingredienteFichaTecnica.AlterarMedidasIngredienteFichaDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.ingredienteFichaTecnica.IngredienteFichaTecnicaDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.AlterarMedidasIngredienteFichaDTOResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteFichaTecnicaDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.ingredienteFichaTecnica.IngredienteFichaTecnicaDTOResponse;
 import gerenciamentorestaurante.projeto1.service.IngredienteFichaTecnicaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,6 +31,9 @@ public class IngredienteFichaTecnicaController {
     return ResponseEntity.status(HttpStatus.CREATED).body(service.criarRelacaoIngredienteFichaTecnica(dto));
   }
 
+  @GetMapping("/listar/{id}/ingredientes")
+  @Operation(summary = "Lista Ingredientes em Ficha Tecnica", description = "Endpoint para listar os ingredientes, unidade de medida e quantidade de cada um deles em uma ficha tecnica")
+  public ResponseEntity<IngredienteFichaTecnica>
   @PatchMapping("/alterar/{id}/medidas")
   @Operation(summary = "Alteração de unidade de medida e quantidade", description = "Endpoint para alteração dos detalhes da medida da ficha tecnica")
   public ResponseEntity<AlterarMedidasIngredienteFichaDTOResponse> alterarMedidasIngredienteFichaTecnica(
@@ -38,6 +42,5 @@ public class IngredienteFichaTecnicaController {
   ) {
     return ResponseEntity.ok(service.alterarMedidasIngredienteFicha(id, dto));
   }
-
 
 }

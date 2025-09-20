@@ -7,13 +7,15 @@ import gerenciamentorestaurante.projeto1.entities.IngredienteFichaTecnica;
 import gerenciamentorestaurante.projeto1.entities.dto.request.ingredienteFichaTecnica.AlterarMedidasIngredienteFichaDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.ingredienteFichaTecnica.IngredienteFichaTecnicaDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.AlterarMedidasIngredienteFichaDTOResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteFichaTecnicaDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.ingredienteFichaTecnica.IngredienteFichaTecnicaDTOResponse;
 import gerenciamentorestaurante.projeto1.repository.FichaTecnicaRepository;
 import gerenciamentorestaurante.projeto1.repository.IngredienteFichaTecnicaRepository;
 import gerenciamentorestaurante.projeto1.repository.IngredienteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class IngredienteFichaTecnicaService {
@@ -43,7 +45,7 @@ public class IngredienteFichaTecnicaService {
     if(ingrediente == null){ throw new RuntimeException("Nenhum ingrediente foi encontrado"); } // personalizar returns com throw
     FichaTecnica fichaTecnica = this.fichaTecnicaRepository.buscarFichaTecnicaPorID(dtoRequestRequest.getFichaTecnica());
     if(fichaTecnica == null){ throw new RuntimeException("Nenhuma ficha tecnica foi encontrada"); }
-    IngredienteFichaTecnica listarDuplicata = this.ingredienteFichaTecRepository.listarIngredienteExisteEmFichaTecnica(ingrediente.getId(), fichaTecnica.getId());
+    IngredienteFichaTecnica listarDuplicata = this.ingredienteFichaTecRepository.buscarIngredienteExisteEmFichaTecnica(ingrediente.getId(), fichaTecnica.getId());
     if(listarDuplicata != null){ return null; }
     IngredienteFichaTecnica ingredienteFicha =  new IngredienteFichaTecnica();
     ingredienteFicha.setQtd(dtoRequestRequest.getQtd());
@@ -63,6 +65,10 @@ public class IngredienteFichaTecnicaService {
     dtoResponse.setStatus(ingredienteFichaSave.getStatus());
     return dtoResponse;
 
+  }
+
+  public List<IngredienteFichaTecnica> listarIngredientesDeFichaTecnica(Integer fichaTecnicaId){
+      return this.ingredienteFichaTecRepository.listarIngredientesEmFichaTecnica(fichaTecnicaId);
   }
 
   public AlterarMedidasIngredienteFichaDTOResponse alterarMedidasIngredienteFicha(Integer ingredienteFichaId, AlterarMedidasIngredienteFichaDTORequest dtoRequest) {

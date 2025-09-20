@@ -1,6 +1,4 @@
-package gerenciamentorestaurante.projeto1.entities.dto.response;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package gerenciamentorestaurante.projeto1.entities.dto.response.ingredienteFichaTecnica;
 
 public class IngredienteFichaTecnicaDTOResponse {
     private Integer id;
@@ -17,7 +15,6 @@ public class IngredienteFichaTecnicaDTOResponse {
   public void setId(Integer id) {
     this.id = id;
   }
-
 
   public int getUnidadeMedida() {
     return unidadeMedida;
