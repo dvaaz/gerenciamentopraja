@@ -20,5 +20,5 @@ public interface FichaTecnicaRepository extends JpaRepository<FichaTecnica, Inte
   List<FichaTecnica> listarFichaTecnicas();
 
   @Query("SELECT f FROM FichaTecnica f WHERE f.id = :id AND f.status>=0")
-  FichaTecnica listarFichaTecnicaPorID(@Param("id") Integer fichaTecnicaId);
+  FichaTecnica buscarFichaTecnicaPorID(@Param("id") Integer fichaTecnicaId);
 }

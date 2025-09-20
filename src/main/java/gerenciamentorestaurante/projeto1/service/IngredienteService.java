@@ -40,7 +40,7 @@ public class IngredienteService {
     @Transactional
     public IngredienteDTOResponse criarIngrediente(IngredienteDTORequest dtoRequest) {
         // Verifica a existencia do um grupo
-        Grupo grupo = grupoRepository.buscarGrupoDeIngredientePorId(dtoRequest.getGrupoId());
+        Grupo grupo = grupoRepository.buscarGrupoDeIngredientesPorId(dtoRequest.getGrupoId());
         // Se não encontrar um grupo
         if (grupo == null) {
             grupo = grupoRepository.buscarGrupoPadrao();
@@ -77,7 +77,7 @@ public class IngredienteService {
         return this.ingredienteRepository.listarIngredientes();
     }
 
-    public Ingrediente buscarIngredientePorId(Integer ingredienteId){
+    public Ingrediente listarIngredientePorId(Integer ingredienteId){
       Ingrediente ingrediente = this.ingredienteRepository.buscarIngredientePorId(ingredienteId);
       if  (ingrediente != null){
         return this.ingredienteRepository.buscarIngredientePorId(ingredienteId);
@@ -102,7 +102,7 @@ public class IngredienteService {
     @Transactional
     public ChangeToAnotherGrupoDTOResponse alterarGrupoIngrediente(Integer ingredienteId, Integer novoGrupo) {
         Ingrediente ingrediente = this.ingredienteRepository.buscarIngredientePorId(ingredienteId);
-        Grupo alteraGrupo = this.grupoRepository.buscarGrupoDeIngredientePorId(novoGrupo);
+        Grupo alteraGrupo = this.grupoRepository.buscarGrupoDeIngredientesPorId(novoGrupo);
         if  (ingrediente != null &&  alteraGrupo != null){
             ingrediente.setGrupo(alteraGrupo);
             Ingrediente tempResponse = ingredienteRepository.save(ingrediente);

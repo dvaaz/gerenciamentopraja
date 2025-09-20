@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface GrupoRepository extends JpaRepository<Grupo, Integer> {
@@ -26,22 +25,22 @@ public interface GrupoRepository extends JpaRepository<Grupo, Integer> {
   List<Grupo> listarGrupos();
 
   @Query("SELECT g FROM Grupo g WHERE g.status>=0 AND g.tipo=0")
-  Grupo listarGrupoPadrao();
+  Grupo buscarGrupoPadrao();
 
   @Query("SELECT g FROM Grupo g WHERE g.id = :id AND g.status>=0")
-  Grupo listarGrupoPorID(@Param("id") Integer grupoId);
+  Grupo buscarGrupoPorID(@Param("id") Integer grupoId);
 
   @Query("SELECT g FROM Grupo g WHERE g.tipo=1  AND g.status>=0" )
   List<Grupo> listarGrupoDeIngredientes();
 
   @Query("SELECT g FROM Grupo g WHERE g.id =:id AND g.status>=0 AND g.tipo=1")
-  Grupo  listarGrupoDeIngredientePorId(@Param("id") Integer grupoId);
+  Grupo buscarGrupoDeIngredientesPorId(@Param("id") Integer grupoId);
 
   @Query("SELECT g FROM Grupo g WHERE g.tipo=2 AND g.status>=0 ")
   List<Grupo> listarGrupoDeFichaTecnicas();
 
   @Query("SELECT g FROM Grupo g WHERE g.id =:id AND g.status>=0 AND g.tipo=2")
-  Grupo  listarGrupoDeFichaTecnicaPorId(@Param("id") Integer grupoId);
+  Grupo buscarGrupoDeFichaTecnicaPorId(@Param("id") Integer grupoId);
 
 
 }

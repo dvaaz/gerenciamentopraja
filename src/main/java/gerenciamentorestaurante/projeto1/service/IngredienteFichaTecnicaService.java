@@ -39,9 +39,9 @@ public class IngredienteFichaTecnicaService {
 
   @Transactional
   public IngredienteFichaTecnicaDTOResponse criarRelacaoIngredienteFichaTecnica (IngredienteFichaTecnicaDTORequest dtoRequestRequest){
-    Ingrediente ingrediente = this.ingredienteRepository.listarIngredientePorId(dtoRequestRequest.getIngrediente());
+    Ingrediente ingrediente = this.ingredienteRepository.buscarIngredientePorId(dtoRequestRequest.getIngrediente());
     if(ingrediente == null){ throw new RuntimeException("Nenhum ingrediente foi encontrado"); } // personalizar returns com throw
-    FichaTecnica fichaTecnica = this.fichaTecnicaRepository.listarFichaTecnicaPorID(dtoRequestRequest.getFichaTecnica());
+    FichaTecnica fichaTecnica = this.fichaTecnicaRepository.buscarFichaTecnicaPorID(dtoRequestRequest.getFichaTecnica());
     if(fichaTecnica == null){ throw new RuntimeException("Nenhuma ficha tecnica foi encontrada"); }
     IngredienteFichaTecnica listarDuplicata = this.ingredienteFichaTecRepository.listarIngredienteExisteEmFichaTecnica(ingrediente.getId(), fichaTecnica.getId());
     if(listarDuplicata != null){ return null; }
@@ -66,7 +66,7 @@ public class IngredienteFichaTecnicaService {
   }
 
   public AlterarMedidasIngredienteFichaDTOResponse alterarMedidasIngredienteFicha(Integer ingredienteFichaId, AlterarMedidasIngredienteFichaDTORequest dtoRequest) {
-    IngredienteFichaTecnica ingredienteFichaTecnica = this.ingredienteFichaTecRepository.listarIngredienteFichaTecnicaPorID(ingredienteFichaId);
+    IngredienteFichaTecnica ingredienteFichaTecnica = this.ingredienteFichaTecRepository.buscarIngredienteFichaTecnicaPorID(ingredienteFichaId);
     if (ingredienteFichaTecnica != null) {
       ingredienteFichaTecnica.setUnidadeMedida(dtoRequest.getUnidadeMedida());
       ingredienteFichaTecnica.setQtd(dtoRequest.getQtd());

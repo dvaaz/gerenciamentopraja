@@ -46,9 +46,9 @@ public class GrupoService {
   }
 
 
-  public Grupo listarGrupoPorID(Integer id) { return this.grupoRepository.listarGrupoPorID(id); }
+  public Grupo listarGrupoPorID(Integer id) { return this.grupoRepository.buscarGrupoPorID(id); }
 
-  public Grupo obterGrupoPadrao() { return this.grupoRepository.listarGrupoPadrao(); }
+  public Grupo obterGrupoPadrao() { return this.grupoRepository.buscarGrupoPadrao(); }
 
   public List<Grupo> listarGruposDeIngredientes() {return this.grupoRepository.listarGrupoDeIngredientes();}
 
@@ -56,7 +56,7 @@ public class GrupoService {
 
     @Transactional
     public UpdateStatusResponse atualizarStatusGrupo(Integer grupoId, UpdateStatusRequest updateStatusRequest) {
-      Grupo  grupo = this.grupoRepository.listarGrupoPorID(grupoId);
+      Grupo  grupo = this.grupoRepository.buscarGrupoPorID(grupoId);
       if (grupo != null
           && (updateStatusRequest.getStatus() == 1 || updateStatusRequest.getStatus() == 2)) {
           grupo.setStatus(updateStatusRequest.getStatus());
@@ -67,7 +67,7 @@ public class GrupoService {
 
     @Transactional
     public GrupoAtualizarDTOResponse atualizarGrupo(Integer grupoId, UpdateGrupoDTORequest grupoDTORequest) {
-      Grupo grupo = grupoRepository.listarGrupoPorID(grupoId);
+      Grupo grupo = grupoRepository.buscarGrupoPorID(grupoId);
       if (grupo != null) {
           if (grupoDTORequest.getCor() != null) {
             grupo.setCor(grupoDTORequest.getCor());

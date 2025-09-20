@@ -42,9 +42,9 @@ public class IngredienteContoller {
     @GetMapping("/listar/{ingredienteId}")
     @Operation(summary = "listar ingrediente por id", description = "Endpoint para listar um ingrediente")
     public ResponseEntity<Ingrediente> listarIngredientePorId(@Valid @PathVariable("ingredienteId") Integer ingredienteId) {
-        Ingrediente ingrediente = ingredienteService.buscarIngredientePorId(ingredienteId);
+        Ingrediente ingrediente = ingredienteService.listarIngredientePorId(ingredienteId);
         if  (ingrediente != null) {
-            return ResponseEntity.ok(ingredienteService.buscarIngredientePorId(ingredienteId));
+            return ResponseEntity.ok(ingredienteService.listarIngredientePorId(ingredienteId));
         }
             else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 
@@ -56,7 +56,7 @@ public class IngredienteContoller {
             @Valid
             @PathVariable("ingredienteId") Integer ingredienteId,
             @RequestBody UpdateDescricaoRequest updateDescricaoRequest) {
-        Ingrediente ingrediente = ingredienteService.buscarIngredientePorId(ingredienteId);
+        Ingrediente ingrediente = ingredienteService.listarIngredientePorId(ingredienteId);
         if (ingrediente != null) {
             return ResponseEntity.ok(ingredienteService.atualizarDescricaoIngrediente(ingredienteId, updateDescricaoRequest));
         } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -69,7 +69,7 @@ public class IngredienteContoller {
             @Valid
             @PathVariable("ingredienteId") Integer ingredienteId,
             @RequestBody UpdateStatusRequest updateStatusRequest) {
-        Ingrediente ingrediente =ingredienteService.buscarIngredientePorId(ingredienteId);
+        Ingrediente ingrediente =ingredienteService.listarIngredientePorId(ingredienteId);
         if (ingrediente != null) {
             return ResponseEntity.ok(ingredienteService.atualizarStatusIngrediente(ingredienteId, updateStatusRequest));
         } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -81,7 +81,7 @@ public class IngredienteContoller {
             @Valid
             @PathVariable("ingredienteId") Integer ingredienteId,
             @RequestBody Integer novoGrupo) {
-        Ingrediente ingrediente = ingredienteService.buscarIngredientePorId(ingredienteId);
+        Ingrediente ingrediente = ingredienteService.listarIngredientePorId(ingredienteId);
         if (ingrediente != null) {
             return ResponseEntity.ok(ingredienteService.alterarGrupoIngrediente(ingredienteId, novoGrupo));
         } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -92,7 +92,7 @@ public class IngredienteContoller {
     public ResponseEntity removerGrupoIngrediente(
             @Valid
             @PathVariable("ingredienteId") Integer ingredienteId) {
-        Ingrediente ingrediente = ingredienteService.buscarIngredientePorId(ingredienteId);
+        Ingrediente ingrediente = ingredienteService.listarIngredientePorId(ingredienteId);
         if (ingrediente != null) {
             this.ingredienteService.apagarLogicoIngrediente(ingredienteId);
             return ResponseEntity.noContent().build();
@@ -104,7 +104,7 @@ public class IngredienteContoller {
     public ResponseEntity removerIngrediente(
             @Valid
             @PathVariable("ingredienteId") Integer ingredienteId) {
-        Ingrediente ingrediente = ingredienteService.buscarIngredientePorId(ingredienteId);
+        Ingrediente ingrediente = ingredienteService.listarIngredientePorId(ingredienteId);
         if (ingrediente != null) {
             this.ingredienteService.deletarDefinitivoIngrediente(ingredienteId);
             return ResponseEntity.noContent().build();
