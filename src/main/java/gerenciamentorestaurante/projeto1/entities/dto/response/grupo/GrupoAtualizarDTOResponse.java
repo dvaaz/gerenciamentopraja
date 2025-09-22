@@ -1,4 +1,4 @@
-package gerenciamentorestaurante.projeto1.entities.dto.response;
+package gerenciamentorestaurante.projeto1.entities.dto.response.grupo;
 
 public class GrupoAtualizarDTOResponse {
     private Integer id;

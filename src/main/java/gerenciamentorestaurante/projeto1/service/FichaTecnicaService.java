@@ -109,7 +109,7 @@ public class FichaTecnicaService {
 
       ChangeToAnotherGrupoDTOResponse updated = new ChangeToAnotherGrupoDTOResponse();
       updated.setId(tempResponse.getId());
-      updated.setGrupo(tempResponse.getGrupo().getId());
+      updated.setIdGrupo(tempResponse.getGrupo().getId());
 
       return updated;
     } else return null;

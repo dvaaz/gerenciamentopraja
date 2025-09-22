@@ -1,4 +1,4 @@
-package gerenciamentorestaurante.projeto1.entities.dto.response;
+package gerenciamentorestaurante.projeto1.entities.dto.response.ingredienteFichaTecnica;
 
 public class AlterarMedidasIngredienteFichaDTOResponse {
   private Integer id;

@@ -1,6 +1,4 @@
-package gerenciamentorestaurante.projeto1.entities.dto.request;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package gerenciamentorestaurante.projeto1.entities.dto.request.ingrediente;
 
 public class IngredienteDTORequest {
     private String nome;

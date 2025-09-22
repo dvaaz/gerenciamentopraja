@@ -1,13 +1,13 @@
 package gerenciamentorestaurante.projeto1.entities.dto.request;
 
 public class ChangeToAnotherGrupoDTORequest {
-    private int grupo;
+    private int idGrupo;
 
-    public int getGrupo() {
-        return grupo;
+    public int getIdGrupo() {
+        return idGrupo;
     }
 
-    public void setGrupo(int grupo) {
-        this.grupo = grupo;
+    public void setIdGrupo(int grupo) {
+        this.idGrupo = grupo;
     }
 }

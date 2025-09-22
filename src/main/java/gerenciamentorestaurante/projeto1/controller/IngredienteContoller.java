@@ -1,6 +1,7 @@
 package gerenciamentorestaurante.projeto1.controller;
 
-import gerenciamentorestaurante.projeto1.entities.dto.request.IngredienteDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.ChangeToAnotherGrupoInBatchDTO;
+import gerenciamentorestaurante.projeto1.entities.dto.request.ingrediente.IngredienteDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateDescricaoRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteDTOResponse;
@@ -12,6 +13,7 @@ import gerenciamentorestaurante.projeto1.service.IngredienteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.websocket.Endpoint;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -73,6 +75,17 @@ public class IngredienteContoller {
         if (ingrediente != null) {
             return ResponseEntity.ok(ingredienteService.atualizarStatusIngrediente(ingredienteId, updateStatusRequest));
         } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
+    // recebe Json com a lista de ingredientes e o número do grupo para o qual elas irao
+    @PatchMapping("/grupo/alteraremlista")
+    @Operation(summary = "alterar o grupo de vários ingredientes", description="Endpoint para alterar o grupo de uma lista de ingredientes")
+    public ResponseEntity<ChangeToAnotherGrupoInBatchDTO> alterarGrupoListaDeIngredientes(
+            @Valid @RequestBody ChangeToAnotherGrupoInBatchDTO dtoRequest
+    ) {
+        ChangeToAnotherGrupoInBatchDTO ingredientesEmNovoGrupo = ingredienteService.alterarGrupoListaDeIngredientes(
+                dtoRequest.getIdGrupo(), dtoRequest.getIdDosItens());
+        return ResponseEntity.ok(ingredientesEmNovoGrupo);
     }
 
     @PatchMapping("/grupo/{ingredienteId}")

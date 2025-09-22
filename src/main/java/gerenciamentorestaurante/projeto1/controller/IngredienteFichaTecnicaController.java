@@ -1,9 +1,9 @@
 package gerenciamentorestaurante.projeto1.controller;
 
-import gerenciamentorestaurante.projeto1.entities.IngredienteFichaTecnica;
 import gerenciamentorestaurante.projeto1.entities.dto.request.ingredienteFichaTecnica.AlterarMedidasIngredienteFichaDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.ingredienteFichaTecnica.IngredienteFichaTecnicaDTORequest;
-import gerenciamentorestaurante.projeto1.entities.dto.response.AlterarMedidasIngredienteFichaDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.ingredienteFichaTecnica.AlterarMedidasIngredienteFichaDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.ingredienteFichaTecnica.IngredienteEMFichaTecnicaDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.ingredienteFichaTecnica.IngredienteFichaTecnicaDTOResponse;
 import gerenciamentorestaurante.projeto1.service.IngredienteFichaTecnicaService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/ingredientefichatecnica")
@@ -33,7 +35,12 @@ public class IngredienteFichaTecnicaController {
 
   @GetMapping("/listar/{id}/ingredientes")
   @Operation(summary = "Lista Ingredientes em Ficha Tecnica", description = "Endpoint para listar os ingredientes, unidade de medida e quantidade de cada um deles em uma ficha tecnica")
-  public ResponseEntity<IngredienteFichaTecnica>
+  public ResponseEntity<List<IngredienteEMFichaTecnicaDTOResponse>> listarIngredientesEmFichaTecnica(
+          @Valid @PathVariable Integer id
+  ) {
+      return ResponseEntity.ok(service.listarIngredientesDeFichaTecnica(id));
+  }
+
   @PatchMapping("/alterar/{id}/medidas")
   @Operation(summary = "Alteração de unidade de medida e quantidade", description = "Endpoint para alteração dos detalhes da medida da ficha tecnica")
   public ResponseEntity<AlterarMedidasIngredienteFichaDTOResponse> alterarMedidasIngredienteFichaTecnica(

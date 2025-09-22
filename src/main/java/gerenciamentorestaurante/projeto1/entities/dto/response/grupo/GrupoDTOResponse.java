@@ -1,10 +1,19 @@
-package gerenciamentorestaurante.projeto1.entities.dto.request;
+package gerenciamentorestaurante.projeto1.entities.dto.response.grupo;
 
-public class GrupoDTORequest {
+public class GrupoDTOResponse {
+  private Integer id;
   private String nome;
   private String cor;
   private int tipo;
   private int status;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;

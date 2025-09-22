@@ -1,6 +1,7 @@
 package gerenciamentorestaurante.projeto1.service;
 
-import gerenciamentorestaurante.projeto1.entities.dto.request.IngredienteDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.ChangeToAnotherGrupoInBatchDTO;
+import gerenciamentorestaurante.projeto1.entities.dto.request.ingrediente.IngredienteDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateDescricaoRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteDTOResponse;
@@ -8,15 +9,20 @@ import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateDescricaoRe
 import gerenciamentorestaurante.projeto1.entities.dto.response.ChangeToAnotherGrupoDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.entities.Grupo;
+import gerenciamentorestaurante.projeto1.exception.ElementNotFoundException;
 import gerenciamentorestaurante.projeto1.repository.GrupoRepository;
 import gerenciamentorestaurante.projeto1.repository.IngredienteRepository;
 import gerenciamentorestaurante.projeto1.entities.Ingrediente;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class IngredienteService {
@@ -96,7 +102,7 @@ public class IngredienteService {
             updated.setDescricao(tempResponse.getDescricao());
 
             return updated;
-        } else return null;
+        } throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
     }
 
     @Transactional
@@ -109,11 +115,52 @@ public class IngredienteService {
 
             ChangeToAnotherGrupoDTOResponse updated = new ChangeToAnotherGrupoDTOResponse();
             updated.setId(tempResponse.getId());
-            updated.setGrupo(tempResponse.getGrupo().getId());
+            updated.setIdGrupo(tempResponse.getGrupo().getId());
 
             return updated;
         } else return null;
     }
+
+    public List<Ingrediente> listarIngredientesSelecionados(List<Integer> listaIngrediente) {
+        return ingredienteRepository.listarIngredientesEmLista(listaIngrediente);
+    }
+
+    @Transactional
+    public ChangeToAnotherGrupoInBatchDTO alterarGrupoListaDeIngredientes(Integer idGrupo, List<Integer> listaIdIngredientes) {
+        Grupo grupoExistente = grupoRepository.buscarGrupoDeIngredientesPorId(idGrupo);
+           if  (grupoExistente == null) {
+            throw new ElementNotFoundException("Grupo não encontrado" + idGrupo);
+         }
+
+          // buscar ingredientes para alterar o grupo
+         List<Ingrediente> listaIngredientes = new ArrayList<Ingrediente>();
+         listaIngredientes = this.listarIngredientesSelecionados(listaIdIngredientes);
+//           if (listaIngredientes.isEmpty()) {
+//               throw new ElementNotFoundException("Nenhum ingrediente encontrado");
+//           }
+//            Considerar se há a necessidade de não continuar caso todos os ingredientes incluidos nao sejam encontrados,
+//             pois caso isso aconteça há um problema de lógica na busca de ingrediente
+        if (listaIngredientes.size() != listaIdIngredientes.size()) {
+            throw new ElementNotFoundException("Um ou mais ingredientes na lista fornecida não foram encontrados.");
+        }
+        //altera o grupo dos itens
+            for (Ingrediente ingrediente : listaIngredientes) {
+                ingrediente.setGrupo(grupoExistente);
+            }
+            List<Ingrediente> ingredientesSalvos = ingredienteRepository.saveAll(listaIngredientes);
+
+// testando map para transformar os ids de ingrediente em lista
+        List<Integer> listaIdDto = ingredientesSalvos.stream().map(Ingrediente::getId)
+                .collect(Collectors.toList());
+        // dto de resposta
+        ChangeToAnotherGrupoInBatchDTO dtoResponse = new ChangeToAnotherGrupoInBatchDTO();
+        dtoResponse.setIdGrupo(idGrupo);
+        dtoResponse.setIdDosItens(listaIdDto);
+
+        return dtoResponse;
+        }
+
+
 
     @Transactional
     public UpdateStatusResponse atualizarStatusIngrediente(Integer ingredienteId, UpdateStatusRequest updateStatusRequest){
