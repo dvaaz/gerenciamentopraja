@@ -1,10 +1,7 @@
-package gerenciamentorestaurante.projeto1.entities.dto.response;
+package gerenciamentorestaurante.projeto1.entities.dto.response.shared;
 
-import java.util.Date;
-
-public class ProducaoDiaDTOResponse {
+public class UpdateStatusResponse {
     private Integer id;
-    private Date data;
     private Integer status;
 
     public Integer getId() {
@@ -13,14 +10,6 @@ public class ProducaoDiaDTOResponse {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
     }
 
     public Integer getStatus() {

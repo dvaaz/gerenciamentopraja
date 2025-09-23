@@ -1,8 +1,8 @@
-package gerenciamentorestaurante.projeto1.entities.dto;
+package gerenciamentorestaurante.projeto1.entities.dto.response.shared;
 
 import java.util.List;
 
-public class ChangeToAnotherGrupoInBatchDTO {
+public class ChangeToAnotherGrupoInBatchDTOResponse {
     private Integer idGrupo;
     private List<Integer> idDosItens;
 

@@ -2,7 +2,7 @@ package gerenciamentorestaurante.projeto1.entities.dto.response.ingredienteFicha
 
 public class AlterarMedidasIngredienteFichaDTOResponse {
   private Integer id;
-//  private String preparo;
+//  private String observacao;
   private Integer qtd;
   private Integer unidadeMedida;
 
@@ -22,12 +22,12 @@ public class AlterarMedidasIngredienteFichaDTOResponse {
     this.qtd = qtd;
   }
 
-//    public String getPreparo() {
-//        return preparo;
+//    public String getObservacao() {
+//        return observacao;
 //    }
 //
-//    public void setPreparo(String preparo) {
-//        this.preparo = preparo;
+//    public void setObservacao(String observacao) {
+//        this.observacao = observacao;
 //    }
 
     public Integer getUnidadeMedida() {

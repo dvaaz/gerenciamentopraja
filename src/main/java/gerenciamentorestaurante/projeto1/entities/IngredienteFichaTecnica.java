@@ -14,8 +14,8 @@ public class IngredienteFichaTecnica {
   private Integer qtd;
   @Column(name="ingrediente_ficha_tecnica_unidade_medida")
   private Integer unidadeMedida;
-//  @Column(name="ingrediente_ficha_tecnica_preparo")
-//  private String preparo;
+//  @Column(name="ingrediente_ficha_tecnica_observacao")
+//  private String observacao;
   @Column(name="ingrediente_ficha_tecnica_status")
   private Integer status;
   @JsonIgnore
@@ -51,12 +51,12 @@ public class IngredienteFichaTecnica {
     this.unidadeMedida = unidadeMedida;
   }
 
-//    public String getPreparo() {
-//        return preparo;
+//    public String getObservacao() {
+//        return observacao;
 //    }
 //
-//    public void setPreparo(String preparo) {
-//        this.preparo = preparo;
+//    public void setObservacao(String observacao) {
+//        this.observacao = observacao;
 //    }
 
     public Integer getStatus() {

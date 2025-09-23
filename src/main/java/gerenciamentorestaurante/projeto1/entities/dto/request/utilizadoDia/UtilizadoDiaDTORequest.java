@@ -1,4 +1,4 @@
-package gerenciamentorestaurante.projeto1.entities.dto.request;
+package gerenciamentorestaurante.projeto1.entities.dto.request.utilizadoDia;
 
 public class UtilizadoDiaDTORequest {
     private Integer qtd;

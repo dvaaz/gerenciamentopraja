@@ -2,13 +2,15 @@ package gerenciamentorestaurante.projeto1.service;
 
 import gerenciamentorestaurante.projeto1.entities.Grupo;
 import gerenciamentorestaurante.projeto1.entities.FichaTecnica;
-import gerenciamentorestaurante.projeto1.entities.dto.request.FichaTecnicaDTORequest;
-import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateDescricaoRequest;
-import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
-import gerenciamentorestaurante.projeto1.entities.dto.response.ChangeToAnotherGrupoDTOResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.FichaTecnicaDTOResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateDescricaoResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.request.fichaTecnica.FichaTecnicaDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.shared.UpdateDescricaoRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.shared.UpdateStatusRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.response.fichaTecnica.FichaTecnicaDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.ChangeToAnotherGrupoDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.ChangeToAnotherGrupoInBatchDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.UpdateDescricaoResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.UpdateStatusResponse;
+import gerenciamentorestaurante.projeto1.exception.ElementNotFoundException;
 import gerenciamentorestaurante.projeto1.repository.GrupoRepository;
 import gerenciamentorestaurante.projeto1.repository.FichaTecnicaRepository;
 import org.modelmapper.ModelMapper;
@@ -16,7 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FichaTecnicaService {
@@ -40,7 +44,7 @@ public class FichaTecnicaService {
   @Transactional
   public FichaTecnicaDTOResponse criarFichaTecnica(FichaTecnicaDTORequest dtoRequest) {
     // Verifica a existencia do um grupo
-    Grupo grupo = grupoRepository.buscarGrupoDeFichaTecnicaPorId(dtoRequest.getGrupoId());
+    Grupo grupo = grupoRepository.buscarGrupoDeFichasTecnicasPorId(dtoRequest.getGrupoId());
     // Se não encontrar um grupo
     if (grupo == null) {
       grupo = grupoRepository.buscarGrupoPadrao();
@@ -102,7 +106,7 @@ public class FichaTecnicaService {
   @Transactional
   public ChangeToAnotherGrupoDTOResponse alterarGrupoFichaTecnica(Integer fichaTecnicaId, Integer novoGrupo) {
     FichaTecnica fichaTecnica = this.fichaTecnicaRepository.buscarFichaTecnicaPorID(fichaTecnicaId);
-    Grupo alteraGrupo = this.grupoRepository.buscarGrupoDeFichaTecnicaPorId(novoGrupo);
+    Grupo alteraGrupo = this.grupoRepository.buscarGrupoDeFichasTecnicasPorId(novoGrupo);
     if  (fichaTecnica != null &&  alteraGrupo != null){
       fichaTecnica.setGrupo(alteraGrupo);
       FichaTecnica tempResponse = fichaTecnicaRepository.save(fichaTecnica);
@@ -113,6 +117,45 @@ public class FichaTecnicaService {
 
       return updated;
     } else return null;
+  }
+
+  public List<FichaTecnica> listarFichasTecnicasEmLista(List<Integer> listaIngrediente) {
+    return fichaTecnicaRepository.listarFichasTecnicasEmLista(listaIngrediente);
+  }
+
+  @Transactional
+  public ChangeToAnotherGrupoInBatchDTOResponse alterarGrupoListaDeFichaTecnicas(Integer idGrupo, List<Integer> listaIdFichaTecnicas) {
+    Grupo grupoExistente = grupoRepository.buscarGrupoDeFichasTecnicasPorId(idGrupo);
+    if  (grupoExistente == null) {
+      throw new ElementNotFoundException("Grupo não encontrado" + idGrupo);
+    }
+
+    // buscar fichatecnicas para alterar o grupo
+    List<FichaTecnica> listaFichaTecnicas = new ArrayList<FichaTecnica>();
+    listaFichaTecnicas = this.listarFichasTecnicasEmLista(listaIdFichaTecnicas);
+//           if (listaFichaTecnicas.isEmpty()) {
+//               throw new ElementNotFoundException("Nenhum fichatecnica encontrado");
+//           }
+//            Considerar se há a necessidade de não continuar caso todos os fichatecnicas incluidos nao sejam encontrados,
+//             pois caso isso aconteça há um problema de lógica na busca de fichatecnica
+    if (listaFichaTecnicas.size() != listaIdFichaTecnicas.size()) {
+      throw new ElementNotFoundException("Um ou mais fichatecnicas na lista fornecida não foram encontrados.");
+    }
+    //altera o grupo dos itens
+    for (FichaTecnica fichatecnica : listaFichaTecnicas) {
+      fichatecnica.setGrupo(grupoExistente);
+    }
+    List<FichaTecnica> fichatecnicasSalvos = fichaTecnicaRepository.saveAll(listaFichaTecnicas);
+
+// testando map para transformar os ids de fichatecnica em lista
+    List<Integer> listaIdDto = fichatecnicasSalvos.stream().map(FichaTecnica::getId)
+        .collect(Collectors.toList());
+    // dto de resposta
+    ChangeToAnotherGrupoInBatchDTOResponse dtoResponse = new ChangeToAnotherGrupoInBatchDTOResponse();
+    dtoResponse.setIdGrupo(idGrupo);
+    dtoResponse.setIdDosItens(listaIdDto);
+
+    return dtoResponse;
   }
 
   @Transactional

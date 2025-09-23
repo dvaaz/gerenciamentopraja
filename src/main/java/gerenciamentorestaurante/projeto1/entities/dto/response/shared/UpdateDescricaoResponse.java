@@ -1,4 +1,4 @@
-package gerenciamentorestaurante.projeto1.entities.dto.response;
+package gerenciamentorestaurante.projeto1.entities.dto.response.shared;
 
 public class UpdateDescricaoResponse {
     private Integer id;

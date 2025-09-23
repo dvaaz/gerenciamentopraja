@@ -1,19 +1,10 @@
-package gerenciamentorestaurante.projeto1.entities.dto.response;
+package gerenciamentorestaurante.projeto1.entities.dto.request.fichaTecnica;
 
-public class IngredienteDTOResponse {
-    private Integer id;
+public class FichaTecnicaDTORequest {
     private String nome;
     private String descricao;
     private Integer grupoId;
     private Integer status;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;

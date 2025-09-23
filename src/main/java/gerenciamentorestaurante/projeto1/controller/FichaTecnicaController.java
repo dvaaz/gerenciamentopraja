@@ -1,10 +1,15 @@
 package gerenciamentorestaurante.projeto1.controller;
 
 import gerenciamentorestaurante.projeto1.entities.FichaTecnica;
-import gerenciamentorestaurante.projeto1.entities.dto.request.FichaTecnicaDTORequest;
-import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateDescricaoRequest;
-import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
-import gerenciamentorestaurante.projeto1.entities.dto.response.*;
+import gerenciamentorestaurante.projeto1.entities.dto.request.shared.ChangeToAnotherGrupoInBatchDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.ChangeToAnotherGrupoDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.ChangeToAnotherGrupoInBatchDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.request.fichaTecnica.FichaTecnicaDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.shared.UpdateDescricaoRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.shared.UpdateStatusRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.response.fichaTecnica.FichaTecnicaDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.UpdateDescricaoResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.service.FichaTecnicaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -83,6 +88,17 @@ public class FichaTecnicaController {
     if (fichaTecnica != null) {
       return ResponseEntity.ok(fichaTecnicaService.alterarGrupoFichaTecnica(fichaTecnicaId, novoGrupo));
     } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+  }
+
+  @PatchMapping("/grupo/{grupoId}/alteraremlista")
+  @Operation(summary = "alterar o grupo de várias fichas tecnicas", description="Endpoint para alterar o grupo de uma lista de fichastecnicas")
+  public ResponseEntity<ChangeToAnotherGrupoInBatchDTOResponse> alterarGrupoListaDeFichaTecnicas(
+      @Valid @PathVariable("grupoId") Integer grupoId,
+      @Valid @RequestBody ChangeToAnotherGrupoInBatchDTORequest dtoRequest
+  ) {
+    ChangeToAnotherGrupoInBatchDTOResponse fichaTecnicasEmNovoGrupo = fichaTecnicaService.alterarGrupoListaDeFichasTecnicas(
+        grupoId, dtoRequest.getIdDosItens());
+    return ResponseEntity.ok(fichaTecnicasEmNovoGrupo);
   }
 
   @DeleteMapping("/deletar/{fichaTecnicaId}")

@@ -24,7 +24,7 @@ public class Estoque {
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "ingrediente_id", nullable = false)
-  private Ingrediente ingrediente;
+  private Ingrediente ingredienteId;
 
   @OneToMany(mappedBy = "estoqueId")
   private Set<Producao> producao;
@@ -69,12 +69,12 @@ public class Estoque {
     this.status = status;
   }
 
-  public Ingrediente getIngrediente() {
-    return ingrediente;
+  public Ingrediente getIngredienteId() {
+    return ingredienteId;
   }
 
-  public void setIngrediente(Ingrediente ingrediente) {
-    this.ingrediente = ingrediente;
+  public void setIngredienteId(Ingrediente ingredienteId) {
+    this.ingredienteId = ingredienteId;
   }
 
   public Set<Producao> getProducao() {

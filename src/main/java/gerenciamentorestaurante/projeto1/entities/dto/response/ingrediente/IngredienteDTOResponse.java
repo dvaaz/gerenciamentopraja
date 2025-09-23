@@ -1,12 +1,19 @@
-package gerenciamentorestaurante.projeto1.entities.dto.request;
+package gerenciamentorestaurante.projeto1.entities.dto.response.ingrediente;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-public class FichaTecnicaDTORequest {
+public class IngredienteDTOResponse {
+    private Integer id;
     private String nome;
     private String descricao;
     private Integer grupoId;
     private Integer status;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;

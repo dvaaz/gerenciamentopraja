@@ -4,7 +4,7 @@ public class IngredienteFichaTecnicaDTORequest {
 
     private Integer unidadeMedida;
     private Integer qtd;
-//    private String preparo;
+//    private String observacao;
     private Integer ingrediente;
     private Integer fichaTecnica;
     private Integer status;
@@ -25,12 +25,12 @@ public class IngredienteFichaTecnicaDTORequest {
     this.qtd = qtd;
   }
 
-//    public String getPreparo() {
-//        return preparo;
+//    public String getObservacao() {
+//        return observacao;
 //    }
 //
-//    public void setPreparo(String preparo) {
-//        this.preparo = preparo;
+//    public void setObservacao(String observacao) {
+//        this.observacao = observacao;
 //    }
 
     public Integer getIngrediente() {

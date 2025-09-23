@@ -55,7 +55,7 @@ public class IngredienteFichaTecnicaService {
     ingredienteFicha.setIngredienteId(ingrediente);
     ingredienteFicha.setFichaTecnicaId(fichaTecnica);
     ingredienteFicha.setStatus(dtoRequestRequest.getStatus());
-//    ingredienteFicha.setPreparo(dtoRequestRequest.getPreparo());
+//    ingredienteFicha.setObservacao(dtoRequestRequest.getObservacao());
 
     IngredienteFichaTecnica ingredienteFichaSave = ingredienteFichaTecRepository.save(ingredienteFicha);
 
@@ -66,7 +66,7 @@ public class IngredienteFichaTecnicaService {
     dtoResponse.setIngrediente(ingredienteFichaSave.getIngredienteId().getId());
     dtoResponse.setFichaTecnica(ingredienteFichaSave.getFichaTecnicaId().getId());
     dtoResponse.setStatus(ingredienteFichaSave.getStatus());
-//    dtoResponse.setPreparo(ingredienteFichaSave.getPreparo());
+//    dtoResponse.setObservacao(ingredienteFichaSave.getObservacao());
     return dtoResponse;
 
   }
@@ -82,7 +82,7 @@ public class IngredienteFichaTecnicaService {
               dto.setNomeIngrediente(ingrediente.getIngredienteId().getNome());
               dto.setUnidadeMedida(ingrediente.getUnidadeMedida());
               dto.setQtd(ingrediente.getQtd());
-              //              dto.setPrepato(ingrediente.getPreparo());
+              //              dto.setPrepato(ingrediente.getObservacao());
               responseListaIngredientesEmFicha.add(dto);
           }
           return responseListaIngredientesEmFicha;
@@ -96,7 +96,7 @@ public class IngredienteFichaTecnicaService {
     if (ingredienteFichaTecnica != null) {
       ingredienteFichaTecnica.setUnidadeMedida(dtoRequest.getUnidadeMedida());
       ingredienteFichaTecnica.setQtd(dtoRequest.getQtd());
-//      ingredienteFichaTecnica.setPreparo(dtoRequest.getPreparo());
+//      ingredienteFichaTecnica.setObservacao(dtoRequest.getObservacao());
 
       IngredienteFichaTecnica ingredienteFichaSave = ingredienteFichaTecRepository.save(ingredienteFichaTecnica);
 
@@ -104,7 +104,7 @@ public class IngredienteFichaTecnicaService {
       dtoResponse.setId(ingredienteFichaSave.getId());
       dtoResponse.setQtd(ingredienteFichaSave.getQtd());
       dtoResponse.setUnidadeMedida(ingredienteFichaSave.getUnidadeMedida());
-//      dtoResponse.setPreparo(ingredienteFichaSave.getPreparo());
+//      dtoResponse.setObservacao(ingredienteFichaSave.getObservacao());
 
       return dtoResponse;
 

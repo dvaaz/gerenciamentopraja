@@ -1,14 +1,16 @@
 package gerenciamentorestaurante.projeto1.entities.dto.request.estoque;
 
-import gerenciamentorestaurante.projeto1.validation.anotation.OrdemDasDatas;
+//import gerenciamentorestaurante.projeto1.validation.anotation.OrdemDasDatas;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
+
+// Validator Odem das datas não está funcionando
 
 import java.util.Date;
-@OrdemDasDatas(primeiraData = "dia", segundaData = "validade", message = "Entrada não pode ser anterior à fabricação")
+
 public class EstoqueDTORequest {
-    @NotEmpty
+   @NotEmpty
+//   @OrdemDasDatas(primeiraData = "dia", segundaData = "validade", message = "Entrada não pode ser anterior à fabricação")
     private Date dia;
     @NotEmpty
     @Future

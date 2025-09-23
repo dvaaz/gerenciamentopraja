@@ -1,17 +1,16 @@
 package gerenciamentorestaurante.projeto1.controller;
 
 import gerenciamentorestaurante.projeto1.entities.ProducaoDia;
-import gerenciamentorestaurante.projeto1.entities.dto.request.ProducaoDiaDTORequest;
-import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
-import gerenciamentorestaurante.projeto1.entities.dto.response.ProducaoDiaDTOResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.request.producaoDia.ProducaoDiaDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.shared.UpdateStatusRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.response.producaoDia.ProducaoDiaDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.service.ProducaoDiaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

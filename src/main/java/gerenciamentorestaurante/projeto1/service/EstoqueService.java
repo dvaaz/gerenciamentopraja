@@ -2,9 +2,9 @@ package gerenciamentorestaurante.projeto1.service;
 
 import gerenciamentorestaurante.projeto1.entities.Estoque;
 import gerenciamentorestaurante.projeto1.entities.Ingrediente;
-import gerenciamentorestaurante.projeto1.entities.dto.EstoqueAlterarQtdDTO;
+import gerenciamentorestaurante.projeto1.entities.dto.response.estoque.EstoqueAlterarQtdDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.request.estoque.EstoqueDTORequest;
-import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.estoque.EstoqueDTOResponse;
 import gerenciamentorestaurante.projeto1.repository.EstoqueRepository;
 import gerenciamentorestaurante.projeto1.repository.IngredienteRepository;
@@ -43,7 +43,7 @@ public class EstoqueService {
         dtoResponse.setDia(estoqueSave.getDia());
         dtoResponse.setValidade(estoqueSave.getValidade());
         dtoResponse.setQtd(estoqueSave.getQtd());
-        dtoResponse.setIngredienteId(estoqueSave.getIngrediente().getId());
+        dtoResponse.setIngredienteId(estoqueSave.getIngredienteId().getId());
         dtoResponse.setStatus(estoqueSave.getStatus());
 
         return dtoResponse;
@@ -58,8 +58,8 @@ public class EstoqueService {
     }
 
     @Transactional
-    public EstoqueAlterarQtdDTO utilizarQuantidade(EstoqueAlterarQtdDTO dtoRequest) {
-        Estoque estoque = estoqueRepository.buscararEstoquePorID(dtoRequest.getId());
+    public EstoqueAlterarQtdDTOResponse utilizarQuantidade(Integer id, EstoqueAlterarQtdDTOResponse dtoRequest) {
+        Estoque estoque = estoqueRepository.buscararEstoquePorID(id);
         if (estoque == null) {
             throw new RuntimeException("Estoque não encontrado");
         }
@@ -71,7 +71,7 @@ public class EstoqueService {
 
             Estoque novaQtdEstoque = estoqueRepository.save(estoque);
 
-            EstoqueAlterarQtdDTO dtoResponse = new EstoqueAlterarQtdDTO();
+            EstoqueAlterarQtdDTOResponse dtoResponse = new EstoqueAlterarQtdDTOResponse();
             dtoResponse.setId(novaQtdEstoque.getId());
             dtoResponse.setQtd(novaQtdEstoque.getQtd());
 
@@ -81,10 +81,9 @@ public class EstoqueService {
     }
 
     @Transactional
-    public UpdateStatusResponse atualizarStatusEstoque(Integer id, EstoqueAlterarQtdDTO dtoRequest) {
+    public UpdateStatusResponse atualizarStatusEstoque(Integer id, EstoqueAlterarQtdDTOResponse dtoRequest) {
         Estoque estoque = this.estoqueRepository.buscararEstoquePorID(id);
         if (estoque == null) {
-            estoque.setStatus(dtoRequest.getStatus());
             Estoque novoStatusEstoque = estoqueRepository.save(estoque);
 
             UpdateStatusResponse dtoResponse = new UpdateStatusResponse();

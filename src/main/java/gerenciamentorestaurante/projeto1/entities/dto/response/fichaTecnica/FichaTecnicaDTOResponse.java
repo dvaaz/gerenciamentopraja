@@ -1,4 +1,4 @@
-package gerenciamentorestaurante.projeto1.entities.dto.response;
+package gerenciamentorestaurante.projeto1.entities.dto.response.fichaTecnica;
 
 public class FichaTecnicaDTOResponse {
     private Integer id;

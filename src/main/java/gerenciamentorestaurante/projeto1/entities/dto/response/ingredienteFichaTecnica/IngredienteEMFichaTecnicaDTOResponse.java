@@ -2,7 +2,7 @@ package gerenciamentorestaurante.projeto1.entities.dto.response.ingredienteFicha
 
 public class IngredienteEMFichaTecnicaDTOResponse {
     private Integer id;
-//    private String preparo;
+//    private String observacao;
     private Integer unidadeMedida;
     private Integer qtd;
     private Integer idIngrediente;
@@ -16,9 +16,9 @@ public class IngredienteEMFichaTecnicaDTOResponse {
         this.id = id;
     }
 
-//    public String getPreparo() {return preparo;}
+//    public String getObservacao() {return observacao;}
 //
-//    public  void setPreparo(String preparo) {this.preparo = preparo;}
+//    public  void setObservacao(String observacao) {this.observacao = observacao;}
 
     public Integer getUnidadeMedida() {
         return unidadeMedida;

@@ -1,13 +1,13 @@
 package gerenciamentorestaurante.projeto1.service;
 
-import gerenciamentorestaurante.projeto1.entities.dto.ChangeToAnotherGrupoInBatchDTO;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.ChangeToAnotherGrupoInBatchDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.request.ingrediente.IngredienteDTORequest;
-import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateDescricaoRequest;
-import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
-import gerenciamentorestaurante.projeto1.entities.dto.response.IngredienteDTOResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateDescricaoResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.ChangeToAnotherGrupoDTOResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.request.shared.UpdateDescricaoRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.shared.UpdateStatusRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.response.ingrediente.IngredienteDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.UpdateDescricaoResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.ChangeToAnotherGrupoDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.entities.Grupo;
 import gerenciamentorestaurante.projeto1.exception.ElementNotFoundException;
 import gerenciamentorestaurante.projeto1.repository.GrupoRepository;
@@ -126,7 +126,7 @@ public class IngredienteService {
     }
 
     @Transactional
-    public ChangeToAnotherGrupoInBatchDTO alterarGrupoListaDeIngredientes(Integer idGrupo, List<Integer> listaIdIngredientes) {
+    public ChangeToAnotherGrupoInBatchDTOResponse alterarGrupoListaDeIngredientes(Integer idGrupo, List<Integer> listaIdIngredientes) {
         Grupo grupoExistente = grupoRepository.buscarGrupoDeIngredientesPorId(idGrupo);
            if  (grupoExistente == null) {
             throw new ElementNotFoundException("Grupo não encontrado" + idGrupo);
@@ -153,7 +153,7 @@ public class IngredienteService {
         List<Integer> listaIdDto = ingredientesSalvos.stream().map(Ingrediente::getId)
                 .collect(Collectors.toList());
         // dto de resposta
-        ChangeToAnotherGrupoInBatchDTO dtoResponse = new ChangeToAnotherGrupoInBatchDTO();
+        ChangeToAnotherGrupoInBatchDTOResponse dtoResponse = new ChangeToAnotherGrupoInBatchDTOResponse();
         dtoResponse.setIdGrupo(idGrupo);
         dtoResponse.setIdDosItens(listaIdDto);
 

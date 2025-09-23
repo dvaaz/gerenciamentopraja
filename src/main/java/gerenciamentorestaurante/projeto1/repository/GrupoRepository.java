@@ -40,7 +40,7 @@ public interface GrupoRepository extends JpaRepository<Grupo, Integer> {
   List<Grupo> listarGrupoDeFichaTecnicas();
 
   @Query("SELECT g FROM Grupo g WHERE g.id =:id AND g.status>=0 AND g.tipo=2")
-  Grupo buscarGrupoDeFichaTecnicaPorId(@Param("id") Integer grupoId);
+  Grupo buscarGrupoDeFichasTecnicasPorId(@Param("id") Integer grupoId);
 
 
 }

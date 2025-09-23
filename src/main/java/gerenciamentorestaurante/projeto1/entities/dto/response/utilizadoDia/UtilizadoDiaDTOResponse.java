@@ -1,8 +1,9 @@
-package gerenciamentorestaurante.projeto1.entities.dto;
+package gerenciamentorestaurante.projeto1.entities.dto.response.utilizadoDia;
 
-public class EstoqueAlterarQtdDTO {
+public class UtilizadoDiaDTOResponse {
     private Integer id;
     private Integer qtd;
+    private Integer destino;
     private Integer status;
 
     public Integer getId() {
@@ -19,6 +20,14 @@ public class EstoqueAlterarQtdDTO {
 
     public void setQtd(Integer qtd) {
         this.qtd = qtd;
+    }
+
+    public Integer getDestino() {
+        return destino;
+    }
+
+    public void setDestino(Integer destino) {
+        this.destino = destino;
     }
 
     public Integer getStatus() {

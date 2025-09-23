@@ -1,9 +1,8 @@
-package gerenciamentorestaurante.projeto1.entities.dto.response;
+package gerenciamentorestaurante.projeto1.entities.dto.response.estoque;
 
-public class ProducaoDTOResponse {
+public class EstoqueAlterarQtdDTOResponse {
     private Integer id;
     private Integer qtd;
-    private Integer status;
 
     public Integer getId() {
         return id;
@@ -19,13 +18,5 @@ public class ProducaoDTOResponse {
 
     public void setQtd(Integer qtd) {
         this.qtd = qtd;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 }

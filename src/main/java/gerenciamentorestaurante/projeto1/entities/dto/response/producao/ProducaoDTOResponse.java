@@ -1,9 +1,8 @@
-package gerenciamentorestaurante.projeto1.entities.dto.response;
+package gerenciamentorestaurante.projeto1.entities.dto.response.producao;
 
-public class UtilizadoDiaDTOResponse {
+public class ProducaoDTOResponse {
     private Integer id;
     private Integer qtd;
-    private Integer destino;
     private Integer status;
 
     public Integer getId() {
@@ -20,14 +19,6 @@ public class UtilizadoDiaDTOResponse {
 
     public void setQtd(Integer qtd) {
         this.qtd = qtd;
-    }
-
-    public Integer getDestino() {
-        return destino;
-    }
-
-    public void setDestino(Integer destino) {
-        this.destino = destino;
     }
 
     public Integer getStatus() {

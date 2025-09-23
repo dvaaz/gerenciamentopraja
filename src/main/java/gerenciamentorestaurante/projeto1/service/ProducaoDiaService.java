@@ -2,10 +2,10 @@ package gerenciamentorestaurante.projeto1.service;
 
 
 import gerenciamentorestaurante.projeto1.entities.ProducaoDia;
-import gerenciamentorestaurante.projeto1.entities.dto.request.ProducaoDiaDTORequest;
-import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
-import gerenciamentorestaurante.projeto1.entities.dto.response.ProducaoDiaDTOResponse;
-import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.request.producaoDia.ProducaoDiaDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.shared.UpdateStatusRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.response.producaoDia.ProducaoDiaDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.repository.ProducaoDiaRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;

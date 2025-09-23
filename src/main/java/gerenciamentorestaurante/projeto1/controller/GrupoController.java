@@ -1,12 +1,12 @@
 package gerenciamentorestaurante.projeto1.controller;
 
-import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateGrupoDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.shared.UpdateGrupoDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.grupo.GrupoDTORequest;
-import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.shared.UpdateStatusRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.grupo.GrupoAtualizarDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.grupo.GrupoDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.Grupo;
-import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.service.GrupoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,4 +1,4 @@
-package gerenciamentorestaurante.projeto1.entities.dto.request;
+package gerenciamentorestaurante.projeto1.entities.dto.request.shared;
 
 public class UpdateDescricaoRequest {
     private String descricao;
