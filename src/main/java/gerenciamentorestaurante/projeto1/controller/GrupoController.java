@@ -58,7 +58,7 @@ public class GrupoController {
         return ResponseEntity.ok(grupoService.listarGruposDeFichaTecnicas());
     }
 
-  @GetMapping("/listar/{grupoId}")
+  @GetMapping("/buscar/{grupoId}")
     @Operation(summary = "listar um grupo", description ="Endpoint para obter um grupo por id")
     public ResponseEntity<Grupo> listarGrupoPorId(@Valid @PathVariable Integer grupoId) {
       Grupo grupo = this.grupoService.listarGrupoPorID(grupoId);

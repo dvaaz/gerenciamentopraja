@@ -33,7 +33,7 @@ public class IngredienteFichaTecnicaController {
     return ResponseEntity.status(HttpStatus.CREATED).body(service.criarRelacaoIngredienteFichaTecnica(dto));
   }
 
-  @GetMapping("/listar/{id}/ingredientes")
+  @GetMapping("/buscar/{id}/ingredientes")
   @Operation(summary = "Lista Ingredientes em Ficha Tecnica", description = "Endpoint para listar os ingredientes, unidade de medida e quantidade de cada um deles em uma ficha tecnica")
   public ResponseEntity<List<IngredienteEMFichaTecnicaDTOResponse>> listarIngredientesEmFichaTecnica(
           @Valid @PathVariable Integer id

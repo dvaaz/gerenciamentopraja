@@ -1,5 +1,6 @@
 package gerenciamentorestaurante.projeto1.controller;
 
+import gerenciamentorestaurante.projeto1.entities.dto.request.shared.ChangeToAnotherGrupoInBatchDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.shared.ChangeToAnotherGrupoInBatchDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.request.ingrediente.IngredienteDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.shared.UpdateDescricaoRequest;
@@ -29,7 +30,7 @@ public class IngredienteContoller {
     }
 
     @PostMapping("/criar")
-    @Operation(summary = "Registro de novo ingrediente", description = "Endpoint para a criacao de novo objeto ingrediente")
+    @Operation(summary = "Registrar ingrediente", description = "Endpoint para a criacao de novo objeto ingrediente")
     public ResponseEntity<IngredienteDTOResponse> criarIngrediente(@Valid @RequestBody IngredienteDTORequest ingrediente) {
         return ResponseEntity.status(HttpStatus.CREATED).body(ingredienteService.criarIngrediente(ingrediente));
     }
@@ -40,7 +41,7 @@ public class IngredienteContoller {
         return ResponseEntity.ok(ingredienteService.listarIngredientes());
     }
 
-    @GetMapping("/listar/{ingredienteId}")
+    @GetMapping("/buscar/{ingredienteId}")
     @Operation(summary = "listar ingrediente por id", description = "Endpoint para listar um ingrediente")
     public ResponseEntity<Ingrediente> buscarIngredientePorId(@Valid @PathVariable("ingredienteId") Integer ingredienteId) {
         Ingrediente ingrediente = ingredienteService.buscarIngredientePorId(ingredienteId);
@@ -51,7 +52,7 @@ public class IngredienteContoller {
 
     }
 
-    @PatchMapping("{ingredienteId}/descricao")
+    @PatchMapping("/descricao/{ingredienteId}")
     @Operation(summary = "altera a descricao de um ingrediente", description = "Endpoint para alterar a descricao de um ingrediente")
     public ResponseEntity<UpdateDescricaoResponse> alterarDescricaoIngrediente(
             @Valid
@@ -64,7 +65,7 @@ public class IngredienteContoller {
 
     }
 
-    @PatchMapping("{ingredienteId}/status")
+    @PatchMapping("/status/{ingredienteId}")
     @Operation(summary = "altera status de um ingrediente", description = "Endpoint para alterar o status de um ingrediente")
     public ResponseEntity<UpdateStatusResponse> alterarStatusIngrediente(
             @Valid

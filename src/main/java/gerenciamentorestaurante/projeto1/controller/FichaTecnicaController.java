@@ -42,7 +42,7 @@ public class FichaTecnicaController {
     return ResponseEntity.ok(fichaTecnicaService.listarFichaTecnicas());
   }
 
-  @GetMapping("/listar/{fichaTecnicaId}")
+  @GetMapping("/buscar/{fichaTecnicaId}")
   @Operation(summary = "listar fichaTecnica por id", description = "Endpoint para listar um fichaTecnica")
   public ResponseEntity<FichaTecnica> listarFichaTecnicaPorId(@Valid @PathVariable("fichaTecnicaId") Integer fichaTecnicaId) {
     FichaTecnica fichaTecnica = fichaTecnicaService.listarFichaTecnicaPorId(fichaTecnicaId);

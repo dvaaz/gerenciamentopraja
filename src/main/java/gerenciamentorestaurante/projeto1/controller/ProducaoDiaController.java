@@ -33,7 +33,7 @@ public class ProducaoDiaController  {
     @Operation(summary = "Listar tabelas de Producao Diária", description = "Endpoint para obter todas as entries de producao dia")
     public ResponseEntity<List<ProducaoDia>> listarProducoesDia() {return ResponseEntity.ok(producaoDiaService.listarProducaoDias());}
 
-    @GetMapping("/listar/{proDiaId}")
+    @GetMapping("/buscar/{proDiaId}")
     @Operation(summary = "listar producao diária por ID", description = "Endpoint para obter UMA producao dia buscando por ID")
     public ResponseEntity<ProducaoDia> listarProducaoDiaPorId(@Valid @PathVariable Integer proDiaId){
         ProducaoDia proDia = this.producaoDiaService.listarProducaoDiaPorId(proDiaId);
