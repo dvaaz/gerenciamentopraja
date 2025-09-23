@@ -1,22 +1,22 @@
 package gerenciamentorestaurante.projeto1.entities.dto.request;
 
 public class ProducaoDTORequest {
-    private int qtd;
-    private int status;
+    private Integer qtd;
+    private Integer status;
 
-    public int getQtd() {
+    public Integer getQtd() {
         return qtd;
     }
 
-    public void setQtd(int qtd) {
+    public void setQtd(Integer qtd) {
         this.qtd = qtd;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

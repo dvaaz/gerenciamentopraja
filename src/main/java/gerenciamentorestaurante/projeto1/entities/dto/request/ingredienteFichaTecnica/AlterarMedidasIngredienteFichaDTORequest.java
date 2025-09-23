@@ -1,22 +1,31 @@
 package gerenciamentorestaurante.projeto1.entities.dto.request.ingredienteFichaTecnica;
 
 public class AlterarMedidasIngredienteFichaDTORequest {
-  private int qtd;
-  private int unidadeMedida;
+  private Integer qtd;
+  private Integer unidadeMedida;
+//  private String preparo;
 
-  public int getQtd() {
+  public Integer getQtd() {
     return qtd;
   }
 
-  public void setQtd(int qtd) {
+  public void setQtd(Integer qtd) {
     this.qtd = qtd;
   }
 
-  public int getUnidadeMedida() {
+//    public String getPreparo() {
+//        return preparo;
+//    }
+//
+//    public void setPreparo(String preparo) {
+//        this.preparo = preparo;
+//    }
+
+    public Integer getUnidadeMedida() {
     return unidadeMedida;
   }
 
-  public void setUnidadeMedida(int unidadeMedida) {
+  public void setUnidadeMedida(Integer unidadeMedida) {
     this.unidadeMedida = unidadeMedida;
   }
 }

@@ -20,9 +20,9 @@ public class Grupo {
   @Column(name = "grupo_tipo")
   @Min(0)
   @Max(2)
-  private int tipo;
+  private Integer tipo;
   @Column(name = "grupo_status")
-  private int status;
+  private Integer status;
 
   @OneToMany(mappedBy = "grupo")
   private Set<Ingrediente> ingredienteSet;
@@ -54,19 +54,19 @@ public class Grupo {
         this.cor = cor;
     }
 
-    public int getTipo() {
+    public Integer getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(Integer tipo) {
         this.tipo = tipo;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

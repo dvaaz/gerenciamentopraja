@@ -29,8 +29,8 @@ public class GrupoService {
   }
 
   @Transactional
-  public GrupoDTOResponse criarGrupo(GrupoDTORequest grupoDTORequest) {
-    Grupo grupo = modelMapper.map(grupoDTORequest, Grupo.class);
+  public GrupoDTOResponse criarGrupo(GrupoDTORequest dtoRequest) {
+    Grupo grupo = modelMapper.map(dtoRequest, Grupo.class);
     if (grupo.getTipo() == 1 || grupo.getTipo() == 2) {
       Grupo grupoSave = this.grupoRepository.save(grupo);
       return modelMapper.map(grupoSave, GrupoDTOResponse.class);

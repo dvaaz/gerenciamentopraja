@@ -2,7 +2,7 @@ package gerenciamentorestaurante.projeto1.entities.dto.response;
 
 public class ChangeToAnotherGrupoDTOResponse {
     private Integer id;
-    private int idGrupo;
+    private Integer idGrupo;
 
     public Integer getId() {
         return id;
@@ -12,11 +12,11 @@ public class ChangeToAnotherGrupoDTOResponse {
         this.id = id;
     }
 
-    public int getIdGrupo() {
+    public Integer getIdGrupo() {
         return idGrupo;
     }
 
-    public void setIdGrupo(int grupo) {
+    public void setIdGrupo(Integer grupo) {
         this.idGrupo = grupo;
     }
 }

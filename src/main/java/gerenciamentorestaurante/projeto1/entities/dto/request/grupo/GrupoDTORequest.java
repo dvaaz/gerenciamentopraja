@@ -3,8 +3,8 @@ package gerenciamentorestaurante.projeto1.entities.dto.request.grupo;
 public class GrupoDTORequest {
   private String nome;
   private String cor;
-  private int tipo;
-  private int status;
+  private Integer tipo;
+  private Integer status;
 
     public String getNome() {
         return nome;
@@ -22,19 +22,19 @@ public class GrupoDTORequest {
         this.cor = cor;
     }
 
-    public int getTipo() {
+    public Integer getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(Integer tipo) {
         this.tipo = tipo;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

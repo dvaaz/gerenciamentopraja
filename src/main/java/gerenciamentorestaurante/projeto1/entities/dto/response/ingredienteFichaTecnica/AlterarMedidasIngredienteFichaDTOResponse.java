@@ -2,8 +2,9 @@ package gerenciamentorestaurante.projeto1.entities.dto.response.ingredienteFicha
 
 public class AlterarMedidasIngredienteFichaDTOResponse {
   private Integer id;
-  private int qtd;
-  private int unidadeMedida;
+//  private String preparo;
+  private Integer qtd;
+  private Integer unidadeMedida;
 
   public Integer getId() {
     return id;
@@ -13,19 +14,27 @@ public class AlterarMedidasIngredienteFichaDTOResponse {
     this.id = id;
   }
 
-  public int getQtd() {
+  public Integer getQtd() {
     return qtd;
   }
 
-  public void setQtd(int qtd) {
+  public void setQtd(Integer qtd) {
     this.qtd = qtd;
   }
 
-  public int getUnidadeMedida() {
+//    public String getPreparo() {
+//        return preparo;
+//    }
+//
+//    public void setPreparo(String preparo) {
+//        this.preparo = preparo;
+//    }
+
+    public Integer getUnidadeMedida() {
     return unidadeMedida;
   }
 
-  public void setUnidadeMedida(int unidadeMedida) {
+  public void setUnidadeMedida(Integer unidadeMedida) {
     this.unidadeMedida = unidadeMedida;
   }
 }

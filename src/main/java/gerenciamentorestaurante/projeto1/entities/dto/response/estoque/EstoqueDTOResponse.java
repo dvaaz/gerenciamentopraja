@@ -1,4 +1,4 @@
-package gerenciamentorestaurante.projeto1.entities.dto.response;
+package gerenciamentorestaurante.projeto1.entities.dto.response.estoque;
 
 import java.util.Date;
 
@@ -6,16 +6,9 @@ public class EstoqueDTOResponse {
     private Integer id;
     private Date dia;
     private Date validade;
-    private int qtd;
-    private int status;
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
+    private Integer qtd;
+    private Integer ingredienteId;
+    private Integer status;
 
     public Integer getId() {
         return id;
@@ -41,11 +34,28 @@ public class EstoqueDTOResponse {
         this.validade = validade;
     }
 
-    public int getQtd() {
+    public Integer getQtd() {
         return qtd;
     }
 
-    public void setQtd(int qtd) {
+    public void setQtd(Integer qtd) {
         this.qtd = qtd;
     }
+
+    public Integer getIngredienteId() {
+        return ingredienteId;
+    }
+
+    public void setIngredienteId(Integer ingredienteId) {
+        this.ingredienteId = ingredienteId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
 }

@@ -4,7 +4,7 @@ public class IngredienteDTORequest {
     private String nome;
     private String descricao;
     private Integer grupoId;
-    private int status;
+    private Integer status;
 
     public String getNome() {
         return nome;
@@ -30,11 +30,11 @@ public class IngredienteDTORequest {
         this.grupoId = grupoId;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

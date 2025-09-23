@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ProducaoDiaDTORequest {
     private Date data;
-    private int status;
+    private Integer status;
 
     public Date getData() {
         return data;
@@ -14,11 +14,11 @@ public class ProducaoDiaDTORequest {
         this.data = data;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

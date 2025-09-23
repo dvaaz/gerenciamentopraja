@@ -15,7 +15,7 @@ public class ProducaoDia {
   @Column(name = "producao_dia_data")
   private Date data;
   @Column(name="producao_dia_status")
-  private int status;
+  private Integer status;
   @OneToMany(mappedBy = "producaoDiaId")
   private Set<Producao> producaoDias;
 
@@ -35,11 +35,11 @@ public class ProducaoDia {
     this.data = data;
   }
 
-  public int getStatus() {
+  public Integer getStatus() {
     return status;
   }
 
-  public void setStatus(int status) {
+  public void setStatus(Integer status) {
     this.status = status;
   }
 

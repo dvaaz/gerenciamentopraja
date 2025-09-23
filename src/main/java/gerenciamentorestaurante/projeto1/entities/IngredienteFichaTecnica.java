@@ -11,11 +11,13 @@ public class IngredienteFichaTecnica {
   @Column(name = "ingrediente_ficha_tecnica_id")
   private Integer id;
   @Column(name= "ingrediente_ficha_tecnica_qtd")
-  private int qtd;
+  private Integer qtd;
   @Column(name="ingrediente_ficha_tecnica_unidade_medida")
-  private int unidadeMedida;
+  private Integer unidadeMedida;
+//  @Column(name="ingrediente_ficha_tecnica_preparo")
+//  private String preparo;
   @Column(name="ingrediente_ficha_tecnica_status")
-  private int status;
+  private Integer status;
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "ingrediente_id", nullable = false)
@@ -33,27 +35,35 @@ public class IngredienteFichaTecnica {
     this.id = id;
   }
 
-  public int getQtd() {
+  public Integer getQtd() {
     return qtd;
   }
 
-  public void setQtd(int qtd) {
+  public void setQtd(Integer qtd) {
     this.qtd = qtd;
   }
 
-  public int getUnidadeMedida() {
+  public Integer getUnidadeMedida() {
     return unidadeMedida;
   }
 
-  public void setUnidadeMedida(int unidadeMedida) {
+  public void setUnidadeMedida(Integer unidadeMedida) {
     this.unidadeMedida = unidadeMedida;
   }
 
-  public int getStatus() {
+//    public String getPreparo() {
+//        return preparo;
+//    }
+//
+//    public void setPreparo(String preparo) {
+//        this.preparo = preparo;
+//    }
+
+    public Integer getStatus() {
     return status;
   }
 
-  public void setStatus(int status) {
+  public void setStatus(Integer status) {
     this.status = status;
   }
 

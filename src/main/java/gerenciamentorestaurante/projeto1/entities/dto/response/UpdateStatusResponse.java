@@ -2,7 +2,7 @@ package gerenciamentorestaurante.projeto1.entities.dto.response;
 
 public class UpdateStatusResponse {
     private Integer id;
-    private int status;
+    private Integer status;
 
     public Integer getId() {
         return id;
@@ -12,11 +12,11 @@ public class UpdateStatusResponse {
         this.id = id;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

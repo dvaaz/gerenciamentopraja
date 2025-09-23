@@ -11,9 +11,9 @@ public class Producao {
   @Column(name = "producao_id")
   private Integer id;
   @Column(name = "producao_qtd")
-  private int qtd;
+  private Integer qtd;
   @Column(name = "producao_status")
-  private int status;
+  private Integer status;
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "producao_dia_id", nullable = false)
@@ -32,19 +32,19 @@ public class Producao {
     this.id = id;
   }
 
-  public int getQtd() {
+  public Integer getQtd() {
     return qtd;
   }
 
-  public void setQtd(int qtd) {
+  public void setQtd(Integer qtd) {
     this.qtd = qtd;
   }
 
-  public int getStatus() {
+  public Integer getStatus() {
     return status;
   }
 
-  public void setStatus(int status) {
+  public void setStatus(Integer status) {
     this.status = status;
   }
 

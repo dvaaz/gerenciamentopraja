@@ -18,7 +18,7 @@ public class FichaTecnica {
   @Column(name="ficha_tecnica_descricao")
   private String descricao;
   @Column(name="ficha_tecnica_status")
-  private int status;
+  private Integer status;
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "grupo_id", nullable = false)
@@ -50,11 +50,11 @@ public class FichaTecnica {
     this.descricao = descricao;
   }
 
-  public int getStatus() {
+  public Integer getStatus() {
     return status;
   }
 
-  public void setStatus(int status) {
+  public void setStatus(Integer status) {
     this.status = status;
   }
 

@@ -5,7 +5,7 @@ public class IngredienteDTOResponse {
     private String nome;
     private String descricao;
     private Integer grupoId;
-    private int status;
+    private Integer status;
 
     public Integer getId() {
         return id;
@@ -39,11 +39,11 @@ public class IngredienteDTOResponse {
         this.grupoId = grupoId;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

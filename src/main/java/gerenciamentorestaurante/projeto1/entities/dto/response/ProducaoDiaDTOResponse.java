@@ -5,7 +5,7 @@ import java.util.Date;
 public class ProducaoDiaDTOResponse {
     private Integer id;
     private Date data;
-    private int status;
+    private Integer status;
 
     public Integer getId() {
         return id;
@@ -23,11 +23,11 @@ public class ProducaoDiaDTOResponse {
         this.data = data;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

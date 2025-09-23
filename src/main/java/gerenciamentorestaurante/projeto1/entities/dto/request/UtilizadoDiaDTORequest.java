@@ -1,13 +1,13 @@
 package gerenciamentorestaurante.projeto1.entities.dto.request;
 
 public class UtilizadoDiaDTORequest {
-    private int qtd;
+    private Integer qtd;
 
-    public int getQtd() {
+    public Integer getQtd() {
         return qtd;
     }
 
-    public void setQtd(int qtd) {
+    public void setQtd(Integer qtd) {
         this.qtd = qtd;
     }
 }

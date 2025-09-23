@@ -2,38 +2,38 @@ package gerenciamentorestaurante.projeto1.entities.dto.request.ingredienteFichaT
 
 public class IngredienteFichaTecnicaDTORequest {
 
-    private int unidadeMedida;
-    private int qtd;
-    private int status;
+    private Integer unidadeMedida;
+    private Integer qtd;
+//    private String preparo;
     private Integer ingrediente;
     private Integer fichaTecnica;
+    private Integer status;
 
-
-  public int getUnidadeMedida() {
+  public Integer getUnidadeMedida() {
     return unidadeMedida;
   }
 
-  public void setUnidadeMedida(int unidadeMedida) {
+  public void setUnidadeMedida(Integer unidadeMedida) {
     this.unidadeMedida = unidadeMedida;
   }
 
-  public int getQtd() {
+  public Integer getQtd() {
     return qtd;
   }
 
-  public void setQtd(int qtd) {
+  public void setQtd(Integer qtd) {
     this.qtd = qtd;
   }
 
-  public int getStatus() {
-    return status;
-  }
+//    public String getPreparo() {
+//        return preparo;
+//    }
+//
+//    public void setPreparo(String preparo) {
+//        this.preparo = preparo;
+//    }
 
-  public void setStatus(int status) {
-    this.status = status;
-  }
-
-  public Integer getIngrediente() {
+    public Integer getIngrediente() {
     return ingrediente;
   }
 
@@ -48,4 +48,13 @@ public class IngredienteFichaTecnicaDTORequest {
   public void setFichaTecnica(Integer fichaTecnica) {
     this.fichaTecnica = fichaTecnica;
   }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
 }

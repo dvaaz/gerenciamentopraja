@@ -57,13 +57,13 @@ public class IngredienteService {
             }
         }
         // Mapeia os dados obtidos para  acriação de ingrediente
-        Ingrediente ingrediente = new Ingrediente();
-        ingrediente.setNome(dtoRequest.getNome());
-        ingrediente.setDescricao(dtoRequest.getDescricao());
-        ingrediente.setGrupo(grupo);
-        ingrediente.setStatus(dtoRequest.getStatus());
+        Ingrediente novoIngrediente = new Ingrediente();
+        novoIngrediente.setNome(dtoRequest.getNome());
+        novoIngrediente.setDescricao(dtoRequest.getDescricao());
+        novoIngrediente.setGrupo(grupo);
+        novoIngrediente.setStatus(dtoRequest.getStatus());
         // Salva no banco de dados (persistence)
-        Ingrediente ingredienteSave = ingredienteRepository.save(ingrediente);
+        Ingrediente ingredienteSave = ingredienteRepository.save(novoIngrediente);
 
         IngredienteDTOResponse dtoResponse= new IngredienteDTOResponse();
         dtoResponse.setId(ingredienteSave.getId());
@@ -83,7 +83,7 @@ public class IngredienteService {
         return this.ingredienteRepository.listarIngredientes();
     }
 
-    public Ingrediente listarIngredientePorId(Integer ingredienteId){
+    public Ingrediente buscarIngredientePorId(Integer ingredienteId){
       Ingrediente ingrediente = this.ingredienteRepository.buscarIngredientePorId(ingredienteId);
       if  (ingrediente != null){
         return this.ingredienteRepository.buscarIngredientePorId(ingredienteId);
@@ -174,7 +174,7 @@ public class IngredienteService {
             updated.setStatus(tempResponse.getStatus());
 
             return updated;
-        } else return null;
+        } else             throw new RuntimeException("Ingrediente não encontrado");
     }
 
     @Transactional
@@ -185,7 +185,7 @@ public class IngredienteService {
     @Transactional
     public void deletarDefinitivoIngrediente(Integer ingredienteId){
     Ingrediente ingrediente = this.buscaFindById(ingredienteId);
-    if (ingrediente != null && ingrediente.getStatus() == -1) {
+    if (ingrediente != null && ingrediente.getStatus() <= -1) {
         this.ingredienteRepository.deleteById(ingredienteId);
     }
     }
