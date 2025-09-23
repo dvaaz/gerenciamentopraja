@@ -3,7 +3,6 @@ package gerenciamentorestaurante.projeto1.service;
 import gerenciamentorestaurante.projeto1.entities.Estoque;
 import gerenciamentorestaurante.projeto1.entities.Ingrediente;
 import gerenciamentorestaurante.projeto1.entities.dto.EstoqueAlterarQtdDTO;
-import gerenciamentorestaurante.projeto1.entities.dto.request.UpdateStatusRequest;
 import gerenciamentorestaurante.projeto1.entities.dto.request.estoque.EstoqueDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.estoque.EstoqueDTOResponse;
