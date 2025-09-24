@@ -3,10 +3,12 @@ package gerenciamentorestaurante.projeto1.controller;
 import gerenciamentorestaurante.projeto1.entities.Estoque;
 import gerenciamentorestaurante.projeto1.entities.dto.request.estoque.EstoqueDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.estoque.EstoqueDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.estoque.EstoqueQtdDTOResponse;
 import gerenciamentorestaurante.projeto1.service.EstoqueService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,9 +38,24 @@ public class EstoqueController {
   
   @GetMapping("/buscar/{id}")
   @Operation(summary = "Buscar estoque", description = "Endpoint para buscar estoque por Id")
-  public ResponseEntity<EstoqueDTOResponse> buscarEstoquePorId(
+  public ResponseEntity<Estoque> buscarEstoquePorId(
       @Valid @PathVariable Integer id
   ) {
-
+    Estoque estoque = this.service.buscarEstoquePorId(id);
+    if (estoque != null) {
+      return ResponseEntity.ok(estoque);
+    } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
   }
+
+  @GetMapping("/obterqtd/{id}")
+  @Operation(summary = "Obter quantidade", description = "Endpoint para obter quantidade disponivel de um ingrediente no estoque por Id")
+  public ResponseEntity<EstoqueQtdDTOResponse> quantidadeDisponivelEmUmEstoque(
+          @Valid @PathVariable Integer id
+  ) {
+    EstoqueQtdDTOResponse quantidade = this.service.quantidadeDisponivelEmUmEstoque(id);
+    if (quantidade != null){
+      return ResponseEntity.ok(quantidade);
+    } else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+  }
+
 }

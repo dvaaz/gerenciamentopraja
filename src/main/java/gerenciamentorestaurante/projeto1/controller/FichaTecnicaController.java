@@ -96,7 +96,7 @@ public class FichaTecnicaController {
       @Valid @PathVariable("grupoId") Integer grupoId,
       @Valid @RequestBody ChangeToAnotherGrupoInBatchDTORequest dtoRequest
   ) {
-    ChangeToAnotherGrupoInBatchDTOResponse fichaTecnicasEmNovoGrupo = fichaTecnicaService.alterarGrupoListaDeFichasTecnicas(
+    ChangeToAnotherGrupoInBatchDTOResponse fichaTecnicasEmNovoGrupo = fichaTecnicaService.alterarGrupoListaDeFichaTecnicas(
         grupoId, dtoRequest.getIdDosItens());
     return ResponseEntity.ok(fichaTecnicasEmNovoGrupo);
   }

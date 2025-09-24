@@ -1,6 +1,6 @@
 package gerenciamentorestaurante.projeto1.entities.dto.request.estoque;
 
-public class EstoqueAlterarQtdDTORequest {
+public class EstoqueQtdDTORequest {
   private Integer qtd;
 
   public Integer getQtd() {
