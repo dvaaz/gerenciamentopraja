@@ -40,7 +40,7 @@ public class GrupoController {
     return ResponseEntity.ok(grupoService.listarTodosGrupos());
   }
 
-  @GetMapping("/lista/semgrupo")
+  @GetMapping("/lista/ingredientesemgrupo")
   @Operation(summary = "Listar o grupo padrao", description="Endpoint para obter o grupo que possui fichas tecnicas e ingredientes")
   public ResponseEntity<Grupo> obterGrupoPadrao() {
     return ResponseEntity.ok(grupoService.obterGrupoPadrao());

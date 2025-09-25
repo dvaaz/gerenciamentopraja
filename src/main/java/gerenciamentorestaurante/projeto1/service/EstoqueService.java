@@ -7,6 +7,8 @@ import gerenciamentorestaurante.projeto1.entities.dto.response.estoque.EstoqueQt
 import gerenciamentorestaurante.projeto1.entities.dto.request.estoque.EstoqueDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.shared.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.estoque.EstoqueDTOResponse;
+import gerenciamentorestaurante.projeto1.enumerator.GrupoEnum;
+import gerenciamentorestaurante.projeto1.enumerator.StatusEnum;
 import gerenciamentorestaurante.projeto1.repository.EstoqueRepository;
 import gerenciamentorestaurante.projeto1.repository.IngredienteRepository;
 import jakarta.transaction.Transactional;
@@ -93,7 +95,7 @@ public class EstoqueService {
             estoque.setQtd(novaQuantidade);
             if (novaQuantidade == 0 ){
                 // altera o status do estoque para não utilizado
-                estoque.setStatus(0);
+                estoque.setStatus(StatusEnum.INATIVO.getStatus());
             }
 
             Estoque novaQtdEstoque = estoqueRepository.save(estoque);

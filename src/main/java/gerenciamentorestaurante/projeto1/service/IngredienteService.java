@@ -49,11 +49,11 @@ public class IngredienteService {
         Grupo grupo = grupoRepository.buscarGrupoDeIngredientesPorId(dtoRequest.getGrupoId());
         // Se não encontrar um grupo
         if (grupo == null) {
-            grupo = grupoRepository.buscarGrupoPadrao();
+            grupo = grupoRepository.buscarGrupoPadraoIngrediente();
             // se não houver um grupo do tipo padrão criado, nós criaremos um
             if (grupo == null) {
-                grupoService.criarGrupoDefault();
-                grupo = grupoRepository.buscarGrupoPadrao();
+                grupoService.criarGrupoPadraoIngrediente();
+                grupo = grupoRepository.buscarGrupoPadraoIngrediente();
             }
         }
         // Mapeia os dados obtidos para  acriação de ingrediente

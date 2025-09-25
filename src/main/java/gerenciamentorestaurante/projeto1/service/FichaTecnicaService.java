@@ -47,11 +47,11 @@ public class FichaTecnicaService {
     Grupo grupo = grupoRepository.buscarGrupoDeFichasTecnicasPorId(dtoRequest.getGrupoId());
     // Se não encontrar um grupo
     if (grupo == null) {
-      grupo = grupoRepository.buscarGrupoPadrao();
+      grupo = grupoRepository.buscarGrupoPadraoFichasTecnicas();
       // se não houver um grupo do tipo padrão criado, nós criaremos um
       if (grupo == null) {
-        grupoService.criarGrupoDefault();
-        grupo = grupoRepository.buscarGrupoPadrao();
+        grupoService.criarGrupoPadraoFichaTecnica();
+        grupo = grupoRepository.buscarGrupoPadraoFichasTecnicas();
       }
     }
     // Mapeia os dados obtidos para  acriação de fichaTecnica

@@ -8,6 +8,8 @@ import gerenciamentorestaurante.projeto1.entities.dto.response.grupo.GrupoAtuali
 import gerenciamentorestaurante.projeto1.entities.dto.response.grupo.GrupoDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.Grupo;
 import gerenciamentorestaurante.projeto1.entities.dto.response.shared.UpdateStatusResponse;
+import gerenciamentorestaurante.projeto1.enumerator.GrupoEnum;
+import gerenciamentorestaurante.projeto1.enumerator.StatusEnum;
 import gerenciamentorestaurante.projeto1.repository.GrupoRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.modelmapper.ModelMapper;
@@ -48,7 +50,9 @@ public class GrupoService {
 
   public Grupo listarGrupoPorID(Integer id) { return this.grupoRepository.buscarGrupoPorID(id); }
 
-  public Grupo obterGrupoPadrao() { return this.grupoRepository.buscarGrupoPadrao(); }
+  public Grupo obterGrupoPadraoIngrediente() { return this.grupoRepository.buscarGrupoPadraoIngrediente(); }
+
+    public Grupo obterGrupoPadraoFichaTecnica() { return this.grupoRepository.buscarGrupoPadraoFichasTecnicas(); }
 
   public List<Grupo> listarGruposDeIngredientes() {return this.grupoRepository.listarGrupoDeIngredientes();}
 
@@ -97,13 +101,22 @@ public class GrupoService {
 //        throw new IllegalArgumentException("Gupo não encontrado ou ativo");
     }
     @Transactional
-  public void criarGrupoDefault() {
+  public void criarGrupoPadraoIngrediente() {
     Grupo grupoDefault = new  Grupo();
-    grupoDefault.setNome("Padrão");
-    grupoDefault.setStatus(1);
-    grupoDefault.setCor("D3D3D3");
-    grupoDefault.setTipo(0);
+    grupoDefault.setNome("INGREDIENTE");
+    grupoDefault.setStatus(StatusEnum.ATIVO.getStatus());
+    grupoDefault.setCor("90EE90");
+    grupoDefault.setTipo(GrupoEnum.INGREDIENTE.getCodigo());
     grupoRepository.save(grupoDefault);
+    }
+
+    public void criarGrupoPadraoFichaTecnica() {
+        Grupo grupoDefault = new  Grupo();
+        grupoDefault.setNome("FICHA TECNICA");
+        grupoDefault.setStatus(StatusEnum.ATIVO.getStatus());
+        grupoDefault.setCor("FA8907");
+        grupoDefault.setTipo(GrupoEnum.FICHATECNICA.getCodigo());
+        grupoRepository.save(grupoDefault);
     }
 
 
