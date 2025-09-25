@@ -9,79 +9,79 @@ public class UtilizadoDia {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "utilizado_dia_id")
-  private int id;
+  private Integer id;
   @Column(name = "utilizado_dia_qtd")
-  private int qtd;
+  private Integer qtd;
   @Column(name="utilizado_dia_destino")
-  private int destino;
+  private Integer destino;
   @Column(name="utilizado_dia_status")
-  private int status;
+  private Integer status;
   @JsonIgnore
   @ManyToOne
-  @JoinColumn(name="ingrediente", nullable = false)
-  private IngredienteFichaTecnica ingredienteFichaTecnica;
+  @JoinColumn(name="ingrediente_id", nullable = false)
+  private Ingrediente ingredienteId;
   @JsonIgnore
   @ManyToOne
-  @JoinColumn(name="producao_dia", nullable = false)
-  private ProducaoDia producaoDia;
+  @JoinColumn(name="producao_dia_id", nullable = false)
+  private ProducaoDia producaoDiaId;
   @JsonIgnore
   @ManyToOne
-  @JoinColumn(name="producao", nullable = false)
-  private Producao producao;
+  @JoinColumn(name="producao_id", nullable = false)
+  private Producao producaoId;
 
-  public int getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
-  public int getQtd() {
+  public Integer getQtd() {
     return qtd;
   }
 
-  public void setQtd(int qtd) {
+  public void setQtd(Integer qtd) {
     this.qtd = qtd;
   }
 
-  public int getDestino() {
+  public Integer getDestino() {
     return destino;
   }
 
-  public void setDestino(int destino) {
+  public void setDestino(Integer destino) {
     this.destino = destino;
   }
 
-  public int getStatus() {
+  public Integer getStatus() {
     return status;
   }
 
-  public void setStatus(int status) {
+  public void setStatus(Integer status) {
     this.status = status;
   }
 
-  public IngredienteFichaTecnica getIngredienteFichaTecnica() {
-    return ingredienteFichaTecnica;
+  public Ingrediente getIngredienteId() {
+    return ingredienteId;
   }
 
-  public void setIngredienteFichaTecnica(IngredienteFichaTecnica ingredienteFichaTecnica) {
-    this.ingredienteFichaTecnica = ingredienteFichaTecnica;
+  public void setIngredienteId(Ingrediente ingredienteId) {
+    this.ingredienteId = ingredienteId;
   }
 
-  public ProducaoDia getProducaoDia() {
-    return producaoDia;
+  public ProducaoDia getProducaoDiaId() {
+    return producaoDiaId;
   }
 
-  public void setProducaoDia(ProducaoDia producaoDia) {
-    this.producaoDia = producaoDia;
+  public void setProducaoDiaId(ProducaoDia producaoDiaId) {
+    this.producaoDiaId = producaoDiaId;
   }
 
-  public Producao getProducao() {
-    return producao;
+  public Producao getProducaoId() {
+    return producaoId;
   }
 
-  public void setProducao(Producao producao) {
-    this.producao = producao;
+  public void setProducaoId(Producao producaoId) {
+    this.producaoId = producaoId;
   }
 }

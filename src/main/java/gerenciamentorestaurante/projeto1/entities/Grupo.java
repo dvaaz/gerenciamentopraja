@@ -1,6 +1,9 @@
 package gerenciamentorestaurante.projeto1.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+
 import java.util.Set;
 
 @Entity
@@ -8,27 +11,30 @@ import java.util.Set;
 public class Grupo {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name ="gupo_id")
-  private int id;
+  @Column(name ="grup_id")
+  private Integer id;
   @Column (name="grupo_nome")
   private String nome;
   @Column(name = "grupo_cor")
   private String cor;
   @Column(name = "grupo_tipo")
-  private int tipo;
+  @Min(0)
+  @Max(2)
+  private Integer tipo;
   @Column(name = "grupo_status")
-  private int status;
+  private Integer status;
 
   @OneToMany(mappedBy = "grupo")
   private Set<Ingrediente> ingredienteSet;
 
   @OneToMany(mappedBy = "grupo")
   private Set<FichaTecnica> fichaTecnicaSet;
-  public int getId() {
-    return id;
-  }
 
-    public void setId(int id) {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -48,19 +54,19 @@ public class Grupo {
         this.cor = cor;
     }
 
-    public int getTipo() {
+    public Integer getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(Integer tipo) {
         this.tipo = tipo;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

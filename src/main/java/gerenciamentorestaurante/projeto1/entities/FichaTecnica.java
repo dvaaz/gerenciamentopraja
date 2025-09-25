@@ -12,25 +12,25 @@ public class FichaTecnica {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name="ficha_tecnica_id")
-  private int id;
+  private Integer id;
   @Column(name="ficha_tecnica_nome")
   private String nome;
   @Column(name="ficha_tecnica_descricao")
   private String descricao;
+  @Column(name="ficha_tecnica_status")
+  private Integer status;
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "grupo_id", nullable = false)
   private Grupo grupo;
-  @Column(name="ficha_tecnica_status")
-  private int status;
-  @OneToMany(mappedBy = "fichaTecnicas")
-  private Set<IngredienteFichaTecnica> ingredienteFichaTecnicas;
+  @OneToMany(mappedBy = "fichaTecnicaId")
+  private Set<IngredienteFichaTecnica> fichaTecnicaId;
 
-  public int getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -50,27 +50,27 @@ public class FichaTecnica {
     this.descricao = descricao;
   }
 
+  public Integer getStatus() {
+    return status;
+  }
+
+  public void setStatus(Integer status) {
+    this.status = status;
+  }
+
   public Grupo getGrupo() {
     return grupo;
   }
 
-  public void setGrupo(Grupo grupo) {
-    this.grupo = grupo;
+  public void setGrupo(Grupo grupoId) {
+    this.grupo = grupoId;
   }
 
-  public int getStatus() {
-    return status;
+  public Set<IngredienteFichaTecnica> getFichaTecnicaId() {
+    return fichaTecnicaId;
   }
 
-  public void setStatus(int status) {
-    this.status = status;
-  }
-
-  public Set<IngredienteFichaTecnica> getIngredienteFichaTecnicas() {
-    return ingredienteFichaTecnicas;
-  }
-
-  public void setIngredienteFichaTecnicas(Set<IngredienteFichaTecnica> ingredienteFichaTecnicas) {
-    this.ingredienteFichaTecnicas = ingredienteFichaTecnicas;
+  public void setFichaTecnicaId(Set<IngredienteFichaTecnica> fichaTecnicaId) {
+    this.fichaTecnicaId = fichaTecnicaId;
   }
 }

@@ -1,8 +1,12 @@
 package gerenciamentorestaurante.projeto1.controller;
 
-import gerenciamentorestaurante.projeto1.entities.dto.request.GrupoDTORequest;
-import gerenciamentorestaurante.projeto1.entities.dto.response.GrupoDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.request.shared.UpdateGrupoDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.grupo.GrupoDTORequest;
+import gerenciamentorestaurante.projeto1.entities.dto.request.shared.UpdateStatusRequest;
+import gerenciamentorestaurante.projeto1.entities.dto.response.grupo.GrupoAtualizarDTOResponse;
+import gerenciamentorestaurante.projeto1.entities.dto.response.grupo.GrupoDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.Grupo;
+import gerenciamentorestaurante.projeto1.entities.dto.response.shared.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.service.GrupoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,6 +37,73 @@ public class GrupoController {
   @GetMapping("/listar")
   @Operation(summary ="Listar todos os grupos", description = "Endpoint para listar todos os grupos")
   public ResponseEntity<List<Grupo>> listarGrupos() {
-    return ResponseEntity.ok(grupoService.listarGrupos());
+    return ResponseEntity.ok(grupoService.listarTodosGrupos());
   }
+
+  @GetMapping("/lista/ingredientesemgrupo")
+  @Operation(summary = "Listar o grupo padrao", description="Endpoint para obter o grupo que possui fichas tecnicas e ingredientes")
+  public ResponseEntity<Grupo> obterGrupoPadrao() {
+    return ResponseEntity.ok(grupoService.obterGrupoPadrao());
+  }
+
+    @GetMapping("listar/ingrediente")
+    @Operation(summary = "Listar grupos de ingredientes", description="Endpoint para obter apenas grupos de ingredientes")
+    public ResponseEntity<List<Grupo>> listarGruposDeIngredientes() {
+        return ResponseEntity.ok(grupoService.listarGruposDeIngredientes());
+    }
+
+    @GetMapping("listar/fichatecnica")
+    @Operation(summary = "Listar grupos de fichatecnicas", description="Endpoint para obter apenas grupos de fichatecnicas")
+    public ResponseEntity<List<Grupo>> listarGruposDeFichaTecnicas() {
+        return ResponseEntity.ok(grupoService.listarGruposDeFichaTecnicas());
+    }
+
+  @GetMapping("/buscar/{grupoId}")
+    @Operation(summary = "listar um grupo", description ="Endpoint para obter um grupo por id")
+    public ResponseEntity<Grupo> listarGrupoPorId(@Valid @PathVariable Integer grupoId) {
+      Grupo grupo = this.grupoService.listarGrupoPorID(grupoId);
+      if(grupo != null){
+          return ResponseEntity.ok(grupo);
+      } else return ResponseEntity.notFound().build();
+  }
+
+    @PatchMapping("/alterar/{grupoId}")
+    @Operation(summary = "Alterações em um grupo", description="Endpoint para alterar nome e cor de um grupo")
+    public ResponseEntity<GrupoAtualizarDTOResponse> atualizarGrupo(
+            @Valid @PathVariable Integer grupoId,
+            @RequestBody UpdateGrupoDTORequest atualizarDTORequest) {
+      GrupoAtualizarDTOResponse atualizado = grupoService.atualizarGrupo(grupoId, atualizarDTORequest);
+      if (atualizado != null){
+          return ResponseEntity.ok(atualizado);
+      } else return ResponseEntity.notFound().build();
+    }
+
+    @PatchMapping("/alterarstatus/{grupoId}")
+    @Operation(summary = "Atualizaçao de grupo", description = "Endpoint para atualização lógica de um grupo")
+    public ResponseEntity<UpdateStatusResponse> atualizarStatus(
+            @Valid @PathVariable Integer grupoId,
+            @RequestBody UpdateStatusRequest novoStatus
+    ) {
+      UpdateStatusResponse  statusResponse = grupoService.atualizarStatusGrupo(grupoId, novoStatus);
+      if (statusResponse != null){
+          return ResponseEntity.ok(statusResponse);
+      } else return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/deletar/{grupoId}")
+    @Operation(summary = "Deletar o grupo", description ="Endpoint para  a deleção lógica")
+  public ResponseEntity deletarGrupoPorID(
+      @Valid @PathVariable Integer grupoId) {
+    this.grupoService.apagarGrupo(grupoId);
+    return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{grupoId}/destroy")
+  @Operation(summary = "Remover grupo", description = "Endpoint para destruir grupo")
+  public ResponseEntity removerGrupoPorID(
+      @Valid @PathVariable Integer grupoId
+    ) {
+    this.grupoService.destruiGrupo(grupoId);
+    return ResponseEntity.noContent().build();
+    }
 }

@@ -12,28 +12,28 @@ public class Estoque {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "estoque_id")
-  private int id;
+  private Integer id;
   @Column(name = "estoque_dia")
   private Date dia;
   @Column(name = "estoque_validade")
   private Date validade;
   @Column(name = "estoque_qtd")
-  private int qtd;
+  private Integer qtd;
   @Column(name="estoque_status")
-  private int status;
+  private Integer status;
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "ingrediente_id", nullable = false)
-  private Ingrediente ingrediente;
+  private Ingrediente ingredienteId;
 
-  @OneToMany(mappedBy = "estoque")
-  private Set<Producao> disponiveisDiaDetalheSet;
+  @OneToMany(mappedBy = "estoqueId")
+  private Set<Producao> producao;
 
-  public int getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -53,35 +53,35 @@ public class Estoque {
     this.validade = validade;
   }
 
-  public int getQtd() {
+  public Integer getQtd() {
     return qtd;
   }
 
-  public void setQtd(int qtd) {
+  public void setQtd(Integer qtd) {
     this.qtd = qtd;
   }
 
-  public int getStatus() {
+  public Integer getStatus() {
     return status;
   }
 
-  public void setStatus(int status) {
+  public void setStatus(Integer status) {
     this.status = status;
   }
 
-  public Ingrediente getIngrediente() {
-    return ingrediente;
+  public Ingrediente getIngredienteId() {
+    return ingredienteId;
   }
 
-  public void setIngrediente(Ingrediente ingrediente) {
-    this.ingrediente = ingrediente;
+  public void setIngredienteId(Ingrediente ingredienteId) {
+    this.ingredienteId = ingredienteId;
   }
 
-  public Set<Producao> getDisponiveisDiaDetalheSet() {
-    return disponiveisDiaDetalheSet;
+  public Set<Producao> getProducao() {
+    return producao;
   }
 
-  public void setDisponiveisDiaDetalheSet(Set<Producao> disponiveisDiaDetalheSet) {
-    this.disponiveisDiaDetalheSet = disponiveisDiaDetalheSet;
+  public void setProducao(Set<Producao> producao) {
+    this.producao = producao;
   }
 }

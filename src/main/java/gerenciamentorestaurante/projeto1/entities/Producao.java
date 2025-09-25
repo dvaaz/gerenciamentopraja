@@ -9,20 +9,58 @@ public class Producao {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "producao_id")
-  private int id;
+  private Integer id;
   @Column(name = "producao_qtd")
-  private int qtd;
+  private Integer qtd;
   @Column(name = "producao_status")
-  private int status;
+  private Integer status;
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "producao_dia_id", nullable = false)
-  private ProducaoDia producoes;
+  private ProducaoDia producaoDiaId;
 
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "estoque_id", nullable = false)
-  private Estoque estoque;
+  private Estoque estoqueId;
 
+  public Integer getId() {
+    return id;
+  }
 
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public Integer getQtd() {
+    return qtd;
+  }
+
+  public void setQtd(Integer qtd) {
+    this.qtd = qtd;
+  }
+
+  public Integer getStatus() {
+    return status;
+  }
+
+  public void setStatus(Integer status) {
+    this.status = status;
+  }
+
+  public ProducaoDia getProducaoDiaId() {
+    return producaoDiaId;
+  }
+
+  public void setProducaoDiaId(ProducaoDia producaoDiaId) {
+    this.producaoDiaId = producaoDiaId;
+  }
+
+  public Estoque getEstoqueId() {
+    return estoqueId;
+  }
+
+  public void setEstoqueId(Estoque estoqueId) {
+    this.estoqueId = estoqueId;
+  }
 }

@@ -13,27 +13,29 @@ public class Ingrediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ingrediente_id")
-    private int id;
+    private Integer id;
     @Column(name="ingrediente_nome")
     private String nome;
     @Column(name ="ingrediente_descricao")
     private String descricao;
     @Column(name="ingrediente_status")
-    private int status;
-    @OneToMany(mappedBy = "ingrediente")
-    private Set<IngredienteFichaTecnica> receitaIngredientes;
-    @OneToMany(mappedBy = "ingrediente")
-    private Set<Estoque> estoqueIngredientes;
+    private Integer status;
+    @OneToMany(mappedBy = "ingredienteId")
+    private Set<Estoque> ingredienteNoEstoque;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "grupo_id", nullable = false)
     private Grupo grupo;
+    @OneToMany(mappedBy = "ingredienteId")
+    private Set<IngredienteFichaTecnica> ingredienteNaFichaTecnica;
+    @OneToMany(mappedBy = "ingredienteId")
+    private Set<UtilizadoDia> ingredienteUtilizado;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -53,35 +55,43 @@ public class Ingrediente {
         this.descricao = descricao;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public Set<IngredienteFichaTecnica> getReceitaIngredientes() {
-        return receitaIngredientes;
+    public Set<Estoque> getIngredienteNoEstoque() {
+        return ingredienteNoEstoque;
     }
 
-    public void setReceitaIngredientes(Set<IngredienteFichaTecnica> receitaIngredientes) {
-        this.receitaIngredientes = receitaIngredientes;
-    }
-
-    public Set<Estoque> getEstoqueIngredientes() {
-        return estoqueIngredientes;
-    }
-
-    public void setEstoqueIngredientes(Set<Estoque> estoqueIngredientes) {
-        this.estoqueIngredientes = estoqueIngredientes;
+    public void setIngredienteNoEstoque(Set<Estoque> ingredienteNoEstoque) {
+        this.ingredienteNoEstoque = ingredienteNoEstoque;
     }
 
     public Grupo getGrupo() {
         return grupo;
     }
 
-    public void setGrupo(Grupo grupo) {
-        this.grupo = grupo;
+    public void setGrupo(Grupo grupoId) {
+        this.grupo = grupoId;
+    }
+
+    public Set<IngredienteFichaTecnica> getIngredienteNaFichaTecnica() {
+        return ingredienteNaFichaTecnica;
+    }
+
+    public void setIngredienteNaFichaTecnica(Set<IngredienteFichaTecnica> ingredienteNaFichaTecnica) {
+        this.ingredienteNaFichaTecnica = ingredienteNaFichaTecnica;
+    }
+
+    public Set<UtilizadoDia> getIngredienteUtilizado() {
+        return ingredienteUtilizado;
+    }
+
+    public void setIngredienteUtilizado(Set<UtilizadoDia> ingredienteUtilizado) {
+        this.ingredienteUtilizado = ingredienteUtilizado;
     }
 }

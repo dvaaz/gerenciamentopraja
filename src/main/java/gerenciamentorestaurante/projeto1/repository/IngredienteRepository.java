@@ -1,7 +1,7 @@
 package gerenciamentorestaurante.projeto1.repository;
 
 import gerenciamentorestaurante.projeto1.entities.Ingrediente;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -21,6 +21,9 @@ public interface IngredienteRepository extends JpaRepository<Ingrediente, Intege
   @Query("SELECT i FROM Ingrediente i WHERE i.status>=0")
   List<Ingrediente> listarIngredientes();
 
-  @Query("SELECT i FROM Ingrediente i WHERE i.status = :id AND i.status>=0")
+  @Query("SELECT i FROM Ingrediente i WHERE i.id = :id AND i.status>=0")
   Ingrediente buscarIngredientePorId(@Param("id") Integer ingredienteId);
+
+  @Query("SELECT i FROM Ingrediente i WHERE i.id IN :ids AND i.status >= 0")
+  List<Ingrediente> listarIngredientesEmLista(@Param("ids") List<Integer> ids);
 }
