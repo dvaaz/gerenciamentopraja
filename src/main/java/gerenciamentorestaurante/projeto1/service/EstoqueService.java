@@ -2,18 +2,17 @@ package gerenciamentorestaurante.projeto1.service;
 
 import gerenciamentorestaurante.projeto1.entities.Estoque;
 import gerenciamentorestaurante.projeto1.entities.Ingrediente;
-import gerenciamentorestaurante.projeto1.entities.dto.request.estoque.EstoqueQtdDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.estoque.EstoqueQtdDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.request.estoque.EstoqueDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.shared.UpdateStatusResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.response.estoque.EstoqueDTOResponse;
-import gerenciamentorestaurante.projeto1.enumerator.GrupoEnum;
 import gerenciamentorestaurante.projeto1.enumerator.StatusEnum;
 import gerenciamentorestaurante.projeto1.repository.EstoqueRepository;
 import gerenciamentorestaurante.projeto1.repository.IngredienteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -60,6 +59,7 @@ public class EstoqueService {
         return this.estoqueRepository.buscarEstoquePorID(id);
     }
 
+
     @Transactional
     public EstoqueQtdDTOResponse quantidadeDisponivelEmUmEstoque(Integer id){
         Estoque estoque = estoqueRepository.buscarEstoquePorID(id);
@@ -74,45 +74,24 @@ public class EstoqueService {
     
     // Operação ideal = puxar uma lista de ingredientes, comparar sua data de validade, utilizar primeiro os que estejam mais proximos ao vencimento (after) 
     // e quando não houver quantiddade suficiente verificar o proximo da lista
-    @Transactional
-    public List<Estoque> buscarIngredientesEmEstoque(Integer ingredienteId){
+    public List<Estoque> listarIngredientesDisponiveisEmEstoque(Integer ingredienteId){
         List<Estoque> listaDeIngredientes = estoqueRepository.listarIngredientesEmEstoque(ingredienteId);
         if (!listaDeIngredientes.isEmpty()){
             return listaDeIngredientes;
         } return null;
     }
 
+
     @Transactional
     public EstoqueQtdDTOResponse utilizarQuantidade(Integer id, EstoqueQtdDTOResponse dtoRequest) {
-        Estoque estoque = estoqueRepository.buscarEstoquePorID(id);
-        if (estoque == null) {
-            throw new RuntimeException("Estoque não encontrado");
-        }
+      List<Estoque> ingredientesEmEstoque = estoqueRepository.listarIngredientesEmEstoque(id);
+      if (ingredientesEmEstoque.isEmpty()){
+        throw new RuntimeException("Não há ingredientes disponiveis");
+      }
+      List<Estoque> organizadosPorData = new ArrayList<Estoque>();
+      for (Estoque estoque : ingredientesEmEstoque) {
 
-        Integer novaQuantidade = estoque.getQtd() - dtoRequest.getQtd();
-
-        if (novaQuantidade <= estoque.getQtd() && novaQuantidade >= 0)  {
-            estoque.setQtd(novaQuantidade);
-            if (novaQuantidade == 0 ){
-                // altera o status do estoque para inutilizavel
-                estoque.setStatus(StatusEnum.INATIVO.getStatus());
-            }
-
-            Estoque novaQtdEstoque = estoqueRepository.save(estoque);
-
-            EstoqueQtdDTOResponse dtoResponse = new EstoqueQtdDTOResponse();
-            dtoResponse.setId(novaQtdEstoque.getId());
-            dtoResponse.setQtd(novaQtdEstoque.getQtd());
-
-            return dtoResponse;
-        }
-        if (novaQuantidade > estoque.getQtd() && novaQuantidade >= 0)
-        {
-
-            List<Estoque> ingredientesDisponiveisEmEstoque = estoqueRepository.listarIngredientesEmEstoque(estoque.getIngredienteId().getId());
-
-        }
-        throw new RuntimeException("Estoque não possui quantidade suficiente de insumos");
+      }
     }
 
     @Transactional
