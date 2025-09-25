@@ -94,7 +94,7 @@ public class EstoqueService {
         if (novaQuantidade <= estoque.getQtd() && novaQuantidade >= 0)  {
             estoque.setQtd(novaQuantidade);
             if (novaQuantidade == 0 ){
-                // altera o status do estoque para não utilizado
+                // altera o status do estoque para inutilizavel
                 estoque.setStatus(StatusEnum.INATIVO.getStatus());
             }
 
