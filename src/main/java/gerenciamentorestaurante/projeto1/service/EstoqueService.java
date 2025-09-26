@@ -84,10 +84,21 @@ public class EstoqueService {
       if (ingredientesEmEstoque.isEmpty()){
         throw new RuntimeException("Não há ingredientes disponiveis");
       }
-        Integer qtdNecessaria = dtoRequest.getQtd();
+      // armazena a quantidade disponivel e verifica se é possivel obter no estoque
 
-
+      Integer qtdNecessaria = dtoRequest.getQtd();
+      Integer totalDisponivel = 0;
         for (Estoque estoque: ingredientesEmEstoque){
+            if (totalDisponivel >= qtdNecessaria){
+                break;
+            }
+            totalDisponivel += estoque.getQtd();
+        }
+      if (qtdNecessaria > totalDisponivel){
+          throw new RuntimeException("Estoque insuficiente. Faltaram " + (qtdNecessaria - totalDisponivel) + " unidades.");
+      }
+
+      for (Estoque estoque: ingredientesEmEstoque){
             if(qtdNecessaria == 0 ){
                 break;
             }
