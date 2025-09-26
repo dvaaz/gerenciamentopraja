@@ -121,10 +121,13 @@ public class IngredienteService {
         } else return null;
     }
 
-    public List<Ingrediente> listarIngredientesSelecionados(List<Integer> listaIngrediente) {
-        return ingredienteRepository.listarIngredientesEmLista(listaIngrediente);
-    }
 
+
+    /**
+     * Alterar o grupo de uma lista de ingredientes
+     * @param  idGrupo, listaIdIngredientes
+     * @return
+     */
     @Transactional
     public ChangeToAnotherGrupoInBatchDTOResponse alterarGrupoListaDeIngredientes(Integer idGrupo, List<Integer> listaIdIngredientes) {
         Grupo grupoExistente = grupoRepository.buscarGrupoDeIngredientesPorId(idGrupo);
@@ -134,7 +137,7 @@ public class IngredienteService {
 
           // buscar ingredientes para alterar o grupo
          List<Ingrediente> listaIngredientes = new ArrayList<Ingrediente>();
-         listaIngredientes = this.listarIngredientesSelecionados(listaIdIngredientes);
+         listaIngredientes = ingredienteRepository.listarIngredientesEmLista(listaIdIngredientes);
 //           if (listaIngredientes.isEmpty()) {
 //               throw new ElementNotFoundException("Nenhum ingrediente encontrado");
 //           }

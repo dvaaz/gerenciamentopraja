@@ -1,6 +1,7 @@
 package gerenciamentorestaurante.projeto1.repository;
 
 import gerenciamentorestaurante.projeto1.entities.Estoque;
+import gerenciamentorestaurante.projeto1.entities.Ingrediente;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -22,7 +23,9 @@ public interface EstoqueRepository extends JpaRepository<Estoque, Integer> {
   @Query("SELECT e FROM Estoque e WHERE e.id = :id AND e.status>=0")
   Estoque buscarEstoquePorID(@Param("id") Integer estoqueId);
   
-  @Query("SELECT e FROM Estoque e JOIN FETCH e.ingredienteId i WHERE  i.id = :id AND e.status >0 ORDER BY e.validade")
-  List<Estoque> listarIngredientesEmEstoque(@Param("id") Integer ingrediente);
+  @Query("SELECT e FROM Estoque e JOIN FETCH e.ingredienteId i WHERE  i.id = :id AND e.status >=0 ORDER BY e.validade")
+  List<Estoque> listarIngredientesEmEstoquePorValidade(@Param("id") Integer ingrediente);
 
+  @Query("SELECT e FROM Estoque e JOIN FETCH e.ingredienteId i WHERE  i.id = :id AND e.status > 0")
+  List<Estoque> listarIngredientesEmEstoque(@Param("id") Integer ingrediente);
 }

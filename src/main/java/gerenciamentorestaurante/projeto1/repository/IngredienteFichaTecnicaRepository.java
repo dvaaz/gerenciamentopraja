@@ -38,4 +38,5 @@ public interface IngredienteFichaTecnicaRepository extends JpaRepository<Ingredi
           @Param("fichaTecnicaId") Integer fichaTecnicaId
   );
 
+
 }

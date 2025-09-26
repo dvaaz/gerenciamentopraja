@@ -2,6 +2,7 @@ package gerenciamentorestaurante.projeto1.service;
 
 import gerenciamentorestaurante.projeto1.entities.Estoque;
 import gerenciamentorestaurante.projeto1.entities.Ingrediente;
+import gerenciamentorestaurante.projeto1.entities.dto.request.estoque.EstoqueQtdDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.estoque.EstoqueQtdDTOResponse;
 import gerenciamentorestaurante.projeto1.entities.dto.request.estoque.EstoqueDTORequest;
 import gerenciamentorestaurante.projeto1.entities.dto.response.shared.UpdateStatusResponse;
@@ -74,17 +75,13 @@ public class EstoqueService {
     
     // Operação ideal = puxar uma lista de ingredientes, comparar sua data de validade, utilizar primeiro os que estejam mais proximos ao vencimento (after) 
     // e quando não houver quantiddade suficiente verificar o proximo da lista
-    public List<Estoque> listarIngredientesDisponiveisEmEstoque(Integer ingredienteId){
-        List<Estoque> listaDeIngredientes = new ArrayList<Estoque>();
+    // Resolvido com uma query em order by
+    public List<Ingrediente> listarIngredientesDisponiveisEmEstoque(Integer ingredienteId){
+        List<Ingrediente> listaDeIngredientes = this.estoqueRepository.listarIngredientesEmEstoque(ingredienteId)
         if (listaDeIngredientes.isEmpty()){
           return null;
         }
-        List<Estoque> buscaDeIngredientes = this.estoqueRepository.listarIngredientesEmEstoque(ingredienteId);
-        for (Estoque estoque : buscaDeIngredientes) {
-          listaDeIngredientes.add(estoque);
-            if( listaDeIngredientes.lastIndexOf((listaDeIngredientes.size()-1).)){
-
-            }
+            return listaDeIngredientes;
         }
 
 
@@ -92,13 +89,16 @@ public class EstoqueService {
 
 
     @Transactional
-    public EstoqueQtdDTOResponse utilizarQuantidade(Integer id, EstoqueQtdDTOResponse dtoRequest) {
-      List<Estoque> ingredientesEmEstoque = this.listarIngredientesDisponiveisEmEstoque(id);
+    public void utilizarQuantidade(Integer id, EstoqueQtdDTORequest dtoRequest) {
+      List<Estoque> ingredientesEmEstoque = this.estoqueRepository.listarIngredientesEmEstoquePorValidade(id);
       if (ingredientesEmEstoque.isEmpty()){
         throw new RuntimeException("Não há ingredientes disponiveis");
       }
-      List<Estoque> organizadosPorData = new ArrayList<Estoque>();
+      Integer qtdSolicitada = dtoRequest.getQtd();
+      Integer qtdAtual = dtoRequest.getQtd();
       for (Estoque estoque : ingredientesEmEstoque) {
+        if ((estoque.getQtd() - qtdSolicitada) >=0){
+
 
       }
     }

@@ -29,8 +29,8 @@ public interface GrupoRepository extends JpaRepository<Grupo, Integer> {
   Grupo buscarGrupoPadraoIngrediente();
 
     @Query("SELECT g FROM Grupo g WHERE " +
-            "g.status>=0 AND g.tipo=1 AND g.nome='FICHAS TECNICAS' ")
-    Grupo buscarGrupoPadraoFichasTecnicas();
+            "g.status>=0 AND g.tipo=2 AND g.nome='FICHAS TECNICAS' ")
+    Grupo buscarGrupoPadraoFichaTecnica();
 
   @Query("SELECT g FROM Grupo g WHERE g.id = :id AND g.status>=0")
   Grupo buscarGrupoPorID(@Param("id") Integer grupoId);
@@ -46,6 +46,5 @@ public interface GrupoRepository extends JpaRepository<Grupo, Integer> {
 
   @Query("SELECT g FROM Grupo g WHERE g.id =:id AND g.status>=0 AND g.tipo=2")
   Grupo buscarGrupoDeFichasTecnicasPorId(@Param("id") Integer grupoId);
-
 
 }

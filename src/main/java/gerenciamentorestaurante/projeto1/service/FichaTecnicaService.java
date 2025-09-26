@@ -47,11 +47,11 @@ public class FichaTecnicaService {
     Grupo grupo = grupoRepository.buscarGrupoDeFichasTecnicasPorId(dtoRequest.getGrupoId());
     // Se não encontrar um grupo
     if (grupo == null) {
-      grupo = grupoRepository.buscarGrupoPadraoFichasTecnicas();
+      grupo = grupoRepository.buscarGrupoPadraoFichaTecnica();
       // se não houver um grupo do tipo padrão criado, nós criaremos um
       if (grupo == null) {
         grupoService.criarGrupoPadraoFichaTecnica();
-        grupo = grupoRepository.buscarGrupoPadraoFichasTecnicas();
+        grupo = grupoRepository.buscarGrupoPadraoFichaTecnica();
       }
     }
     // Mapeia os dados obtidos para  acriação de fichaTecnica
@@ -119,10 +119,12 @@ public class FichaTecnicaService {
     } else return null;
   }
 
-  public List<FichaTecnica> listarFichasTecnicasEmLista(List<Integer> listaIngrediente) {
-    return fichaTecnicaRepository.listarFichasTecnicasEmLista(listaIngrediente);
-  }
 
+  /**
+   * Alterar o grupo de uma lista de ingredientes
+   * @param idGrupo, listaIdFichaTecnicas
+   * @return dtoResponse
+   */
   @Transactional
   public ChangeToAnotherGrupoInBatchDTOResponse alterarGrupoListaDeFichaTecnicas(Integer idGrupo, List<Integer> listaIdFichaTecnicas) {
     Grupo grupoExistente = grupoRepository.buscarGrupoDeFichasTecnicasPorId(idGrupo);
@@ -132,7 +134,7 @@ public class FichaTecnicaService {
 
     // buscar fichatecnicas para alterar o grupo
     List<FichaTecnica> listaFichaTecnicas = new ArrayList<FichaTecnica>();
-    listaFichaTecnicas = this.listarFichasTecnicasEmLista(listaIdFichaTecnicas);
+    listaFichaTecnicas = fichaTecnicaRepository.listarFichasTecnicasEmLista(listaIdFichaTecnicas);
 //           if (listaFichaTecnicas.isEmpty()) {
 //               throw new ElementNotFoundException("Nenhum fichatecnica encontrado");
 //           }
