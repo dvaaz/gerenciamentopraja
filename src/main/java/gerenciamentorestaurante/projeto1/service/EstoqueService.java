@@ -75,16 +75,25 @@ public class EstoqueService {
     // Operação ideal = puxar uma lista de ingredientes, comparar sua data de validade, utilizar primeiro os que estejam mais proximos ao vencimento (after) 
     // e quando não houver quantiddade suficiente verificar o proximo da lista
     public List<Estoque> listarIngredientesDisponiveisEmEstoque(Integer ingredienteId){
-        List<Estoque> listaDeIngredientes = estoqueRepository.listarIngredientesEmEstoque(ingredienteId);
-        if (!listaDeIngredientes.isEmpty()){
-            return listaDeIngredientes;
-        } return null;
+        List<Estoque> listaDeIngredientes = new ArrayList<Estoque>();
+        if (listaDeIngredientes.isEmpty()){
+          return null;
+        }
+        List<Estoque> buscaDeIngredientes = this.estoqueRepository.listarIngredientesEmEstoque(ingredienteId);
+        for (Estoque estoque : buscaDeIngredientes) {
+          listaDeIngredientes.add(estoque);
+            if( listaDeIngredientes.lastIndexOf((listaDeIngredientes.size()-1).)){
+
+            }
+        }
+
+
     }
 
 
     @Transactional
     public EstoqueQtdDTOResponse utilizarQuantidade(Integer id, EstoqueQtdDTOResponse dtoRequest) {
-      List<Estoque> ingredientesEmEstoque = estoqueRepository.listarIngredientesEmEstoque(id);
+      List<Estoque> ingredientesEmEstoque = this.listarIngredientesDisponiveisEmEstoque(id);
       if (ingredientesEmEstoque.isEmpty()){
         throw new RuntimeException("Não há ingredientes disponiveis");
       }
