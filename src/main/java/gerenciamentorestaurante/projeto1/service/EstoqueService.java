@@ -14,6 +14,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -75,18 +76,7 @@ public class EstoqueService {
     
     // Operação ideal = puxar uma lista de ingredientes, comparar sua data de validade, utilizar primeiro os que estejam mais proximos ao vencimento (after) 
     // e quando não houver quantiddade suficiente verificar o proximo da lista
-    // Resolvido com uma query em order by
-    public List<Ingrediente> listarIngredientesDisponiveisEmEstoque(Integer ingredienteId){
-        List<Ingrediente> listaDeIngredientes = this.estoqueRepository.listarIngredientesEmEstoque(ingredienteId)
-        if (listaDeIngredientes.isEmpty()){
-          return null;
-        }
-            return listaDeIngredientes;
-        }
-
-
-    }
-
+    // a ordenação está sendo resolvida na chamada do banco pelo repository
 
     @Transactional
     public void utilizarQuantidade(Integer id, EstoqueQtdDTORequest dtoRequest) {
@@ -94,13 +84,32 @@ public class EstoqueService {
       if (ingredientesEmEstoque.isEmpty()){
         throw new RuntimeException("Não há ingredientes disponiveis");
       }
-      Integer qtdSolicitada = dtoRequest.getQtd();
-      Integer qtdAtual = dtoRequest.getQtd();
-      for (Estoque estoque : ingredientesEmEstoque) {
-        if ((estoque.getQtd() - qtdSolicitada) >=0){
+        Integer qtdNecessaria = dtoRequest.getQtd();
 
 
+        for (Estoque estoque: ingredientesEmEstoque){
+            if(qtdNecessaria == 0 ){
+                break;
+            }
+
+            Integer qtdARetirar;
+            Integer qtdDisponivel = estoque.getQtd(); // armazena qtd disponivel
+
+            if (qtdNecessaria >= qtdDisponivel){ // se houver menor quantidade em estoque (ou igual) que a solicitada
+                qtdARetirar = qtdDisponivel; // retira qtd possivel
+                estoque.setQtd(0);
+                qtdNecessaria -= qtdARetirar;
+            }
+            if (qtdNecessaria < qtdDisponivel){ // se Houver mais quantidade em estoque que a solicitada
+                qtdARetirar = qtdNecessaria;
+                int novaQuantidade = qtdDisponivel - qtdARetirar;
+                estoque.setQtd(novaQuantidade);
+                qtdNecessaria = 0;
+            }
       }
+
+
+
     }
 
     @Transactional
